@@ -3,13 +3,16 @@
 \name{bRTM}
 \alias{bRTM}
 \title{Generates an invertable model for backward implementation
-of Radiative Transfer Models. This function will be updated 
-in next release [this code is obsolete, kept in for completeness].}
+of Radiative Transfer Models}
 \usage{
 bRTM(fm = rho ~ prospect5, data = NULL, pars = NULL, fixed = NULL,
   wl = 400:2500)
 }
 \arguments{
+\item{fm}{A formula specifying which rtm to run}
+
+\item{data}{ignored as of yet}
+
 \item{pars}{a list of _named_ parameter vectors for all models.
 The parameter list for a model call as rho ~ prospect + foursail
 therefore contains two named vectors the first with parameters for
@@ -26,6 +29,5 @@ will not be returned.}
 }
 \description{
 Generates an invertable model for backward implementation
-of Radiative Transfer Models. This function will be updated 
-in next release [this code is obsolete, kept in for completeness].
+of Radiative Transfer Models
 }

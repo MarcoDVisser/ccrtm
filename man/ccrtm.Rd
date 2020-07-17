@@ -4,14 +4,13 @@
 \name{ccrtm}
 \alias{ccrtm}
 \alias{ccrtm-package}
-\title{ccrtm}
+\title{ccrtm: Coupled Chain Radiative Transfer Models.}
 \description{
-Coupled Chain Radiative Transfer Models.
+A collection of radiative transfer models that can form
+a coupled chain to model radiative transfer across multiple
+spatial scales from leaf to canopy to stand.
 }
 \details{
-A collection of radiative transfer models that can form a coupled chain to model
-radiative transfer across multiple spatial scales from leaf to canopy to stand.
-
 Currently implemented models:
 
 \itemize{

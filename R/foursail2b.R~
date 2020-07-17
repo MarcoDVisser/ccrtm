@@ -338,7 +338,7 @@ HotSpot2b <- function(lai,fbu,q,tss,kst,kot,ksb,kob,dso){
     ko <- (kob*fbu + (1-fbu)*kot) ## full canopy ko
     
     tss <- exp(-ks*lai) ## full canopy
-    ck <- exp(-kst*(1-fbu)*lai) ## only top
+    ck <- exp(-kst*(1-fbu)*lai) ## only top!!!!!!
     
     alf <- 1e6
     

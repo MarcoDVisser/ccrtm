@@ -8,7 +8,9 @@ for all supported models.}
 getDefaults(model = NULL, ...)
 }
 \arguments{
-\item{model}{a ccrtm formula or character vector of modelnames
+\item{model}{a ccrtm formula or character vector of modelnames}
+
+\item{\\dots}{not used.
 (e.g. "prospect5")}
 }
 \description{

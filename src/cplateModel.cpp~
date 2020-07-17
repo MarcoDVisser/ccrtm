@@ -27,29 +27,32 @@ List cplateModel(NumericVector r12, NumericVector t12,
   NumericVector rho(r12.size());
   NumericVector tau(r12.size());
 
+  double trans2,ra,ta,r90,t90,r902,t902,delta,beta,va,vb;
+  double vbNN,vbNNinv,vainv,s1,s2,s3;
+
   for(int i =0; i < r12.size(); i++){
 
     // reflectance and transmittance of the elementary layer N = 1
-    double trans2 = trans[i]*trans[i];
-    double ra = r12[i]+(t12[i]*t21[i]*r21[i]*trans2)/(1.0-(r21[i]*r21[i])*trans2);
-    double ta = (t12[i]*t21[i]*trans[i])/(1.0-(r21[i]*r21[i])*trans2);
-    double r90 = (ra-y[i])/x[i];
-    double t90 = ta/x[i];
-    double r902 = r90*r90;
-    double t902 = t90*t90;
+    trans2 = trans[i]*trans[i];
+    ra = r12[i]+(t12[i]*t21[i]*r21[i]*trans2)/(1.0-(r21[i]*r21[i])*trans2);
+    ta = (t12[i]*t21[i]*trans[i])/(1.0-(r21[i]*r21[i])*trans2);
+    r90 = (ra-y[i])/x[i];
+    t90 = ta/x[i];
+    r902 = r90*r90;
+    t902 = t90*t90;
 
     // reflectance and transmittance of N layers
-    double delta = sqrt(pow(t902-r902-1,2)-4.0*r902);
-    double beta = (1.0+r902-t902-delta)/(2.0*r90);
-    double va = (1.0+r902-t902+delta)/(2.0*r90);
-    double vb = sqrt(beta*(va-r90)/(va*(beta-r90)));
+    delta = sqrt(pow(t902-r902-1,2)-4.0*r902);
+    beta = (1.0+r902-t902-delta)/(2.0*r90);
+    va = (1.0+r902-t902+delta)/(2.0*r90);
+    vb = sqrt(beta*(va-r90)/(va*(beta-r90)));
 
-    double vbNN = pow(vb,N-1.0);
-    double vbNNinv = 1.0/vbNN;
-    double vainv = 1.0/va;
-    double s1 = ta*t90*(vbNN-vbNNinv);
-    double s2 = ta*(va-vainv);
-    double s3 = va*vbNN-vainv*vbNNinv-r90*(vbNN-vbNNinv);
+    vbNN = pow(vb,N-1.0);
+    vbNNinv = 1.0/vbNN;
+    vainv = 1.0/va;
+    s1 = ta*t90*(vbNN-vbNNinv);
+    s2 = ta*(va-vainv);
+    s3 = va*vbNN-vainv*vbNNinv-r90*(vbNN-vbNNinv);
 
     rho[i] = ra+s1/s3; // leaf rho
     tau[i] = s2/s3; // leaf tau

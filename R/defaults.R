@@ -2,6 +2,7 @@
 #' for all supported models. 
 #'
 #' @param model a ccrtm formula or character vector of modelnames
+#' @param \\dots not used.
 #' (e.g. "prospect5")
 #' @export
 getDefaults<-function(model=NULL, ...){
@@ -52,14 +53,14 @@ defaults <- function(x, ...){
     UseMethod("defaults",x)
 }
 
-##' get some default values for the prospect model 
-##'       - N     = leaf structure parameter
-##'       - Cab   = chlorophyll a+b content 
-##'       - Car   = carotenoids content 
-##'       - Cbrown= brown pigments content in arbitrary units
-##'       - Cw    = equivalent water thickness
-##'       - Cm    = dry matter content 
-##'
+## get some default values for the prospect model 
+##      - N     = leaf structure parameter
+##      - Cab   = chlorophyll a+b content 
+##      - Car   = carotenoids content 
+##      - Cbrown= brown pigments content in arbitrary units
+##      - Cw    = equivalent water thickness
+##      - Cm    = dry matter content 
+
 defaults.prospect5<-function(x){
    
     ## typical values are the rice values
@@ -79,15 +80,15 @@ defaults.prospect5<-function(x){
     return(def)
 }
 
-##' get some default values for the prospect model 
-##'       - N     = leaf structure parameter
-##'       - Cab   = chlorophyll a+b content 
-##'       - Car   = carotenoids content 
-##'       - Canth = Leaf anthocyanin content
-##'       - Cbrown= brown pigments content in arbitrary units
-##'       - Cw    = equivalent water thickness
-##'       - Cm    = dry matter content 
-##'
+## get some default values for the prospect model 
+##       - N     = leaf structure parameter
+##       - Cab   = chlorophyll a+b content 
+##       - Car   = carotenoids content 
+##       - Canth = Leaf anthocyanin content
+##       - Cbrown= brown pigments content in arbitrary units
+##       - Cw    = equivalent water thickness
+##       - Cm    = dry matter content 
+##
 defaults.prospectd<-function(x){
     
     
@@ -111,17 +112,17 @@ defaults.prospectd<-function(x){
 
 
 
-##' Generate default values for the foursail model
-##'       - psoil = linear mixing weight for 2 soil
-##'                 reflectance types
-##'       - LAI   =  Leaf area index
-##'       - TypeLidf= Type of leaf angle distribution. 
-##'       - lidfa = Leaf angle distribution parameter a. 
-##'       - lidfb = Leaf angle distribution parameter b.
-##'       - hspot = Hotspot parameter
-##'       - tts   = Solar zenith angle (degrees)
-##'       - tto   = Observer zenith angle (degrees)
-##'       - psi   = Relative azimuth angle (degrees)
+## Generate default values for the foursail model
+##       - psoil = linear mixing weight for 2 soil
+##                 reflectance types
+##       - LAI   =  Leaf area index
+##       - TypeLidf= Type of leaf angle distribution. 
+##       - lidfa = Leaf angle distribution parameter a. 
+##       - lidfb = Leaf angle distribution parameter b.
+##       - hspot = Hotspot parameter
+##       - tts   = Solar zenith angle (degrees)
+##       - tto   = Observer zenith angle (degrees)
+##       - psi   = Relative azimuth angle (degrees)
 defaults.foursail<-function(x){
 
     nms <- c("psoil","LAI","TypeLidf","lidfa","lidfb",
@@ -151,22 +152,22 @@ defaults.foursail<-function(x){
 
 }   
 
-##' Generate default values for the foursail2 model 
-##'       - psoil = psoil: Dry/Wet soil factor
-##'       - LAI   =  Leaf area index
-##'       - TypeLidf= Type of leaf angle distribution. 
-##'       - lidfa = Leaf angle distribution parameter a. 
-##'       - lidfb = Leaf angle distribution parameter b.
-##'       - Cv    = vertical crown coverage fraction.
-##'       - Zeta0 = tree shape factor (D/H).
-##'       - fb    = fraction secondary particles (fraction "brown").
-##'       - diss  = Canopy dissociation factor for secondary particles.
-##'       - skyl  = linear mixing weight for diffuse & direct radiation.
-##'                 (ratio of diffuse to total incident radiation)
-##'       - hspot = Hotspot parameter.
-##'       - tts   = Solar zenith angle (degrees).
-##'       - tto   = Observer zenith angle (degrees).
-##'       - psi   = Relative azimuth angle (degrees).
+## Generate default values for the foursail2 model 
+##       - psoil = psoil: Dry/Wet soil factor
+##       - LAI   =  Leaf area index
+##       - TypeLidf= Type of leaf angle distribution. 
+##       - lidfa = Leaf angle distribution parameter a. 
+##       - lidfb = Leaf angle distribution parameter b.
+##       - Cv    = vertical crown coverage fraction.
+##      - Zeta0 = tree shape factor (D/H).
+##      - fb    = fraction secondary particles (fraction "brown").
+##       - diss  = Canopy dissociation factor for secondary particles.
+##       - skyl  = linear mixing weight for diffuse & direct radiation.
+##                 (ratio of diffuse to total incident radiation)
+##       - hspot = Hotspot parameter.
+##       - tts   = Solar zenith angle (degrees).
+##       - tto   = Observer zenith angle (degrees).
+##       - psi   = Relative azimuth angle (degrees).
 defaults.foursail2<-function(x){
 
     nms <- c("psoil","LAI","TypeLidf","lidfa","lidfb",
@@ -205,22 +206,22 @@ defaults.foursail2<-function(x){
 }
 
 
-##' Generate default values for the foursail2b model 
-##'       - psoil = psoil: Dry/Wet soil factor
-##'       - LAI   =  Leaf area index
-##'       - TypeLidf= Type of leaf angle distribution. 
-##'       - lidfa = Leaf angle distribution parameter a. 
-##'       - lidfb = Leaf angle distribution parameter b.
-##'       - Cv    = vertical crown coverage fraction.
-##'       - Zeta0 = tree shape factor (D/H).
-##'       - fb    = fraction secondary particles (fraction "brown").
-##'       - diss  = Canopy dissociation factor for secondary particles.
-##'       - skyl  = linear mixing weight for diffuse & direct radiation.
-##'                 (ratio of diffuse to total incident radiation)
-##'       - hspot = Hotspot parameter.
-##'       - tts   = Solar zenith angle (degrees).
-##'       - tto   = Observer zenith angle (degrees).
-##'       - psi   = Relative azimuth angle (degrees).
+## Generate default values for the foursail2b model 
+##       - psoil = psoil: Dry/Wet soil factor
+##       - LAI   =  Leaf area index
+##       - TypeLidf= Type of leaf angle distribution. 
+##       - lidfa = Leaf angle distribution parameter a. 
+##       - lidfb = Leaf angle distribution parameter b.
+##      - Cv    = vertical crown coverage fraction.
+##      - Zeta0 = tree shape factor (D/H).
+##      - fb    = fraction secondary particles (fraction "brown").
+##       - diss  = Canopy dissociation factor for secondary particles.
+##       - skyl  = linear mixing weight for diffuse & direct radiation.
+##                 (ratio of diffuse to total incident radiation)
+##       - hspot = Hotspot parameter.
+##       - tts   = Solar zenith angle (degrees).
+##       - tto   = Observer zenith angle (degrees).
+##       - psi   = Relative azimuth angle (degrees).
 defaults.foursail2b<-function(x){
 
     nms <- c("psoil","LAI","TypeLidf","lidfa","lidfb",
@@ -258,14 +259,14 @@ defaults.foursail2b<-function(x){
     
 }
 
-##' get some default values for the prospect model 
-##'       - N     = leaf structure parameter
-##'       - Cab   = chlorophyll a+b content 
-##'       - Car   = carotenoids content 
-##'       - Cbrown= brown pigments content in arbitrary units
-##'       - Cw    = equivalent water thickness
-##'       - Cm    = dry matter content 
-##'
+## get some default values for the prospect model 
+##       - N     = leaf structure parameter
+##       - Cab   = chlorophyll a+b content 
+##       - Car   = carotenoids content 
+##       - Cbrown= brown pigments content in arbitrary units
+##       - Cw    = equivalent water thickness
+##       - Cm    = dry matter content 
+##
 defaults.skyl<-function(x){
    
     ## typical values are the rice values

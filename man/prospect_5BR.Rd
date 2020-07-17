@@ -8,17 +8,17 @@ prospect_5BR(N = 1.5, Cab = 60, Car = 10, Cbrown = 0.01,
   Cw = 0.013, Cm = 0.003)
 }
 \arguments{
-\item{(N)}{leaf structure parameter}
+\item{N}{leaf structure parameter}
 
-\item{(Cab)}{chlorophyll a+b content in ug/cm2}
+\item{Cab}{chlorophyll a+b content in ug/cm2}
 
-\item{(Car)}{carotenoids content in ug/cm2}
+\item{Car}{carotenoids content in ug/cm2}
 
-\item{(Cbrown)}{brown pigments content in arbitrary units}
+\item{Cbrown}{brown pigments content in arbitrary units}
 
-\item{(Cw)}{equivalent water thickness in g/cm2 or cm}
+\item{Cw}{equivalent water thickness in g/cm2 or cm}
 
-\item{(Cm)}{dry matter content in g/cm2}
+\item{Cm}{dry matter content in g/cm2}
 }
 \description{
 Note from the original code; 

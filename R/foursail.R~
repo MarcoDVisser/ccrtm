@@ -154,7 +154,9 @@ foursail <- function(rho, tau,bgr,param){
 #' \item [2] = Leaf angle distribution function parameter b (LIDFb)
 #' \item [3] = Leaf angle distribution function type (see ?lidfFun)
 #' \item [4] = Leaf area index (LAI)
-#' \item [5] = Hot spot effect parameter (hspot)
+#' \item [5] = Hot spot effect parameter (hspot) - The foliage hot spot size
+#'             parameter is equal to the ratio of the correlation length of leaf
+#'             projections in the horizontal plane and the canopy height (Verhoef & Bach 2007).
 #' \item [6] = Solar zenith angle (tts)
 #' \item [7] = Observer zenith angle (tto)
 #' \item [8] = Sun-sensor azimuth angle (psi)
@@ -287,13 +289,15 @@ r_foursail <- function(rho, tau,bgr,param){
 ##' Sensor geometry function
 sail_sensgeom <- function(tts,tto,psi,rd){
 
-        cts     <-  cos(rd*tts)
-        cto     <-  cos(rd*tto)
-        ctscto  <-  cts*cto
-        tants   <-  tan(rd*tts)
-        tanto   <-  tan(rd*tto)
-        cospsi  <-  cos(rd*psi)
-        dso     <-  sqrt(tants*tants+tanto*tanto-2*tants*tanto*cospsi)
+    cts     <-  cos(rd*tts)
+    cto     <-  cos(rd*tto)
+    ctscto  <-  cts*cto
+    tants   <-  tan(rd*tts)
+    tanto   <-  tan(rd*tto)
+    cospsi  <-  cos(rd*psi)
+
+    ## angular distance measure also used in the hotspot effect
+    dso     <-  sqrt(tants*tants+tanto*tanto-2*tants*tanto*cospsi)
         
     return(list(cts,cto,ctscto,dso))
 
@@ -313,6 +317,7 @@ SUITS <- function(na,litab,lidv,tts,tto,cts,cto,psi,ctscto){
 
     ##	Weighted sums over LIDF
     for(i in 1:na) { ## loop over leaf inclination discrete values
+        
         ttl <- litab[i]     
         ctl = cos(rd*ttl)
         ## SAIL volume scattering phase function gives interception and portions to be 

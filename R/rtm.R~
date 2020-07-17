@@ -37,7 +37,6 @@ fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
 
     if(!any(rowInc)) stop("check wavelengths: wl")
     
-
     tmp <- checkForm(fm)
     reqMods <- tmp[[1]]
     ordN <- tmp[[2]]
@@ -67,14 +66,14 @@ fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
  
 
 
-#' Backward implementation of Radiative Transfer Models
+#' Generates an invertable model for backward implementation
+#' of Radiative Transfer Models
 #' @inheritParams fRTM
-#' @param pars fixed a list of parameters to fix
+#' @param fixed a list of parameters to fix
 #' 
 #' @export
-
-## plot(bRTM(rho ~ prospect,parvec=c(Car=20,Cw=.002,Cm=0.001,Cbrown=0.001),fixed=c(N=2,Cab=9)))
-bRTM <- function(fm= rho ~ prospect5b, data=NULL, pars=NULL, fixed=NULL,
+# plot(bRTM(rho ~ prospect,parvec=c(Car=20,Cw=.002,Cm=0.001,Cbrown=0.001),fixed=c(N=2,Cab=9)))
+bRTM <- function(fm= rho ~ prospect5, data=NULL, pars=NULL, fixed=NULL,
                  wl=400:2500){
 
     

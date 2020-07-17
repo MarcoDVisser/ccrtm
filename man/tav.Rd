@@ -7,9 +7,9 @@
 tav(teta, ref)
 }
 \arguments{
-\item{(teta)}{Angle in degrees}
+\item{teta}{Angle in degrees}
 
-\item{(ref)}{refractive index}
+\item{ref}{refractive index}
 }
 \description{
 Stern F. (1964), Transmission of isotropic radiation across an

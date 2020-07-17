@@ -15,9 +15,17 @@ flim(Rc, Rg, To = NULL, Ts = NULL, params, area = 10000)
 
 \item{Ts}{transmission in sun direction}
 
-\item{cd}{crown diameter (confounded with D)}
+\item{params}{a named vector of parameters: 
+ \itemize{
+\item [1] = D, stand density (confounded with cd)
+\item [2] = cd, crown diameter (confounded with D)
+\item [3] = h, mean crown height
+\item [6] = Solar zenith angle (tts)
+\item [7] = Observer zenith angle (tto)
+\item [8] = Sun-sensor azimuth angle (psi)
+}}
 
-\item{D}{stand density (confounded with cd)}
+\item{area}{area of stand}
 }
 \description{
 Forests are assumed a discontinous mix of tree crowns

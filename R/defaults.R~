@@ -204,3 +204,80 @@ defaults.foursail2<-function(x){
     
 }
 
+
+##' Generate default values for the foursail2b model 
+##'       - psoil = psoil: Dry/Wet soil factor
+##'       - LAI   =  Leaf area index
+##'       - TypeLidf= Type of leaf angle distribution. 
+##'       - lidfa = Leaf angle distribution parameter a. 
+##'       - lidfb = Leaf angle distribution parameter b.
+##'       - Cv    = vertical crown coverage fraction.
+##'       - Zeta0 = tree shape factor (D/H).
+##'       - fb    = fraction secondary particles (fraction "brown").
+##'       - diss  = Canopy dissociation factor for secondary particles.
+##'       - skyl  = linear mixing weight for diffuse & direct radiation.
+##'                 (ratio of diffuse to total incident radiation)
+##'       - hspot = Hotspot parameter.
+##'       - tts   = Solar zenith angle (degrees).
+##'       - tto   = Observer zenith angle (degrees).
+##'       - psi   = Relative azimuth angle (degrees).
+defaults.foursail2b<-function(x){
+
+    nms <- c("psoil","LAI","TypeLidf","lidfa","lidfb",
+             "hspot",
+             "Cv","Zeta","fb","diss",
+             "tts","tto","psi")
+#             "sigma")
+    
+    typical  <-  c(0,8.77,2,35,45,
+                   0.01,                   
+                   0.95,1/3,0.5,0.5,
+                   30,10,0)
+#                0.1)
+    
+    omega <- c(1,50,2,0,0,
+               1,
+               1,1,1,1,
+               90,90,180)
+#               4) 
+    alpha <- c(0,0.1,2,90,90,
+               1e-6,
+               0,0,0,0,
+               0,0,0)
+#               1e-8) 
+    
+    names(typical)<-nms
+    names(omega)<-nms
+    names(alpha)<-nms
+    
+    def = data.frame(best = typical)
+    def$lower = alpha
+    def$upper = omega
+
+    return(def)
+    
+}
+
+##' get some default values for the prospect model 
+##'       - N     = leaf structure parameter
+##'       - Cab   = chlorophyll a+b content 
+##'       - Car   = carotenoids content 
+##'       - Cbrown= brown pigments content in arbitrary units
+##'       - Cw    = equivalent water thickness
+##'       - Cm    = dry matter content 
+##'
+defaults.skyl<-function(x){
+   
+    ## typical values are the rice values
+    typical = c(0.1)
+    omega <- c(1) 
+    alpha <- c(0) 
+    
+    names(alpha)<-names(omega)<-names(typical)<-c("skyl")
+    
+    def = data.frame(best = typical)
+    def$lower = alpha
+    def$upper = omega
+    
+    return(def)
+}

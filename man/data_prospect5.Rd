@@ -3,7 +3,8 @@
 \docType{data}
 \name{data_prospect5}
 \alias{data_prospect5}
-\title{refractive index and specific absorption coefficient for PROSPECT 5}
+\title{refractive index and specific absorption coefficient for
+PROSPECT 5}
 \usage{
 data(prospect5)
 }

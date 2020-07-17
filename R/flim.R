@@ -9,8 +9,16 @@
 #' @param Rg soil/background reflectance
 #' @param To transmission in viewing direction
 #' @param Ts transmission in sun direction
-#' @param cd crown diameter (confounded with D)
-#' @param D stand density (confounded with cd)
+#' @param area area of stand
+#' @param params a named vector of parameters: 
+#'  \itemize{
+#' \item [1] = D, stand density (confounded with cd)
+#' \item [2] = cd, crown diameter (confounded with D)
+#' \item [3] = h, mean crown height
+#' \item [6] = Solar zenith angle (tts)
+#' \item [7] = Observer zenith angle (tto)
+#' \item [8] = Sun-sensor azimuth angle (psi)
+#' }
 #'
 #' @details
 #'

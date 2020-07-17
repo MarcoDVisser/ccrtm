@@ -37,7 +37,7 @@ prospect5 <- function(param){
     Cm <- as.numeric(param["cm"])
     rhoTau <- matrix(0, 2101, 2)
 
-    CoefMat <- ccrtm:::data_prospect5 ## get reflective and absorbtion coefficient data
+    CoefMat <- data_prospect5 ## get reflective and absorbtion coefficient data
     
     l <- CoefMat[,1] # wavelength (nm)
     n <- CoefMat[,2] # refractive index
@@ -91,6 +91,7 @@ prospect5 <- function(param){
 #' \item [1] = leaf reflectance (rho)
 #' \item [2] = leaf transmission (tau)
 #' }
+#' @import expint
 #' @export
 #' @useDynLib ccrtm    
 prospectd <- function(param){
@@ -108,8 +109,9 @@ prospectd <- function(param){
     Cm <- as.numeric(param["cm"])
     rhoTau <- matrix(0, 2101, 2)
 
-    CoefMat <- ccrtm:::data_prospectd ## get reflective and absorbtion coefficient data
-    
+#    CoefMat <- ccrtm:::data_prospectd ## get reflective and absorbtion coefficient data
+    CoefMat <- data_prospectd ## get reflective and absorbtion coefficient data
+     
     l <- CoefMat[,1] # wavelength (nm)
     n <- CoefMat[,2] # refractive index
     ## specific absorption coefficient for each element at each wl (k= total absorbtion coefficient)
@@ -147,8 +149,7 @@ prospectd <- function(param){
 
 
 
-#' Low level prospect D implementation
-#' @useDynLib ccrtm    
+# Low level prospect D implementation
 .prospect5 <- function(param,
                        expected=c("n","cab","car","cbrown","cw","cm")){
  
@@ -164,7 +165,7 @@ prospectd <- function(param){
     Cm <- as.numeric(param[expected[6]])
     rhoTau <- matrix(0, 2101, 2)
 
-    CoefMat <- ccrtm:::data_prospectd ## get reflective and absorbtion coefficient data
+    CoefMat <- data_prospect5 ## get reflective and absorbtion coefficient data
     n <- CoefMat[,2] # refractive index
 
     alpha <- c(Cab,Car,Cbrown,Cw,Cm)/N 
@@ -201,8 +202,7 @@ prospectd <- function(param){
 }
 
 
-#' Low level prospect D implementation
-#' @useDynLib ccrtm    
+# Low level prospect D implementation
 .prospectd <- function(param,
                        expected=c("n","cab","car",
                                   "canth","cbrown","cw","cm")){
@@ -220,7 +220,7 @@ prospectd <- function(param){
     Cm <- as.numeric(param[expected[7]])
     rhoTau <- matrix(0, 2101, 2)
 
-    CoefMat <- ccrtm:::data_prospectd ## get reflective and absorbtion coefficient data
+    CoefMat <- data_prospectd ## get reflective and absorbtion coefficient data
     n <- CoefMat[,2] # refractive index
 
     ## specific absorption coefficient for each element at each wl (k= total absorbtion coefficient)

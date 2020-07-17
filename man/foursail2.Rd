@@ -64,7 +64,7 @@ to the incoming radiant flux in the solar direction.
 }
 }
 \description{
-Layers are assumed identical in in particle inclination and
+Layers are assumed identical in particle inclination and
 hotspot, but may differ in the relative density and types of
 particles. In comparison to foursail, the background (soil),
 can now be non-Lambertain, having it own 4-stream

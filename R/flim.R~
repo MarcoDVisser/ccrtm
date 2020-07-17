@@ -37,7 +37,7 @@ flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
     
     cd <- params["cd"] # mean crown diameter
     h <- params["h"] # mean crown height
-    D <- params["D"] # stand density
+    D <- params["d"] # stand density
     tto <- params["tto"]*rd  # observer zenith
     tts <- params["tts"]*rd # sun zenith
     psi <- params["psi"]*rd # relative azimuth
@@ -79,6 +79,6 @@ flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
 }
 
 
-parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,D=10,tto=10,tts=20,psi=30)
+#parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,d=10,tto=10,tts=20,psi=30)
     
     

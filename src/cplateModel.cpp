@@ -1,21 +1,21 @@
 #include <Rcpp.h>
 
 using namespace Rcpp;
-//' plate model 
-//'
-//' @param(theta) Angle (in radians!)
-//' @param(ref) refractive index
-//' 
-//' @references Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
-//' Properties Model Separating Photosynthetic Pigments, Remote Sensing of
-//' Environment
-//' @references Stern F. (1964), Transmission of isotropic radiation across an
-//' interface between two dielectrics, Appl. Opt., 3(1):111-113.
-//' @references Allen W.A. (1973), Transmission of isotropic light across a
-//' dielectric surface in two and three dimensions, J. Opt. Soc. Am.,
-//' 63(6):664-666.
-//' 
-//' @export
+// plate model 
+//
+// @param(theta) Angle (in radians!)
+// @param(ref) refractive index
+// 
+// @references Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
+// Properties Model Separating Photosynthetic Pigments, Remote Sensing of
+// Environment
+// @references Stern F. (1964), Transmission of isotropic radiation across an
+// interface between two dielectrics, Appl. Opt., 3(1):111-113.
+// @references Allen W.A. (1973), Transmission of isotropic light across a
+// dielectric surface in two and three dimensions, J. Opt. Soc. Am.,
+// 63(6):664-666.
+// 
+// @export
 // [[Rcpp::export]]
 List cplateModel(NumericVector r12, NumericVector t12,
 		 NumericVector r21, NumericVector t21,

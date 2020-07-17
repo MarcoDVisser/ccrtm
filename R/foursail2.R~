@@ -92,7 +92,6 @@ foursail2 <- function(rhoA,tauA,rhoB=NULL,tauB=NULL,bgr,
     tto <- as.numeric(param["tto"])
     psi <- as.numeric(param["psi"])
 
-       
     ##  Leaf angle distribution function
     ## TO DO: build generic N angle LIA models
     na  <-  18 # number of angle

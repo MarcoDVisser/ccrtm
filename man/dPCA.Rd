@@ -7,15 +7,17 @@
 dPCA(D, W, xi = rep(1, ncol(W)), eigendecom = TRUE)
 }
 \arguments{
+\item{D}{Dataset matrix with columns corresponding to variables and rows
+to oberservations (as is standard in R, but in constrast to Delchambre's code).
+The matrix will be scaled after the weighted mean is subtracted in the code
+no need to do this prior as in the original Delchambre code.}
+
 \item{W}{Weight matrix, similar to X, but containing data weights.}
 
 \item{xi}{Regularization factor: controls the influence of
 uncertain (rare) variables.}
 
-\item{X}{Dataset matrix with columns corresponding to variables and rows
-to oberservations (as is standard in R, but in constrast to Delchambre's code).
-The matrix will be scaled after the weighted mean is subtracted in the code
-no need to do this prior as in the original Delchambre code.}
+\item{eigendecom}{do eigendecomposition?}
 
 \item{ncomp}{number of principle components to retrieve}
 

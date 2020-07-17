@@ -1,9 +1,8 @@
-#' ccrtm
+#' ccrtm: Coupled Chain Radiative Transfer Models.
 #' 
-#' Coupled Chain Radiative Transfer Models.
-#' 
-#' A collection of radiative transfer models that can form a coupled chain to model
-#' radiative transfer across multiple spatial scales from leaf to canopy to stand.
+#' A collection of radiative transfer models that can form
+#' a coupled chain to model radiative transfer across multiple
+#' spatial scales from leaf to canopy to stand.
 #'
 #' Currently implemented models:
 #'
@@ -26,7 +25,8 @@
 #'
 #' @section relavent references
 #' 
-#' Verhoef, W. and Bach, H., 2003. Remote sensing data assimilation using coupled radiative transfer models.
+#' Verhoef, W. and Bach, H., 2003. Remote sensing data assimilation using
+#' coupled radiative transfer models.
 #' Physics and Chemistry of the Earth, Parts A/B/C, 28(1-3), pp.3-13.
 #'
 #' Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
@@ -41,8 +41,8 @@
 #' @name ccrtm
 NULL 
 
-
-#' refractive index and specific absorption coefficient for PROSPECT 5
+#' refractive index and specific absorption coefficient for
+#' PROSPECT 5
 #'
 #' see http://teledetection.ipgp.jussieu.fr/prosail/ for more details
 #' on the data.

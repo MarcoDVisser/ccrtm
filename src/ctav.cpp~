@@ -19,7 +19,9 @@ using namespace Rcpp;
 NumericVector ctav(double theta, NumericVector n){
 
   static const double pi = 3.14159265;
-
+  double n2,np,nm,a,k,ds,ds2,k2,nm2,b1,b2,b,ts,tp1,tp2;
+  double tp3,n22,np3,tp4,tp5,tp;
+  
   NumericVector f(n.size());
 
     if(theta==0){
@@ -30,17 +32,15 @@ NumericVector ctav(double theta, NumericVector n){
     } else {
       
       for(int i =0; i < n.size(); i++){
-	double n2 = n[i]*n[i];
-	double np = n2+1.0;
-	double nm = n2-1.0;
-	double a = ((n[i]+1.0)*(n[i]+1.0))/2.0;
-	double k = -((n2-1)*(n2-1))/4.0;
-	double ds = sin(theta*pi/180.0);
-	double ds2 = ds*ds;
-	double k2 = k*k;
-	double nm2 = nm*nm;
-
-	double b1;  	
+	n2 = n[i]*n[i];
+	np = n2+1.0;
+	nm = n2-1.0;
+	a = ((n[i]+1.0)*(n[i]+1.0))/2.0;
+	k = -((n2-1)*(n2-1))/4.0;
+	ds = sin(theta*pi/180.0);
+	ds2 = ds*ds;
+	k2 = k*k;
+	nm2 = nm*nm;
 
 	if(theta!=90){
 	  b1 = sqrt(pow(ds2-np/2.0,2)+k);
@@ -51,17 +51,17 @@ NumericVector ctav(double theta, NumericVector n){
 
 	//	Rcpp::Rcout << "value is " << std::endl << b1 << std::endl;
 
-	double b2 = ds2-np/2.0;
-	double b = b1-b2;
-	double ts = (k2/(6.0*b*b*b)+k/b-b/2.0)-(k2/(6.0*a*a*a)+k/a-a/2.0);
-	double tp1 = -2.0*n2*(b-a)/(np*np);
-	double tp2 = -2.0*n2*np*log(b/a)/nm2;
-	double tp3 = n2*((1.0/b)-(1.0/a))/2.0;
-	double n22 = n2*n2;
-	double np3 = np*np*np;
-	double tp4 = 16.0*n22*(n22+1.0)*log((2.0*np*b-nm2)/(2.0*np*a-nm2))/(np3*nm2);
-	double tp5 = 16.0*(n2*n2*n2)*(pow(2.0*np*b-nm2,-1)-pow(2.0*np*a-nm2,-1))/np3;
-	double tp = tp1+tp2+tp3+tp4+tp5;
+	b2 = ds2-np/2.0;
+	b = b1-b2;
+	ts = (k2/(6.0*b*b*b)+k/b-b/2.0)-(k2/(6.0*a*a*a)+k/a-a/2.0);
+	tp1 = -2.0*n2*(b-a)/(np*np);
+	tp2 = -2.0*n2*np*log(b/a)/nm2;
+	tp3 = n2*((1.0/b)-(1.0/a))/2.0;
+	n22 = n2*n2;
+	np3 = np*np*np;
+	tp4 = 16.0*n22*(n22+1.0)*log((2.0*np*b-nm2)/(2.0*np*a-nm2))/(np3*nm2);
+	tp5 = 16.0*(n2*n2*n2)*(pow(2.0*np*b-nm2,-1)-pow(2.0*np*a-nm2,-1))/np3;
+	tp = tp1+tp2+tp3+tp4+tp5;
 	f[i] = (ts+tp)/(2.0*ds2);
 	
       }

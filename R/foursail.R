@@ -286,7 +286,7 @@ r_foursail <- function(rho, tau,bgr,param){
 
 
 
-##' Sensor geometry function
+## Sensor geometry function
 sail_sensgeom <- function(tts,tto,psi,rd){
 
     cts     <-  cos(rd*tts)
@@ -305,7 +305,7 @@ sail_sensgeom <- function(tts,tto,psi,rd){
 
 
 
-##' SUITS function to calculate SUITS coefficients
+## SUITS function to calculate SUITS coefficients
 SUITS <- function(na,litab,lidv,tts,tto,cts,cto,psi,ctscto){
 
     ## Calculate geometric factors associated with extinction and scattering 
@@ -378,7 +378,7 @@ SUITS <- function(na,litab,lidv,tts,tto,cts,cto,psi,ctscto){
 } # SUITS
 
 
-##' RTgeom: correct rho and tau using SUITS factors
+## RTgeom: correct rho and tau using SUITS factors
 RTgeom <- function(rho,tau,ddb,ddf,sdb,sdf,dob,dof,sob,sof){
 
     
@@ -399,8 +399,7 @@ RTgeom <- function(rho,tau,ddb,ddf,sdb,sdf,dob,dof,sob,sof){
 } #RTgeom
 
 
-##' volume scattering function
-
+## volume scattering function
 volscatt <- function(tts,tto,psi,ttl,chi_s,chi_o,frho,ftau){
 
     ###########################################################################

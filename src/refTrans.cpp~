@@ -13,7 +13,7 @@ double cJfunc1(double k,
 
   del = (k-l)*t;
     
-  if(abs(del)>1e3) {
+  if(fabs(del)>1e3) {
       
     Jout = ((exp(-l*t)-exp(-k*t))/(k-l)); // for all del>1e-3
   } else {  
@@ -118,37 +118,38 @@ List cReflTrans(NumericVector rho,
   double too   = exp(-ko*lai);
   double z     = cJfunc2or3(ks,ko,lai);
 
+  
   // return list
   List ret;
 
   // helper doubles
-  //  double e1,e2,rinf,rinf2,re,denom;
-  //  double J1ks,J2ks,J1ko,J2ko;
-  //  double Ps,Qs,Pv,Qv;
-  //  double z,g1,g2;
-  //  double Tv1,Tv2,T1,T2,T3;
+  double e1,e2,rinf,rinf2,re,denom;
+  double J1ks,J2ks,J1ko,J2ko;
+  double Ps,Qs,Pv,Qv;
+  double g1,g2;
+  double Tv1,Tv2,T1,T2,T3;
     
   //  NumericVector xx = exp( x );
 
   for(int i =0; i < rho.size(); i++){
 
-    double e1    = exp(-m[i]*lai);
-    double e2    = e1*e1;
-    double rinf  = (att[i]-m[i])/sigb[i];
-    double rinf2 = rinf*rinf;
-    double re    = rinf*e1;
-    double denom = 1-rinf2*e2;
+    e1    = exp(-m[i]*lai);
+    e2    = e1*e1;
+    rinf  = (att[i]-m[i])/sigb[i];
+    rinf2 = rinf*rinf;
+    re    = rinf*e1;
+    denom = 1-rinf2*e2;
     	   
     // Jfunctions sun and observer
-    double J1ks = cJfunc1(ks,m[i],lai);
-    double J2ks = cJfunc2or3(ks,m[i],lai);
-    double J1ko = cJfunc1(ko,m[i],lai);
-    double J2ko = cJfunc2or3(ko,m[i],lai);
+    J1ks = cJfunc1(ks,m[i],lai);
+    J2ks = cJfunc2or3(ks,m[i],lai);
+    J1ko = cJfunc1(ko,m[i],lai);
+    J2ko = cJfunc2or3(ko,m[i],lai);
 
-    double Ps    = (sf[i]+sb[i]*rinf)*J1ks;
-    double Qs    = (sf[i]*rinf+sb[i])*J2ks;
-    double Pv    = (vf[i]+vb[i]*rinf)*J1ko;
-    double Qv    = (vf[i]*rinf+vb[i])*J2ko;
+    Ps    = (sf[i]+sb[i]*rinf)*J1ks;
+    Qs    = (sf[i]*rinf+sb[i])*J2ks;
+    Pv    = (vf[i]+vb[i]*rinf)*J1ko;
+    Qv    = (vf[i]*rinf+vb[i])*J2ko;
 
     rdd[i]   = rinf*(1-e2)/denom;
     tdd[i]   = (1-rinf2)*e1/denom;
@@ -157,14 +158,14 @@ List cReflTrans(NumericVector rho,
     tdo[i]   = (Pv-re*Qv)/denom;
     rdo[i]   = (Qv-re*Pv)/denom;
 
-    double g1    = (z-J1ks*too)/(ko+m[i]);
-    double g2    = (z-J1ko*tss)/(ks+m[i]);
+    g1    = (z-J1ks*too)/(ko+m[i]);
+    g2    = (z-J1ko*tss)/(ks+m[i]);
 
-    double Tv1   = (vf[i]*rinf+vb[i])*g1;
-    double Tv2   = (vf[i]+vb[i]*rinf)*g2;
-    double T1    = Tv1*(sf[i]+sb[i]*rinf);
-    double T2    = Tv2*(sf[i]*rinf+sb[i]);
-    double T3    = (rdo[i]*Qs+tdo[i]*Ps)*rinf;
+    Tv1   = (vf[i]*rinf+vb[i])*g1;
+    Tv2   = (vf[i]+vb[i]*rinf)*g2;
+    T1    = Tv1*(sf[i]+sb[i]*rinf);
+    T2    = Tv2*(sf[i]*rinf+sb[i]);
+    T3    = (rdo[i]*Qs+tdo[i]*Ps)*rinf;
 
     // Multiple scattering contribution to bidirectional canopy reflectance
     rsod[i] = (T1+T2-T3)/(1-rinf2);
@@ -200,28 +201,33 @@ List cReflTransSingleLayer(NumericVector rho, NumericVector tau,
   NumericVector w(rho.size());
 
   // constants
-  
   double tss = exp(-ks*lai);
   double too = exp(-ko*lai);
-    
+
+  //helper
+  double sb,sf,vb,vf,sigb,sigf,att,m2,m;  
+  double J1ks,J2ks,J1ko,J2ko,z,J4,e1,e2,rinf,rinf2,re,denom,Ps,Qs;
+  double Pv,Qv,g1,g2,Tv1,Tv2,T1,T2,T3,amsig,apsig,rtp,rtm,dns,dno;
+  double cks,cko,dks,dko,ho;
+  
   for(int i =0; i < rho.size(); i++){
     
     //Here the reflectance and transmission come in
     //with the suits coefficients
 
     //RTgeomRes function in R
-    double sb = sdb*rho[i]+sdf*tau[i];
-    double sf = sdf*rho[i]+sdb*tau[i];
-    double vb = dob*rho[i]+dof*tau[i];
-    double vf = dof*rho[i]+dob*tau[i];
+    sb = sdb*rho[i]+sdf*tau[i];
+    sf = sdf*rho[i]+sdb*tau[i];
+    vb = dob*rho[i]+dof*tau[i];
+    vf = dof*rho[i]+dob*tau[i];
     w[i] = sob*rho[i]+sof*tau[i];
     
-    double sigb = ddb*rho[i]+ddf*tau[i];
-    double sigf = ddf*rho[i]+ddb*tau[i];
-    double att = 1.0-sigf;
+    sigb = ddb*rho[i]+ddf*tau[i];
+    sigf = ddf*rho[i]+ddb*tau[i];
+    att = 1.0-sigf;
 
-    double m2 = (att+sigb)*(att-sigb);
-    double m;
+    m2 = (att+sigb)*(att-sigb);
+    m;
 
     if(m2<0){
       m = 0;
@@ -230,28 +236,28 @@ List cReflTransSingleLayer(NumericVector rho, NumericVector tau,
 
     }
        
-    double J1ks = cJfunc1(ks,m,lai);
-    double J2ks = cJfunc2or3(ks,m,lai);
-    double J1ko = cJfunc1(ko,m,lai);
-    double J2ko = cJfunc2or3(ko,m,lai);
-    double z  = cJfunc2or3(ks,ko,lai);
-    double J4 = cJfunc4(m,lai);
+    J1ks = cJfunc1(ks,m,lai);
+    J2ks = cJfunc2or3(ks,m,lai);
+    J1ko = cJfunc1(ko,m,lai);
+    J2ko = cJfunc2or3(ko,m,lai);
+    z  = cJfunc2or3(ks,ko,lai);
+    J4 = cJfunc4(m,lai);
 
      // condition 1
     if(m>0.01) {
 
       // Normal case
-      double e1 = exp(-m*lai);
-      double e2 = e1*e1;
-      double rinf = ((att-m)/sigb);
-      double rinf2 = rinf*rinf;
-      double re = rinf*e1;
-      double denom = 1.0-rinf2*e2;
+      e1 = exp(-m*lai);
+      e2 = e1*e1;
+      rinf = ((att-m)/sigb);
+      rinf2 = rinf*rinf;
+      re = rinf*e1;
+      denom = 1.0-rinf2*e2;
 
-      double Ps  =  (sf+sb*rinf)*J1ks;
-      double Qs = (sf*rinf+sb)*J2ks;
-      double Pv = (vf+vb*rinf)*J1ko;
-      double Qv = (vf*rinf+vb)*J2ko;
+      Ps  =  (sf+sb*rinf)*J1ks;
+      Qs = (sf*rinf+sb)*J2ks;
+      Pv = (vf+vb*rinf)*J1ko;
+      Qv = (vf*rinf+vb)*J2ko;
     
       rdd[i] = rinf*(1.0-e2)/denom;
       tdd[i] = (1.0-rinf2)*e1/denom;
@@ -261,14 +267,14 @@ List cReflTransSingleLayer(NumericVector rho, NumericVector tau,
       tdo[i] = (Pv-re*Qv)/denom;
       rdo[i] = (Qv-re*Pv)/denom;
     
-      double g1 = (z-J1ks*too)/(ko+m);
-      double g2 = (z-J1ko*tss)/(ks+m);
+      g1 = (z-J1ks*too)/(ko+m);
+      g2 = (z-J1ko*tss)/(ks+m);
 
-      double Tv1 = (vf*rinf+vb)*g1;
-      double Tv2 = (vf+vb*rinf)*g2;
-      double T1 = Tv1*(sf+sb*rinf);
-      double T2 = Tv2*(sf*rinf+sb);
-      double T3 = (rdo[i]*Qs+tdo[i]*Ps)*rinf;
+      Tv1 = (vf*rinf+vb)*g1;
+      Tv2 = (vf+vb*rinf)*g2;
+      T1 = Tv1*(sf+sb*rinf);
+      T2 = Tv2*(sf*rinf+sb);
+      T3 = (rdo[i]*Qs+tdo[i]*Ps)*rinf;
 
       // Multiple scattering contribution to
       //bidirectional canopy reflectance
@@ -279,21 +285,21 @@ List cReflTransSingleLayer(NumericVector rho, NumericVector tau,
 
       // else m<0.01
       // Near or complete conservative scattering
-      double amsig = att-sigb;
-      double apsig = att+sigb;
+      amsig = att-sigb;
+      apsig = att+sigb;
 	
-      double rtp = (1.0-amsig*J4)/(1+amsig*J4);
-      double rtm = (-1.0+apsig*J4)/(1+apsig*J4);
+      rtp = (1.0-amsig*J4)/(1+amsig*J4);
+      rtm = (-1.0+apsig*J4)/(1+apsig*J4);
       rdd[i] = 5.0*(rtp+rtm);
       tdd[i] = 5.0*(rtp-rtm);
 	
-      double dns = ks*ks-m*m;
-      double dno = ko*ko-m*m;
-      double cks = (sb*(ks-att)-sf*sigb)/dns;
-      double cko = (vb*(ko-att)-vf*sigb)/dno;
-      double dks = (-sf*(ks+att)-sb*sigb)/dns;
-      double dko = (-vf*(ko+att)-vb*sigb)/dno;
-      double ho  = (sf*cko+sb*dko)/(ko+ks);
+      dns = ks*ks-m*m;
+      dno = ko*ko-m*m;
+      cks = (sb*(ks-att)-sf*sigb)/dns;
+      cko = (vb*(ko-att)-vf*sigb)/dno;
+      dks = (-sf*(ks+att)-sb*sigb)/dns;
+      dko = (-vf*(ko+att)-vb*sigb)/dno;
+      ho  = (sf*cko+sb*dko)/(ko+ks);
 	
       rsd[i] = cks*(1.0-tss*tdd[i])-dks*rdd[i];
       rdo[i] = cko*(1.0-too*tdd[i])-dko*rdd[i];

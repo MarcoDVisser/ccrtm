@@ -28,39 +28,10 @@ cambell <- function(ala, tx1, tx2) {
     .Call('_ccrtm_cambell', PACKAGE = 'ccrtm', ala, tx1, tx2)
 }
 
-#' plate model 
-#'
-#' @param(theta) Angle (in radians!)
-#' @param(ref) refractive index
-#' 
-#' @references Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
-#' Properties Model Separating Photosynthetic Pigments, Remote Sensing of
-#' Environment
-#' @references Stern F. (1964), Transmission of isotropic radiation across an
-#' interface between two dielectrics, Appl. Opt., 3(1):111-113.
-#' @references Allen W.A. (1973), Transmission of isotropic light across a
-#' dielectric surface in two and three dimensions, J. Opt. Soc. Am.,
-#' 63(6):664-666.
-#' 
-#' @export
 cplateModel <- function(r12, t12, r21, t21, x, y, trans, N) {
     .Call('_ccrtm_cplateModel', PACKAGE = 'ccrtm', r12, t12, r21, t21, x, y, trans, N)
 }
 
-#' tav function
-#' 
-#' Stern F. (1964), Transmission of isotropic radiation across an
-#' interface between two dielectrics, Appl. Opt., 3(1):111-113.
-#' Allen W.A. (1973), Transmission of isotropic light across a
-#' dielectric surface in two and three dimensions, J. Opt. Soc. Am.,
-#' 63(6):664-666.
-#' @references Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
-#' Properties Model Separating Photosynthetic Pigments, Remote Sensing of
-#' Environment
-#' 
-#' @param(theta) Angle (in degrees!)
-#' @param(ref) refractive index
-#' @export
 ctav <- function(theta, n) {
     .Call('_ccrtm_ctav', PACKAGE = 'ccrtm', theta, n)
 }
@@ -77,31 +48,10 @@ cJfunc4 <- function(m, t) {
     .Call('_ccrtm_cJfunc4', PACKAGE = 'ccrtm', m, t)
 }
 
-#' Single layer reflection and transmission function 
-#' 4sail
-#' \code{cReflTrans} calculates
-#' @param rho numeric vector of particle reflectance
-#' @param tau numeric vector of particle transmission
-#' @param lai leaf area index
-#' @param att 
-#' @param m
-#' @param sigb
-#' @param ks
-#' @param ko
-#' @param sf
-#' @param sb
-#' @param vf
-#' @param vb
-#' 
-#' @author Marco D. Visser
-#' @return Returns a list of reflectances
-#' @export
 cReflTrans <- function(rho, tau, lai, att, m, sigb, ks, ko, sf, sb, vf, vb) {
     .Call('_ccrtm_cReflTrans', PACKAGE = 'ccrtm', rho, tau, lai, att, m, sigb, ks, ko, sf, sb, vf, vb)
 }
 
-#' Single layer for two layer prospect
-#' 4sail2
 cReflTransSingleLayer <- function(rho, tau, lai, ks, ko, sdf, sdb, dof, dob, sob, sof, ddb, ddf) {
     .Call('_ccrtm_cReflTransSingleLayer', PACKAGE = 'ccrtm', rho, tau, lai, ks, ko, sdf, sdb, dof, dob, sob, sof, ddb, ddf)
 }

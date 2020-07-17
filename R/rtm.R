@@ -14,7 +14,7 @@
 
 #' Forward implementation of Radiative Transfer Models
 #'
-#' @param formula A formula specifying which rtm to run
+#' @param fm A formula specifying which rtm to run
 #' @param pars a list of _named_ parameter vectors for all models.
 #' The parameter list for a model call as rho ~ prospect + foursail
 #' therefore contains two named vectors the first with parameters for
@@ -67,15 +67,14 @@ fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
 
 
 #' Generates an invertable model for backward implementation
-#' of Radiative Transfer Models. This function will be updated 
-#' in next release [this code is obsolete, kept in for completeness].  
-#' 
+#' of Radiative Transfer Models
 #' @inheritParams fRTM
 #' @param fixed a list of parameters to fix
+#' @param data ignored as of yet
 #' 
 #' @export
 # plot(bRTM(rho ~ prospect,parvec=c(Car=20,Cw=.002,Cm=0.001,Cbrown=0.001),fixed=c(N=2,Cab=9)))
-bRTM <- function(fm= rho ~ prospect5, data=NULL, pars=NULL, fixed=NULL,
+bRTM <- function(fm = rho ~ prospect5, data=NULL, pars=NULL, fixed=NULL,
                  wl=400:2500){
 
     
@@ -171,8 +170,8 @@ if(ordN==1){
 
 	
        
-        bgRef<- prms[[2]]["psoil"]*ccrtm:::soil[,"drySoil"] +
-            (1-prms[[2]]["psoil"])*ccrtm:::soil[,"wetSoil"]
+        bgRef<- prms[[2]]["psoil"]*soil[,"drySoil"] +
+            (1-prms[[2]]["psoil"])*soil[,"wetSoil"]
 
 	model<-function(prms,RTM1=get(reqMods[1]),
 			RTM2=get(reqMods[2]),
@@ -196,8 +195,8 @@ if(ordN==1){
     
     if(ordN==3){
         
-        bgRef<- prms[[3]]["psoil"]*ccrtm:::soil[,"drySoil"] +
-            (1-prms[[3]]["psoil"])*ccrtm:::soil[,"wetSoil"]
+        bgRef<- prms[[3]]["psoil"]*soil[,"drySoil"] +
+            (1-prms[[3]]["psoil"])*soil[,"wetSoil"]
         
         model<-function(prms,
                         RTM1=get(reqMods[1]),

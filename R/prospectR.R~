@@ -161,8 +161,8 @@ prospect_5BR <- function(N=1.5,Cab=60,Car=10,Cbrown=0.01,Cw=0.013,Cm=0.003){
 #' Properties Model Separating Photosynthetic Pigments, Remote Sensing of
 #' Environment
 #' 
-#' @param teta Angle in degrees
-#' @param ref refractive index
+#' @param(teta) Angle in degrees
+#' @param(ref) refractive index
 #' @export
 tav <- function(teta,ref) {
 

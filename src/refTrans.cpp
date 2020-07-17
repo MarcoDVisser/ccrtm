@@ -71,25 +71,25 @@ double cJfunc4(double m, double t){
 } // Jfunc4
 
 
-//' Single layer reflection and transmission function 
-//' 4sail
-//' \code{cReflTrans} calculates
-//' @param rho numeric vector of particle reflectance
-//' @param tau numeric vector of particle transmission
-//' @param lai leaf area index
-//' @param att 
-//' @param m
-//' @param sigb
-//' @param ks
-//' @param ko
-//' @param sf
-//' @param sb
-//' @param vf
-//' @param vb
-//' 
-//' @author Marco D. Visser
-//' @return Returns a list of reflectances
-//' @export
+// Single layer reflection and transmission function 
+// 4sail
+// \code{cReflTrans} calculates
+// @param rho numeric vector of particle reflectance
+// @param tau numeric vector of particle transmission
+// @param lai leaf area index
+// @param att to be documented
+// @param m to be documented
+// @param sigb to be documented
+// @param ks to be documented
+// @param ko to be documented
+// @param sf to be documented
+// @param sb to be documented
+// @param vf to be documented
+// @param vb to be documented
+// 
+// @author Marco D. Visser
+// @return Returns a list of reflectances
+// @export
 // [[Rcpp::export]]
 List cReflTrans(NumericVector rho,
 			 NumericVector tau,
@@ -181,8 +181,8 @@ List cReflTrans(NumericVector rho,
 
 
 
-//' Single layer for two layer prospect
-//' 4sail2
+// Single layer for two layer prospect
+// 4sail2
 // [[Rcpp::export]]
 List cReflTransSingleLayer(NumericVector rho, NumericVector tau,
 			   double lai,

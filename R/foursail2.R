@@ -1,6 +1,6 @@
 #' R implementation of the foursail2 model with 2 canopy layers.
 #'
-#' Layers are assumed identical in in particle inclination and
+#' Layers are assumed identical in particle inclination and
 #' hotspot, but may differ in the relative density and types of
 #' particles. In comparison to foursail, the background (soil),
 #' can now be non-Lambertain, having it own 4-stream
@@ -293,7 +293,7 @@ foursail2 <- function(rhoA,tauA,rhoB=NULL,tauB=NULL,bgr,
 
 
 
-##' 2 layer Hotspot function
+## 2 layer Hotspot function
 HotSpot2 <- function(lai,lai1,fbu,q,tss,ks,ko,dso){
     
     ## Treatment of the hotspot-effect for 2 layers
