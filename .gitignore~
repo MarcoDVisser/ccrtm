@@ -1,0 +1,7 @@
+*.ptx
+*.o
+*~
+optixProjection
+*.zip
+*.rds
+*.csv

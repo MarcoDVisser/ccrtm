@@ -1,0 +1,21 @@
+Package: ccrtm
+Type: Package
+Title: Coupled Chain Radiative Transfer Models
+Version: 0.1.2
+Date: 2020-01-11
+Author: Marco D. Visser
+Maintainer: Marco D. Visser <marco.d.visser@gmail.com>
+Description: A collection of radiative transfer models that can form a coupled chain 
+    to model radiative transfer across multiple spatial scales from leaf to canopy to stand.
+License: GPL (>= 2)
+URL: http://github.com/MarcoDVisser/aprof
+BugReports: http://github.com/MarcoDVisser/aprof/issues
+Imports:
+    graphics,
+    grDevices,
+    stats,
+    testthat,
+    Rcpp (>= 1.0.3)
+LinkingTo: Rcpp
+Repository: CRAN
+RoxygenNote: 7.0.2

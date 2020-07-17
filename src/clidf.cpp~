@@ -1,0 +1,30 @@
+//' Leaf inclination distribution function
+//' cummulative lagden function from Wout Verhoef's dissertation
+//' Extended here for any angle  
+//'
+//' @param a parameter
+//' @param b parameter
+//' @param theta angle in degrees
+//' @return angle fraction value
+//'
+//' @export
+// [[Rcpp::export]]
+NumericVector dcum(double a, double b, NumericVector theta) {
+
+  NumericVector rad(theta.size())
+  NumericVector dcum(theta.size());
+
+  for(int i =0; i < r12.size(); i++){
+    
+  rad <- theta * (pi / 180) 
+  x0 <- x <- 2 * rad
+  eps <- 1e-6
+  dx_abs <- 1
+  while (any(dx_abs > eps)) {
+    y <- a * sin(x) + 0.5 * b * sin(2 * x)
+    dx <- 0.5 * (y - x + x0)
+    x <- x + dx
+    dx_abs <- abs(dx)
+  }
+  2 * (y + thetarad) / pi
+}

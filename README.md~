@@ -1,0 +1,117 @@
+## ccrtm: Coupled Chain Radiative Transfer Models 
+
+A set of radiative transfer models to quantitatively describe the absorption, reflectance and transmission of solar energy in vegatation,
+and model remotely sensed spectral signatures of vegetation at distinct spatial scales. The main principle behind ccrtm is that many 
+radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). 
+Included models are prospect family, and 2 stream and 4 stream models for canopies. The package will be extended to include atmospheric models. 
+
+### Quicklinks
+
+-   [Quick start and tutorials](#quick-start-and-tutorials)
+-   [Installation](#the-online-code-files-from-s1-text)
+	-   [Dependencies](#dependencies)
+-   [Examples](#examples)
+    -   [Examples of output](#examples-of-output)
+    -   [Memory statisics](#memory-statisics)
+-   [Thanks](#thanks)
+  
+
+## Quick start and tutorials
+
+A "10 minute" quickstart guide is will be implemented in due time. 
+
+## Installation
+
+There is no release on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/), but there soon will be. 
+For now the developmental version from github can be downloaded as [zip](https://github.com/MarcoDVisser/aprof/zipball/master) 
+or [tar ball](https://github.com/MarcoDVisser/aprof/tarball/master).
+To install decompress these and run R CMD INSTALL on the contents of the archives, or use the **devtools** package to install the current development version from R.
+
+
+```r
+## devtools is required
+require(devtools)
+install_github("MarcoDVisser/ccrtm")
+```
+### Dependencies
+
+ccrtm depends on the pracma and expint packages (for now). 
+
+## Examples
+
+The basic functionality of ccrtm, and the coupled chain nature of the forward modelling components is shown below.
+Backward modelling will be included in later stages.
+
+```r
+require(ccrtm)
+
+
+## setup graphics for plots 
+par(mfrow=c(3,2))
+
+## get reflectance for a leaf 
+ref <- fRTM(rho~prospect5)
+plot(ref)
+     
+## get reflectance and transmission for a leaf 
+reftrans <- fRTM(rho+tau~prospect5)
+plot(reftrans)
+     
+## get reflectance for a single layered canopy 
+ref <- fRTM(rho~prospect5+foursail)
+plot(ref)
+
+## get reflectance for a 2 layered canopy with two leaf types 
+ref <- fRTM(rho~prospect5+prospectd+foursail2)
+plot(ref)
+
+## edit the parameters
+
+parameters<-getDefaults(rho~prospect5+prospectd+foursail2)
+
+## change leaf area index
+#parameters$foursail2["LAI"]<-0.5
+
+## update reflectance
+#ref <- fRTM(rho~prospect5+prospectd+foursail2,parameters)
+#plot(ref)
+
+
+## change leaf area index
+#parameters$foursail2["LAI"]<-8.5
+
+## update reflectance
+#ref <- fRTM(rho~prospect5+prospectd+foursail2,parameters)
+#plot(ref)
+
+```
+	 
+### Examples of output
+The package provdes some standard plots, the output from the above example code for instance is:
+
+![](http://i.imgur.com/lb1UBCI.png)
+
+
+Printing any ccrtm object will return basic information:
+```r
+ref <- fRTM(rho~prospect5+prospectd+foursail2)
+ref
+```
+
+```
+RTM predicted spectra:  reflectance 
+Generating model(s):  prospect5, prospectd, foursail2 
+Wavelength range  400-2500 (nm) 
+```
+
+## to do list
+debug and optimize 
+
+## Thanks
+Special thanks to Matteo Detto for all the suggestions while I was developing this package.
+
+
+## Version history
+0.01 Initial package with everything in R 
+0.1 Basic tests complete, basic optimization, and refactoring in c++. 
+
