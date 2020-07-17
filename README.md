@@ -44,53 +44,49 @@ The basic functionality of ccrtm, and the coupled chain nature of the forward mo
 Backward modelling will be included in later stages.
 
 ```r
-require(ccrtm)
 
+require(ccrtm)
 
 ## setup graphics for plots 
 par(mfrow=c(3,2))
 
 ## get reflectance for a leaf 
 ref <- fRTM(rho~prospect5)
-plot(ref)
+plot(ref,main="Prospect 5")
      
 ## get reflectance and transmission for a leaf 
 reftrans <- fRTM(rho+tau~prospect5)
-plot(reftrans)
+plot(reftrans,main="Prospect 5")
      
 ## get reflectance for a single layered canopy 
 ref <- fRTM(rho~prospect5+foursail)
-plot(ref)
+plot(ref,main="Prospect 5 + 4SAIL")
 
 ## get reflectance for a 2 layered canopy with two leaf types 
-ref <- fRTM(rho~prospect5+prospectd+foursail2)
-plot(ref)
+ref <- fRTM(rho~prospectd+prospect5+foursail2)
+plot(ref,main="Prospect D + Prospect 5  + 4SAIL2")
 
-## edit the parameters
-
-parameters<-getDefaults(rho~prospect5+prospectd+foursail2)
-
-## change leaf area index
-#parameters$foursail2["LAI"]<-0.5
+## edit the parameters: sparse vegatation LAI 
+parlist<- list(prospect5=NULL,prospectd=NULL,foursail2=c(LAI=0.05))
 
 ## update reflectance
-#ref <- fRTM(rho~prospect5+prospectd+foursail2,parameters)
-#plot(ref)
+ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
+plot(ref,main="LAI=0.05")
 
-
-## change leaf area index
-#parameters$foursail2["LAI"]<-8.5
+## change leaf area index to dense vegetation
+parlist$foursail2["LAI"]<-8.5
 
 ## update reflectance
-#ref <- fRTM(rho~prospect5+prospectd+foursail2,parameters)
-#plot(ref)
+ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
+plot(ref,main="LAI=8.5")
+
 
 ```
 	 
 ### Examples of output
 The package provdes some standard plots, the output from the above example code for instance is:
 
-![](http://i.imgur.com/lb1UBCI.png)
+![](https://i.imgur.com/alouDkJ.png)
 
 
 Printing any ccrtm object will return basic information:
