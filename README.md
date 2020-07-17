@@ -102,10 +102,10 @@ Wavelength range  400-2500 (nm)
 ```
 
 ## to do list
-Add liberty, and procosine
-Add 2 stream model
-Add inform model
-Add GEOSAIL model
+- Add liberty, and procosine
+- Add 2 stream model
+- Add inform model
+- Add GEOSAIL model
 
 ## Thanks
 Special thanks to Matteo Detto for all the suggestions while I was developing this package.
