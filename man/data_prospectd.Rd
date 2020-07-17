@@ -8,7 +8,8 @@
 data(prospectd)
 }
 \description{
-refractive index and specific absorption coefficient for PROSPECT D
+see http://teledetection.ipgp.jussieu.fr/prosail/ for more details
+on the data.
 }
 \section{details}{
 
@@ -40,9 +41,6 @@ medium").
 Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
 Properties Model Separating Photosynthetic Pigments, Remote Sensing of
 Environment
-The specific absorption coefficient corresponding to brown pigment is
-provided by Frederic Baret (EMMAH, INRA Avignon, baret[at]avignon.inra.fr)
-and used with his autorization.
 }
 
 \keyword{datasets}

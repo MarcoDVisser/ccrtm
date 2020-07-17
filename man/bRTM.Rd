@@ -2,9 +2,11 @@
 % Please edit documentation in R/rtm.R
 \name{bRTM}
 \alias{bRTM}
-\title{Backward implementation of Radiative Transfer Models}
+\title{Generates an invertable model for backward implementation
+of Radiative Transfer Models. This function will be updated 
+in next release [this code is obsolete, kept in for completeness].}
 \usage{
-bRTM(fm = rho ~ prospect5b, data = NULL, pars = NULL, fixed = NULL,
+bRTM(fm = rho ~ prospect5, data = NULL, pars = NULL, fixed = NULL,
   wl = 400:2500)
 }
 \arguments{
@@ -14,6 +16,8 @@ therefore contains two named vectors the first with parameters for
 prospect and the second with parameters for foursail 
 if left empty default parameters are generated}
 
+\item{fixed}{a list of parameters to fix}
+
 \item{wl}{wavelengths (in nm) add only if
 certain wavelengths are required as output.
 Input is expected to integers between 400 and 2500, or will 
@@ -21,5 +25,7 @@ be forced to be an integer. Integers outside the 400:2500 range
 will not be returned.}
 }
 \description{
-Backward implementation of Radiative Transfer Models
+Generates an invertable model for backward implementation
+of Radiative Transfer Models. This function will be updated 
+in next release [this code is obsolete, kept in for completeness].
 }

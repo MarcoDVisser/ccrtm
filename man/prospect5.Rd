@@ -4,10 +4,11 @@
 \alias{prospect5}
 \title{Prospect model version 5 and 5B}
 \usage{
-prospect5(param, data = NULL)
+prospect5(param)
 }
 \arguments{
 \item{param}{A named vector of PROSPECT parameters (note: program ignores case):
+
  \itemize{
 \item [1] = leaf structure parameter (N)
 \item [2] = chlorophyll a+b content in ug/cm2 (Cab)
@@ -26,5 +27,5 @@ for wavelengths 400 to 2500nm:
 }
 }
 \description{
-Set Cbrown to 0 for version 5
+Set Cbrown to 0 for prospect version 5
 }

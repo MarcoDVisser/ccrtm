@@ -4,7 +4,7 @@
 \alias{prospectd}
 \title{Prospect model version D}
 \usage{
-prospectd(param, data = NULL)
+prospectd(param)
 }
 \arguments{
 \item{param}{A named vector of PROSPECT parameters (note: program ignores case):

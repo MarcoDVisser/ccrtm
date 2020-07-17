@@ -7,8 +7,29 @@
 \title{ccrtm}
 \description{
 Coupled Chain Radiative Transfer Models.
+}
+\details{
 A collection of radiative transfer models that can form a coupled chain to model
 radiative transfer across multiple spatial scales from leaf to canopy to stand.
+
+Currently implemented models:
+
+\itemize{
+
+\item [1] = PROSPECT 5, 5B and D
+\item [2] = FOURSAIL, and FOURSAIL2 
+\item [3] = FLIM
+
+}
+
+Currently being tested/soon to be implemented models
+
+\itemize{
+
+\item [1] = LIBERTY, PROCOSINE
+\item [2] = INFORM
+
+}
 }
 \author{
 Marco D. Visser
