@@ -23,7 +23,7 @@ A "10 minute" quickstart guide is will be implemented in due time.
 
 ## Installation
 
-There is no release on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/), but there soon will be. 
+The pacakge will soon be on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/). 
 For now the developmental version from github can be downloaded as [zip](https://github.com/MarcoDVisser/aprof/zipball/master) 
 or [tar ball](https://github.com/MarcoDVisser/aprof/tarball/master).
 To install decompress these and run R CMD INSTALL on the contents of the archives, or use the **devtools** package to install the current development version from R.
