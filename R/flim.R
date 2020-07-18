@@ -25,7 +25,8 @@
 #' Confounded parameters pairs cannot be inversely
 #' estimated, one of the pairs should be set to 1.
 #'
-#'@import pracma 
+#' @importFrom pracma sec
+#' 
 flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
 
     ## degrees to radians

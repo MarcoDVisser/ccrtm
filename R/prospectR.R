@@ -75,7 +75,7 @@
 #' @param Cbrown brown pigments content in arbitrary units
 #' @param Cw equivalent water thickness in g/cm2 or cm
 #' @param Cm dry matter content in g/cm2
-#' @import expint 
+#' @importFrom expint expint_E1
 #' @export
 prospect_5BR <- function(N=1.5,Cab=60,Car=10,Cbrown=0.01,Cw=0.013,Cm=0.003){
 

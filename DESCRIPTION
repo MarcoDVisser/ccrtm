@@ -1,12 +1,12 @@
 Package: ccrtm
 Type: Package
 Title: Coupled Chain Radiative Transfer Models
-Version: 0.1.4
+Version: 0.1.5
 Date: 2020-07-10
 Author: Marco D. Visser
 Maintainer: Marco D. Visser <marco.d.visser@gmail.com>
 Description: A collection of radiative transfer models that can form a coupled chain 
-    to model radiative transfer in vegatation across multiple spatial scales from leaf to canopy to stand.
+    to model radiative transfer in vegetation across multiple spatial scales from leaf to canopy to stand.
 License: GPL (>= 2)
 URL: http://github.com/MarcoDVisser/ccrtm
 BugReports: http://github.com/MarcoDVisser/ccrtm/issues

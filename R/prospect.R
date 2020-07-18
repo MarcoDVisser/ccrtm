@@ -19,7 +19,9 @@
 #' \item [1] = leaf reflectance (rho)
 #' \item [2] = leaf transmission (tau)
 #' }
-#' @import expint
+#'
+#' @importFrom expint expint_E1
+#' 
 #' @export
 #' 
 #' @useDynLib ccrtm    
@@ -91,7 +93,8 @@ prospect5 <- function(param){
 #' \item [1] = leaf reflectance (rho)
 #' \item [2] = leaf transmission (tau)
 #' }
-#' @import expint
+#' 
+#' @importFrom expint expint_E1
 #' @export
 #' @useDynLib ccrtm    
 prospectd <- function(param){

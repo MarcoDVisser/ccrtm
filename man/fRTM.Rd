@@ -25,3 +25,38 @@ will not be returned.}
 \description{
 Forward implementation of Radiative Transfer Models
 }
+\examples{
+## setup graphics for plots 
+par(mfrow=c(3,2))
+
+## get reflectance for a leaf 
+ref <- fRTM(rho~prospect5)
+plot(ref,main="Prospect 5")
+     
+## get reflectance and transmission for a leaf 
+reftrans <- fRTM(rho+tau~prospect5)
+plot(reftrans,main="Prospect 5")
+     
+## get reflectance for a single layered canopy 
+ref <- fRTM(rho~prospect5+foursail)
+plot(ref,main="Prospect 5 + 4SAIL")
+
+## get reflectance for a 2 layered canopy with two leaf types 
+ref <- fRTM(rho~prospectd+prospect5+foursail2)
+plot(ref,main="Prospect D + Prospect 5  + 4SAIL2")
+
+## edit the parameters: sparse vegatation LAI 
+parlist<- list(prospect5=NULL,prospectd=NULL,foursail2=c(LAI=0.05))
+
+## update reflectance
+ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
+plot(ref,main="LAI=0.05")
+
+## change leaf area index to dense vegetation
+parlist$foursail2["LAI"]<-8.5
+
+## update reflectance
+ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
+plot(ref,main="LAI=8.5")
+   
+}

@@ -24,7 +24,42 @@
 #' certain wavelengths are required as output.
 #' Input is expected to integers between 400 and 2500, or will 
 #' be forced to be an integer. Integers outside the 400:2500 range
-#' will not be returned. 
+#' will not be returned.
+#'
+#' @examples
+#' ## setup graphics for plots 
+#' par(mfrow=c(3,2))
+#' 
+#' ## get reflectance for a leaf 
+#' ref <- fRTM(rho~prospect5)
+#' plot(ref,main="Prospect 5")
+#'      
+#' ## get reflectance and transmission for a leaf 
+#' reftrans <- fRTM(rho+tau~prospect5)
+#' plot(reftrans,main="Prospect 5")
+#'      
+#' ## get reflectance for a single layered canopy 
+#' ref <- fRTM(rho~prospect5+foursail)
+#' plot(ref,main="Prospect 5 + 4SAIL")
+#' 
+#' ## get reflectance for a 2 layered canopy with two leaf types 
+#' ref <- fRTM(rho~prospectd+prospect5+foursail2)
+#' plot(ref,main="Prospect D + Prospect 5  + 4SAIL2")
+#' 
+#' ## edit the parameters: sparse vegatation LAI 
+#' parlist<- list(prospect5=NULL,prospectd=NULL,foursail2=c(LAI=0.05))
+#' 
+#' ## update reflectance
+#' ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
+#' plot(ref,main="LAI=0.05")
+#' 
+#' ## change leaf area index to dense vegetation
+#' parlist$foursail2["LAI"]<-8.5
+#' 
+#' ## update reflectance
+#' ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
+#' plot(ref,main="LAI=8.5")
+#'    
 #' @export
 fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
                  wl=400:2500){
@@ -158,12 +193,14 @@ ordN<-length(reqMods)
 
 if(ordN==1){
        
-       model<-function(prms,RTM=get(reqMods[1])){ 
+       model1<-function(prms,RTM=get(reqMods[1])){ 
                 
         ord1pred <- RTM(prms[[1]])
 
         return(ord1pred)   
-        }      
+       }
+    return(model1)
+
     }
     
     if(ordN==2){
@@ -173,7 +210,7 @@ if(ordN==1){
         bgRef<- prms[[2]]["psoil"]*soil[,"drySoil"] +
             (1-prms[[2]]["psoil"])*soil[,"wetSoil"]
 
-	model<-function(prms,RTM1=get(reqMods[1]),
+	model2<-function(prms,RTM1=get(reqMods[1]),
 			RTM2=get(reqMods[2]),
 			Rsoil=bgRef){	
         
@@ -190,6 +227,9 @@ if(ordN==1){
         return(ord2pred)
 
         }
+        
+        return(model2)
+
     }
     
     
@@ -198,7 +238,7 @@ if(ordN==1){
         bgRef<- prms[[3]]["psoil"]*soil[,"drySoil"] +
             (1-prms[[3]]["psoil"])*soil[,"wetSoil"]
         
-        model<-function(prms,
+        model3<-function(prms,
                         RTM1=get(reqMods[1]),
                         RTM2=get(reqMods[2]),
                         RTM3=get(reqMods[3]),
@@ -223,10 +263,11 @@ if(ordN==1){
             
         }
         
+        return(model3)
         
     }
     
-    return(model)
+ 
 }
 
 ## get prediction columns
