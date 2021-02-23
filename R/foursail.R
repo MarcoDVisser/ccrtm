@@ -1,4 +1,12 @@
-#' R implementation of foursail (Optimized)
+#' Optimized R implementation of foursail (4SAIL) 
+#'
+#' The foursail (or 4SAIL) radiative transfer model is commonly used to simulate bidirectional 
+#' reflectance distribution functions within vegetation canopies. Foursail (4SAIL) refers 
+#' to “Scattering by Arbitrary Inclined Leaves” in a 4-stream model. The four-streams represents 
+#' the scattering and absorption of upward, downward and two directional radiative fluxes with 
+#' four linear differential equations in a 1-D canopy. The model was initially developed by
+#' Verhoef (1984), who extended work by Suits (1971) 4-steam model.  
+#' 
 #' @param rho input leaf reflectance from 400-2500nm (can be measured or modeled)
 #' @param tau input leaf transmittance from 400-2500nm (can be measured or modeled)
 #' @param bgr background reflectance. Usual input is
@@ -31,9 +39,36 @@
 #' \item [6] = transmission of direct light through the canopy (taus).
 #' }
 #'
-#' @author   Wout Verhoef (original), Marco D. Visser (R implementation) 
+#' @examples
+#' ## lower-level implementation example
+#' ## see ?fRTM for the typical mode of simulation
+#' ## e.g. fRTM(rho~prospectd+foursail) 
+#'
+#' ## 1) get parameters
+#' params<-getDefaults(rho~prospectd+foursail) 
+#' ## getDefaults("foursail") will also work
+#' bestpars<-params$foursail$best
+#' ## ensure the vector is named
+#' names(bestpars) <- rownames(params$foursail)
+#' 
+#' ## 2) get leaf reflectance and transmission 
+#' rt<-fRTM(rho+tau~prospectd)
+#'
+#' ## 3) get soil reflectance to model background reflectance
+#' data(soil)
+#' 
+#' ## a linear mixture soil model 
+#' bgRef<- bestpars["psoil"]*soil[,"drySoil"] + (1-bestpars["psoil"])*soil[,"wetSoil"]
+#' 
+#' ## 4) run 4SAIL
+#' foursail(rt[,"rho"],rt[,"tau"],bgRef,bestpars)
+#' 
+#' @references Suits, G.H., 1971. The calculation of the directional reflectance of a 
+#'  vegetative canopy. Remote Sens. Environ. 2, 117–125.
+#' @references Verhoef, W. (1984). Light scattering by leaf layers with application to 
+#'   canopy reflectance modeling: The SAIL model. Remote Sens. Environ. 16, 125-141.
 #' @export
-foursail <- function(rho, tau,bgr,param){
+foursail <- function(rho, tau, bgr,param){
 
     names(param) <- tolower(names(param))
     
@@ -143,6 +178,7 @@ foursail <- function(rho, tau,bgr,param){
 #'
 #' The pure R version of foursail is included in the package as an easy
 #' way to review the code, and to check more optimized versions against.
+#' Model originally developed by Wout Verhoef.
 #' 
 #' @param rho input leaf reflectance from 400-2500nm (can be measured or modeled)
 #' @param tau input leaf transmittance from 400-2500nm (can be measured or modeled)
@@ -178,8 +214,8 @@ foursail <- function(rho, tau,bgr,param){
 #' \item [6] = transmission of direct light through the canopy (taus).
 #' }
 #'
-#' @author   Wout Verhoef (original), Marco D. Visser (R implementation) 
-#' @export
+#' @author   Marco D. Visser (R implementation) 
+#'
 r_foursail <- function(rho, tau,bgr,param){
 
     names(param) <- tolower(names(param))

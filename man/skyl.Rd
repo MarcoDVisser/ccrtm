@@ -25,5 +25,20 @@ solar incident flux}
 \item{skyl}{fraction diffuse}
 }
 \description{
-simple atmospherical model
+Simple atmospherical model that builds on recommendations
+from
+}
+\examples{
+data(solar)
+
+rt<-fRTM(rho~prospect5+foursail)
+skyl(rt[,"rddt"],rt[,"rsdt"],rt[,"rdot"],rt[,"rsot"],
+Es=solar[,1],Ed=solar[,2],tts=45,skyl=NULL)
+
+}
+\references{
+Francois, C., Ottle, C., Olioso, A., Prevot, L., Bruguier, N., 
+  Ducros, Y.(2002). Conversion of 400-1100 nm vegetation albedo measurements 
+  into total shortwave broadband albedo using a canopy radiative transfer model. 
+  Agronomie 22, 611-618.
 }

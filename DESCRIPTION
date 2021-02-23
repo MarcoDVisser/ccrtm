@@ -1,12 +1,12 @@
 Package: ccrtm
 Type: Package
 Title: Coupled Chain Radiative Transfer Models
-Version: 0.1.5
-Date: 2020-07-10
-Author: Marco D. Visser
+Version: 0.1.6
+Date: 2021-02-22
+Authors@R: c(person("Marco","Visser","Developer", role = c("aut", "cre","cph"),
+                      email = "marco.d.visser@gmail.com"))
 Maintainer: Marco D. Visser <marco.d.visser@gmail.com>
-Description: A collection of radiative transfer models that can form a coupled chain 
-    to model radiative transfer in vegetation across multiple spatial scales from leaf to canopy to stand.
+Description: A set of radiative transfer models to quantitatively describe the absorption, reflectance and transmission of solar energy in vegatation, and model remotely sensed spectral signatures of vegetation at distinct spatial scales (currentlty leaf,canopy and stand). The main principle behind ccrtm is that many  radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). It allows the simulation of spectral datasets in the solar spectrum (400-2500nm) using leaf models as PROSPECT5, 5b, and D which can be coupled with canopy models as FLIM, SAIL and SAIL2. Currently, only a simple atmostpheric model (skyl) is implemented. Jacquemoud et al 2008 provide the most comprehensive overview of these models <doi:10.1016/j.rse.2008.01.026>. 
 License: GPL (>= 2)
 URL: http://github.com/MarcoDVisser/ccrtm
 BugReports: http://github.com/MarcoDVisser/ccrtm/issues

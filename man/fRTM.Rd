@@ -2,7 +2,7 @@
 % Please edit documentation in R/rtm.R
 \name{fRTM}
 \alias{fRTM}
-\title{Forward implementation of Radiative Transfer Models}
+\title{Forward implementation of coupled Radiative Transfer Models.}
 \usage{
 fRTM(fm = rho + tau ~ prospect5 + foursail, pars = NULL,
   wl = 400:2500)
@@ -23,10 +23,11 @@ be forced to be an integer. Integers outside the 400:2500 range
 will not be returned.}
 }
 \description{
-Forward implementation of Radiative Transfer Models
+Forward implementation of coupled Radiative Transfer Models.
 }
 \examples{
 ## setup graphics for plots 
+oldpar<-par()
 par(mfrow=c(3,2))
 
 ## get reflectance for a leaf 
@@ -58,5 +59,6 @@ parlist$foursail2["LAI"]<-8.5
 ## update reflectance
 ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
 plot(ref,main="LAI=8.5")
-   
+
+par(oldpar)   
 }

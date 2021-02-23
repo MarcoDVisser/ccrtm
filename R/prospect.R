@@ -1,6 +1,9 @@
-#' Prospect model version 5 and 5B
+#' PROSPECT model version 5 and 5B
 #'
-#' Set Cbrown to 0 for prospect version 5
+#' The PROSPECT5(b) leaf reflectance model. The model was implemented based on
+#' Jacquemoud and Ustin (2019), and is further described in detail in Feret et al (2008).
+#' PROSPECT models use the plate models developed in 
+#' Allen (1969) and Stokes (1862). Set Cbrown to 0 for prospect version 5.
 #' 
 #' @param param A named vector of PROSPECT parameters (note: program ignores case):
 #' 
@@ -23,7 +26,18 @@
 #' @importFrom expint expint_E1
 #' 
 #' @export
-#' 
+#' @references Jacquemoud, S., and Ustin, S. (2019). Leaf optical properties. 
+#'   Cambridge University Press.
+#' @references Feret, J.B., Francois, C., Asner, G.P., Gitelson, A.A., 
+#'   Martin, R.E., Bidel, L.P.R., Ustin, S.L., le Maire, G., Jacquemoud, S. (2008),
+#'   PROSPECT-4 and 5: Advances in the leaf optical properties model separating photosynthetic 
+#'   pigments. Remote Sens. Environ. 112, 3030–3043. 
+#' @references Allen W.A., Gausman H.W., Richardson A.J., Thomas J.R.
+#'   (1969), Interaction of isotropic ligth with a compact plant leaf,
+#'   Journal of the Optical Society of American, 59:1376-1379.
+#' @references Stokes G.G. (1862), On the intensity of the light
+#'   reflected from or transmitted through a pile of plates,
+#'   Proceedings of the Royal Society of London, 11:545-556.
 #' @useDynLib ccrtm    
 prospect5 <- function(param){
 
@@ -75,7 +89,13 @@ prospect5 <- function(param){
     return(rhoTau)
 }
 
-#' Prospect model version D
+#' PROSPECT model version D
+#'
+#' The PROSPECTD leaf reflectance model. The model was implemented based on
+#' Jacquemoud and Ustin (2019), and is further described in detail in Feret et al (2017).
+#' PROSPECT models use the plate models developed in 
+#' Allen (1969) and Stokes (1862).
+#'
 #' @param param A named vector of PROSPECT parameters (note: program ignores case):
 #'  \itemize{
 #' \item [1] = leaf structure parameter (N)
@@ -93,7 +113,17 @@ prospect5 <- function(param){
 #' \item [1] = leaf reflectance (rho)
 #' \item [2] = leaf transmission (tau)
 #' }
-#' 
+#' @references Jacquemoud, S., and Ustin, S. (2019). Leaf optical properties. 
+#'   Cambridge University Press.
+#' @references Feret, J.B., Gitelson, A.A., Noble, S.D., Jacquemoud, S. (2017).
+#'   PROSPECT-D: Towards modeling leaf optical properties through a complete lifecycle. 
+#'   Remote Sens. Environ. 193, 204-215.  
+#' @references Allen W.A., Gausman H.W., Richardson A.J., Thomas J.R.
+#'   (1969), Interaction of isotropic ligth with a compact plant leaf,
+#'   Journal of the Optical Society of American, 59:1376-1379.
+#' @references Stokes G.G. (1862), On the intensity of the light
+#'   reflected from or transmitted through a pile of plates,
+#'   Proceedings of the Royal Society of London, 11:545-556.
 #' @importFrom expint expint_E1
 #' @export
 #' @useDynLib ccrtm    
@@ -112,13 +142,15 @@ prospectd <- function(param){
     Cm <- as.numeric(param["cm"])
     rhoTau <- matrix(0, 2101, 2)
 
-#    CoefMat <- ccrtm:::data_prospectd ## get reflective and absorbtion coefficient data
+#   CoefMat <- ccrtm:::data_prospectd ## get reflective and absorbtion coefficient data
     CoefMat <- data_prospectd ## get reflective and absorbtion coefficient data
      
     l <- CoefMat[,1] # wavelength (nm)
     n <- CoefMat[,2] # refractive index
     ## specific absorption coefficient for each element at each wl (k= total absorbtion coefficient)
     ## should be able to switch this to CoefMat%*%Input
+    ## the formula is over N as concentrations are assumed uniform over the 
+    ## leaf
     k <- (Cab*CoefMat[,3]+Car*CoefMat[,4]+Canth*CoefMat[,5]+Cbrown*CoefMat[,6]+
           Cw*CoefMat[,7]+Cm*CoefMat[,8])/N;
     

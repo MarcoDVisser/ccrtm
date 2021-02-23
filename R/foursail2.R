@@ -1,10 +1,14 @@
 #' R implementation of the foursail2 model with 2 canopy layers.
 #'
+#' The foursail2 model is a two layer implementation of the 
+#' foursail model described in Verhoef and Bach (2007).
 #' Layers are assumed identical in particle inclination and
 #' hotspot, but may differ in the relative density and types of
-#' particles. In comparison to foursail, the background (soil),
+#' particles (see foursail2b for a layer specific inclination angle).
+#' In comparison to foursail, the background (soil),
 #' can now be non-Lambertain, having it own 4-stream
-#' BDRF. There are two types of particles, generalized
+#' BDRF (not implemented here but may be input by the user).
+#' There are two types of particles, generalized
 #' to primary and secondary (originally termed "green"
 #' and "brown" particles). The  realtive abundance of
 #' the secondary particle in the top canopy is regulated by
@@ -12,7 +16,8 @@
 #' prospect, libery or procosine for the reflectance
 #' and transmittance of the particles, and with the the foursail
 #' or Hapke elements for the background reflectance.
-#' If run alone, these require direct inputs. 
+#' If run alone, these require direct inputs which could be 
+#' measured leaf reflectance. 
 #' 
 #' @param rhoA primary particle reflectance from 400-2500nm (can be measured or modeled)
 #' @param tauA primary particle transmittance from 400-2500nm (can be measured or modeled)
@@ -59,7 +64,14 @@
 #' \item [4] = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
 #' to the incoming radiant flux in the solar direction. 
 #' }
-#' @author   Wout Verhoef (original), Marco D. Visser (R implementation) 
+#'
+#' @examples
+#' ## see ?foursail for lower-level implementations
+#' fRTM(rho~prospect5+foursail2)
+#'
+#' @references Verhoef, W., Bach, H. (2007). Coupled soil-leaf-canopy and atmosphere radiative transfer 
+#'   modeling to simulate hyperspectral multi-angular surface reflectance and TOA radiance data. 
+#'   Remote Sens. Environ. 109, 166-182. 
 #' @export
 foursail2 <- function(rhoA,tauA,rhoB=NULL,tauB=NULL,bgr,
                       rsobgr=NULL,rdobgr=NULL,rsdbgr=NULL,rddbgr=NULL,

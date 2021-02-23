@@ -28,7 +28,8 @@ flim(Rc, Rg, To = NULL, Ts = NULL, params, area = 10000)
 \item{area}{area of stand}
 }
 \description{
-Forests are assumed a discontinous mix of tree crowns
+The FLIM model was first described by Rosema et al (1992).
+In FLIM forests are assumed a discontinous mix of tree crowns
 and gaps. Reflectance is modelled in terms of the
 probabilty to observe either a gap (background)
 or a tree crown. Both gaps and crowns may be shaded.
@@ -36,4 +37,9 @@ or a tree crown. Both gaps and crowns may be shaded.
 \details{
 Confounded parameters pairs cannot be inversely
 estimated, one of the pairs should be set to 1.
+}
+\references{
+Rosema, A., Verhoef, W., Noorbergen, H., Borgesius, J.J. (1992). 
+A new forest light interaction model in support of forest monitoring. 
+Remote Sens. Environ. 42, 23-41.
 }

@@ -1,6 +1,7 @@
 #' Forest Light Interaction Model (FLIM)
 #'
-#' Forests are assumed a discontinous mix of tree crowns
+#' The FLIM model was first described by Rosema et al (1992).
+#' In FLIM forests are assumed a discontinous mix of tree crowns
 #' and gaps. Reflectance is modelled in terms of the
 #' probabilty to observe either a gap (background)
 #' or a tree crown. Both gaps and crowns may be shaded. 
@@ -25,6 +26,13 @@
 #' Confounded parameters pairs cannot be inversely
 #' estimated, one of the pairs should be set to 1.
 #'
+#' @examlpes
+#' parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,d=10,tto=10,tts=20,psi=30)
+#' flim(0.1,0.1,params=parvec)
+#'    
+#' @references Rosema, A., Verhoef, W., Noorbergen, H., Borgesius, J.J. (1992). 
+#' A new forest light interaction model in support of forest monitoring. 
+#' Remote Sens. Environ. 42, 23-41. 
 #' @importFrom pracma sec
 #' 
 flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
@@ -87,7 +95,4 @@ flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
     return(list(R,crowndark=Fcd,crownsun=Fcs,opendark=Fod,opensun=Fos,open=open,sunlit=sunlit))
 }
 
-
-#parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,d=10,tto=10,tts=20,psi=30)
-    
     

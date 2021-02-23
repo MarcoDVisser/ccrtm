@@ -12,7 +12,7 @@
 ## and the output of the previous model directly
 ## RTM2(..., param=pars[[2]],chain=predictions1)
 
-#' Forward implementation of Radiative Transfer Models
+#' Forward implementation of coupled Radiative Transfer Models.
 #'
 #' @param fm A formula specifying which rtm to run
 #' @param pars a list of _named_ parameter vectors for all models.
@@ -28,6 +28,7 @@
 #'
 #' @examples
 #' ## setup graphics for plots 
+#' oldpar<-par()
 #' par(mfrow=c(3,2))
 #' 
 #' ## get reflectance for a leaf 
@@ -59,7 +60,8 @@
 #' ## update reflectance
 #' ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
 #' plot(ref,main="LAI=8.5")
-#'    
+#'
+#' par(oldpar)   
 #' @export
 fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
                  wl=400:2500){
@@ -442,8 +444,8 @@ checkPars <- function(pars,reqMods,ordN){
         
         if(!all(test)) {
             errorvec<-unlist(parnames)[!test]
-            cat(paste(errorvec,collapse=", "), " not recognized \n")
-            stop()
+            msg<-paste0(paste(errorvec,collapse=", "), " not recognized \n")
+            stop(msg)
         }
 
         test <- sapply(expparlist,length)!=sapply(pars,length)

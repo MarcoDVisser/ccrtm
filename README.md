@@ -115,3 +115,4 @@ Special thanks to Matteo Detto for all the suggestions while I was developing th
 0.01 Initial package with everything in R 
 0.1 Basic tests complete, basic optimization, and refactoring in c++. 
 
+

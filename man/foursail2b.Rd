@@ -64,6 +64,8 @@ to the incoming radiant flux in the solar direction.
 }
 }
 \description{
+The foursail2b model is a two layer implementation of the 
+foursail model described in Zhang et al (2005).
 Layers are assumed identical in hotspot,
 but may differ in the relative density, inclination and types of
 particles. In comparison to foursail, the background (soil),
@@ -76,8 +78,16 @@ the dissociation paramerter.The model 4SAIL2 combines with
 prospect, libery or procosine for the reflectance
 and transmittance of the particles, and with the the foursail
 or Hapke elements for the background reflectance.
-If run alone, these require direct inputs.
+If run alone, these require direct inputs which could be 
+measured leaf reflectance.
 }
-\author{
-Wout Verhoef (original), Marco D. Visser (R implementation)
+\examples{
+## see ?foursail for lower-level implementations
+fRTM(rho~prospectd+foursail2b)
+
+}
+\references{
+Zhang, Q., Xiao, X., Braswell, B., Linder, E., Baret, F., Moore, B. (2005).
+  Estimating light absorption by chlorophyll, leaf and canopy in a deciduous broadleaf forest
+  using MODIS data and a radiative transfer model. Remote Sens. Environ. 99, 357-371.
 }
