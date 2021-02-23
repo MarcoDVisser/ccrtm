@@ -2,7 +2,7 @@
 #'
 #' The foursail (or 4SAIL) radiative transfer model is commonly used to simulate bidirectional 
 #' reflectance distribution functions within vegetation canopies. Foursail (4SAIL) refers 
-#' to “Scattering by Arbitrary Inclined Leaves” in a 4-stream model. The four-streams represents 
+#' to "Scattering by Arbitrary Inclined Leaves" in a 4-stream model. The four-streams represents 
 #' the scattering and absorption of upward, downward and two directional radiative fluxes with 
 #' four linear differential equations in a 1-D canopy. The model was initially developed by
 #' Verhoef (1984), who extended work by Suits (1971) 4-steam model.  
@@ -64,7 +64,7 @@
 #' foursail(rt[,"rho"],rt[,"tau"],bgRef,bestpars)
 #' 
 #' @references Suits, G.H., 1971. The calculation of the directional reflectance of a 
-#'  vegetative canopy. Remote Sens. Environ. 2, 117–125.
+#'  vegetative canopy. Remote Sens. Environ. 2, 117-125.
 #' @references Verhoef, W. (1984). Light scattering by leaf layers with application to 
 #'   canopy reflectance modeling: The SAIL model. Remote Sens. Environ. 16, 125-141.
 #' @export

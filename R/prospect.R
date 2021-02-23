@@ -31,7 +31,7 @@
 #' @references Feret, J.B., Francois, C., Asner, G.P., Gitelson, A.A., 
 #'   Martin, R.E., Bidel, L.P.R., Ustin, S.L., le Maire, G., Jacquemoud, S. (2008),
 #'   PROSPECT-4 and 5: Advances in the leaf optical properties model separating photosynthetic 
-#'   pigments. Remote Sens. Environ. 112, 3030–3043. 
+#'   pigments. Remote Sens. Environ. 112, 3030-3043. 
 #' @references Allen W.A., Gausman H.W., Richardson A.J., Thomas J.R.
 #'   (1969), Interaction of isotropic ligth with a compact plant leaf,
 #'   Journal of the Optical Society of American, 59:1376-1379.
