@@ -26,6 +26,9 @@
 #' Confounded parameters pairs cannot be inversely
 #' estimated, one of the pairs should be set to 1.
 #'
+#' @return a list with reflectance, and the fractions of shaded 
+#' and sunexplosed crowns, shaded and sun exposed open space. 
+#'
 #' @examlpes
 #' parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,d=10,tto=10,tts=20,psi=30)
 #' flim(0.1,0.1,params=parvec)

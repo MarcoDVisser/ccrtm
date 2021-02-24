@@ -13,6 +13,9 @@ getDefaults(model = NULL, ...)
 \item{\\dots}{not used.
 (e.g. "prospect5")}
 }
+\value{
+a data.frame with default model parameters
+}
 \description{
 S3- methods for Generate defaults settings and parameters
 for all supported models.

@@ -4,6 +4,7 @@
 #' @param model a ccrtm formula or character vector of modelnames
 #' @param \\dots not used.
 #' (e.g. "prospect5")
+#' @return a data.frame with default model parameters
 #' @export
 getDefaults<-function(model=NULL, ...){
 
@@ -60,7 +61,6 @@ defaults <- function(x, ...){
 ##      - Cbrown= brown pigments content in arbitrary units
 ##      - Cw    = equivalent water thickness
 ##      - Cm    = dry matter content 
-
 defaults.prospect5<-function(x){
    
     ## typical values are the rice values

@@ -27,6 +27,10 @@ flim(Rc, Rg, To = NULL, Ts = NULL, params, area = 10000)
 
 \item{area}{area of stand}
 }
+\value{
+a list with reflectance, and the fractions of shaded 
+and sunexplosed crowns, shaded and sun exposed open space.
+}
 \description{
 The FLIM model was first described by Rosema et al (1992).
 In FLIM forests are assumed a discontinous mix of tree crowns

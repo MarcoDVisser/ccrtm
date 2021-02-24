@@ -22,6 +22,11 @@ Input is expected to integers between 400 and 2500, or will
 be forced to be an integer. Integers outside the 400:2500 range
 will not be returned.}
 }
+\value{
+spectra matrix with reflectance (and transmission,
+depending on the formula inputs). 
+See seperate model helpfiles for details.
+}
 \description{
 Forward implementation of coupled Radiative Transfer Models.
 }

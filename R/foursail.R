@@ -734,6 +734,21 @@ HotSpot <- function(lai,q,tss,ks,ko,dso){
 #' @param tss Direct transmittance of solar flux
 #' @param too Direct transmittance in viewing direction
 #' @param rsod Multi scattering contribution 
+#' @return spectra matrixwith 4 reflectance factors and canopy transmission 
+#' for wavelengths 400 to 2500nm:
+#'  \itemize{
+#' \item [1] = bi-hemispherical reflectance (rddt). White-sky albedo: the reflectance of the canopy
+#' under diffuse illumination. The BRDF integrated over all viewing and illumination directions.  
+#' \item [2] = hemispherical directional reflectance (rsdt). Black-sky albedo: reflectance of a surface
+#' under direct light without a diffuse component. It is the integral of the BRDF over all viewing
+#' directions.
+#' \item [3] = directional hemispherical reflectance (rdot). Diffuse reflectance in the vieweing
+#' direction. 
+#' \item [4] = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
+#' to the incoming radiant flux in the solar direction. 
+#' \item [5] = Canopy transmission of diffuse light through the canopy (taud).
+#' \item [6] = transmission of direct light through the canopy (taus).
+#' }
 sail_BDRF <- function(w,lai,sumint,tsstoo,rsoil,
         rdd,tdd,tsd,rsd,tdo,rdo,tss,too,rsod) {
 

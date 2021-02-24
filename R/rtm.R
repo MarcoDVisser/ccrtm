@@ -26,6 +26,10 @@
 #' be forced to be an integer. Integers outside the 400:2500 range
 #' will not be returned.
 #'
+#' @return spectra matrix with reflectance (and transmission,
+#' depending on the formula inputs). 
+#' See seperate model helpfiles for details. 
+#'
 #' @examples
 #' ## setup graphics for plots 
 #' oldpar<-par()
@@ -109,7 +113,7 @@ fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
 #' @param fixed a list of parameters to fix
 #' @param data ignored as of yet
 #' 
-#' @export
+# @export
 # plot(bRTM(rho ~ prospect,parvec=c(Car=20,Cw=.002,Cm=0.001,Cbrown=0.001),fixed=c(N=2,Cab=9)))
 bRTM <- function(fm = rho ~ prospect5, data=NULL, pars=NULL, fixed=NULL,
                  wl=400:2500){

@@ -18,6 +18,10 @@ lidf.[modelnumber]. Models include:
 }
  Models 1 and 2 are the standard models from the SAIL model}
 }
+\value{
+a vector of proportions for each leaf angle calculated 
+from each leaf inclination model
+}
 \description{
 Leaf inclination distribution models
 s3 method for calling leaf models

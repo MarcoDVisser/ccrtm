@@ -2,7 +2,7 @@
 % Please edit documentation in R/tools.R
 \name{KLd}
 \alias{KLd}
-\title{KL distance function
+\title{Kullback-Lieber divergence function
 D(spec1 || spec2) = sum(spec1 * log(spec1 / spec2))}
 \usage{
 KLd(spec1, spec2)
@@ -12,7 +12,10 @@ KLd(spec1, spec2)
 
 \item{spec2}{spectral signal 2 at identical wavelengths}
 }
+\value{
+the KL divergence between the vector inputs
+}
 \description{
-KL distance function
+Kullback-Lieber divergence function
 D(spec1 || spec2) = sum(spec1 * log(spec1 / spec2))
 }

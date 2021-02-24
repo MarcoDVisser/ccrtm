@@ -14,7 +14,7 @@
 #'
 #' }
 #'
-#' Currently being tested/soon to be implemented models
+#' Currently being tested or to be implemented models
 #'
 #'  \itemize{
 #'
@@ -23,15 +23,14 @@
 #'
 #' }
 #'
-#' @section relavent references
 #' 
-#' Verhoef, W. and Bach, H., 2003. Remote sensing data assimilation using
-#' coupled radiative transfer models.
+#' @reference Verhoef, W. and Bach, H., 2003. Remote sensing data assimilation
+#' using coupled radiative transfer models.
 #' Physics and Chemistry of the Earth, Parts A/B/C, 28(1-3), pp.3-13.
 #'
-#' Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
-#' Properties Model Separating Photosynthetic Pigments, Remote Sensing of
-#' Environment.
+#' @reference Feret et al. (2008), PROSPECT-4 and 5: Advances in the Leaf Optical
+#' Properties Model Separating Photosynthetic Pigments, 
+#' Remote Sensing of Environment.
 #' 
 #' @docType package
 #' @author Marco D. Visser 

@@ -9,6 +9,8 @@
 #' \item [4] = One parameter beta distribution (4, lidf.4)
 #' }
 #'  Models 1 and 2 are the standard models from the SAIL model
+#' @return a vector of proportions for each leaf angle calculated 
+#' from each leaf inclination model  
 #' @export
 lidf <- function(pars) {
     

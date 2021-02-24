@@ -24,17 +24,18 @@ solar incident flux}
 
 \item{skyl}{fraction diffuse}
 }
-\description{
-Simple atmospherical model that builds on recommendations
-from
-}
-\examples{
-data(solar)
-
+\value{
+a list with hemispherical and directional reflectance.
 rt<-fRTM(rho~prospect5+foursail)
 skyl(rt[,"rddt"],rt[,"rsdt"],rt[,"rdot"],rt[,"rsot"],
 Es=solar[,1],Ed=solar[,2],tts=45,skyl=NULL)
-
+}
+\description{
+Simple atmospherical model that builds on recommendations
+from Francois et al. (2002).
+}
+\examples{
+data(solar)
 }
 \references{
 Francois, C., Ottle, C., Olioso, A., Prevot, L., Bruguier, N., 

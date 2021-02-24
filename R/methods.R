@@ -4,6 +4,8 @@
 #'
 #' @param x predictions from an RTM
 #' @param \dots additional plot arguments
+#' @return plots to the device a ccrtm standard spectra plot based on 
+#' the function call returned from fRTM. 
 #' @export
 plot.rtm.spectra <- function(x, ...) {
 
@@ -45,6 +47,8 @@ plot.rtm.spectra <- function(x, ...) {
 #'
 #' @param x predictions from an RTM
 #' @param \dots additional plot arguments
+#' @return prints the standard information from a simulated 
+#' ccrtm spectra plot  
 #' @export
 print.rtm.spectra <- function(x, ...) {
 

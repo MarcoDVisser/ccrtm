@@ -11,6 +11,10 @@
 
 \item{\dots}{additional plot arguments}
 }
+\value{
+plots to the device a ccrtm standard spectra plot based on 
+the function call returned from fRTM.
+}
 \description{
 Plot RTM return spectra vs. wavelength
 }

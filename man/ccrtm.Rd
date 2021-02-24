@@ -21,7 +21,7 @@ Currently implemented models:
 
 }
 
-Currently being tested/soon to be implemented models
+Currently being tested or to be implemented models
 
 \itemize{
 
