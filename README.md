@@ -17,7 +17,6 @@ The package will slowly be extended as more models are added, and tested, and op
 	-   [Dependencies](#dependencies)
 -   [Examples](#examples)
     -   [Examples of output](#examples-of-output)
-    -   [Memory statisics](#memory-statisics)
 -   [Thanks](#thanks)
   
 
