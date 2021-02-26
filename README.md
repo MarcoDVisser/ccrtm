@@ -4,7 +4,11 @@ A set of radiative transfer models to quantitatively describe the absorption, re
 and model remotely sensed spectral signatures of vegetation at distinct spatial scales. The main principle behind ccrtm is that many 
 radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). Included models are prospect family, and 2 stream and 4 stream models for canopies, with planned inclusion atmospheric models.
 
-The package will slowly be extended as more models are added, and tested, and optimized. Please send request and bug reports.
+The package will slowly be extended as more models are added, and tested, and optimized. Please send requests and bug reports.
+
+[![cran version](http://www.r-pkg.org/badges/version/ccrtm)](http://cran.rstudio.com/web/packages/ccrtm)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ccrtm?color=E664A4)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/ccrtm?color=333FFF)](https://github.com/metacran/cranlogs.app)
 
 ### Quicklinks
 
@@ -23,9 +27,9 @@ A "10 minute" quickstart guide is will be implemented in due time.
 
 ## Installation
 
-The pacakge will soon be on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/). 
-For now the developmental version from github can be downloaded as [zip](https://github.com/MarcoDVisser/aprof/zipball/master) 
-or [tar ball](https://github.com/MarcoDVisser/aprof/tarball/master).
+The pacakge is on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/). 
+Newer developmental versions will first be available from github and can be downloaded as [zip](https://github.com/MarcoDVisser/ccrtm/zipball/master) 
+or [tar ball](https://github.com/MarcoDVisser/ccrtm/tarball/master).
 To install decompress these and run R CMD INSTALL on the contents of the archives, or use the **devtools** package to install the current development version from R.
 
 
