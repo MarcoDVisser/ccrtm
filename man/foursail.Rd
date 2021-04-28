@@ -40,7 +40,8 @@ direction.
 \item [4] = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
 to the incoming radiant flux in the solar direction. 
 \item [5] = Canopy transmission of diffuse light through the canopy (taud).
-\item [6] = transmission of direct light through the canopy (taus).
+\item [6] = transmission of direct light through the canopy in the solar direction (taus).
+\item [7] = transmission of direct light through the canopy in the sensor/viewing direction (tauo).
 }
 }
 \description{
