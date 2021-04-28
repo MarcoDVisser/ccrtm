@@ -747,7 +747,9 @@ HotSpot <- function(lai,q,tss,ks,ko,dso){
 #' \item [4] = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
 #' to the incoming radiant flux in the solar direction. 
 #' \item [5] = Canopy transmission of diffuse light through the canopy (taud).
-#' \item [6] = transmission of direct light through the canopy (taus).
+#' \item [6] = transmission of direct light through the canopy in the solar direction (taus).
+#' \item [7] = transmission of direct light through the canopy in the sensor/viewing direction (tauo).
+#'
 #' }
 sail_BDRF <- function(w,lai,sumint,tsstoo,rsoil,
         rdd,tdd,tsd,rsd,tdo,rdo,tss,too,rsod) {
@@ -774,9 +776,13 @@ sail_BDRF <- function(w,lai,sumint,tsstoo,rsoil,
     ## transmission of light through the canopy
     ## taus = tranmission of diffuse light from solar direction
     ## plus gap fraction in solar direction
-    taus <- (tsd+tss) ## direct and diffuse transmission of light
+    ## direct (not diffuse) transmission of light in solar direction    
+    taus <- (tss) 
 
-    return(list(rddt,rsdt,rdot,rsot,taus))
+    ## direct (not diffuse0 transmission of light in observer direction
+    tauo <- (tdo) 
+
+    return(list(rddt,rsdt,rdot,rsot,taus,tauo))
 
 } ## sail_BDRF
 

@@ -37,7 +37,7 @@
 #' A new forest light interaction model in support of forest monitoring. 
 #' Remote Sens. Environ. 42, 23-41. 
 #' @importFrom pracma sec
-#' 
+#' @export
 flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
 
     ## degrees to radians
