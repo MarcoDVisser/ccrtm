@@ -14,7 +14,7 @@
 
 #' Forward implementation of coupled Radiative Transfer Models.
 #'
-#' @param fm A formula specifying which rtm to run
+#' @param fm A formula specifying which rtm to run (see details).
 #' @param pars a list of _named_ parameter vectors for all models.
 #' The parameter list for a model call as rho ~ prospect + foursail
 #' therefore contains two named vectors the first with parameters for
@@ -25,7 +25,48 @@
 #' Input is expected to integers between 400 and 2500, or will 
 #' be forced to be an integer. Integers outside the 400:2500 range
 #' will not be returned.
+#' 
+#' @details
 #'
+#' In general the form of the formula specifies the
+#' both the expected output (left hand) and the different models
+#' you would like to couple to generate the output (right hand).
+#'
+#' At current the following ratiative transfer models are
+#' implemented
+#'
+#' | Formula                             | Model     |      
+#' | :---------------------------------  | :-------: | 
+#' | rho ~ prospect5                     | prospect5 |
+#' | rho ~ prospectd                     | prospectd |
+#' | rho ~ prospectd + foursail          | 4SAIL     | 
+#' | rho ~ prospectd + foursail2         | 4SAIL2    |
+#' | rho ~ prospectd + foursail2b        | 4SAIL2b   |
+#' | rho ~ prospectd + foursail2 + flim  | 4SAIL2    |
+#' | rho ~ prospectd + foursail2b + flim | 4SAIL2b   |
+#' | rho ~ prospectd + foursail + flim   | INFORM    |
+#'
+#' In the examples with additive components above, prospectd can
+#' be replaced with prospect5 if so desired. See the help files for
+#' details on each right hand component. For instance, ?foursail
+#' provides more elaboration on the 4SAIL model and gives
+#' an example for lower-level implementations of each component
+#' model.
+#'
+#' Tranmission can also be returned if specified in
+#' the left-hand component of the formula:
+#'
+#' | Formula                             | Model     |      
+#' | :---------------------------------  | :-------: | 
+#' | rho + tau ~ prospect5               | prospect5 |
+#' | rho + tau ~ prospectd + foursail    | 4SAIL     |
+#'
+#' The examples above indicate that the users wishes to predict
+#' transmission next to reflectance. More specifically, The first
+#' returns leaf reflectance and transmission while
+#' the second returns 4 components of canopy reflectance and
+#' canopy transmission in the solar and viewing direction.
+#' 
 #' @return spectra matrix with reflectance (and transmission,
 #' depending on the formula inputs). 
 #' See seperate model helpfiles for details. 
@@ -65,8 +106,9 @@
 #' ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
 #' plot(ref,main="LAI=8.5")
 #'
-#' par(oldpar)   
+#' par(oldpar)
 #' @export
+#' @md
 fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
                  wl=400:2500){
 
@@ -287,7 +329,7 @@ getPredictions<-function(fm,ordN){
     if(length(pred)>1){
 
         if(ordN>1){
-        returnCol <- 1:5 ## return reflectance and transmittance
+        returnCol <- 1:6 ## return reflectance and transmittance
         } else{
         returnCol <- 1:2 ## return reflectance and transmittance
         }
@@ -303,7 +345,7 @@ getPredictions<-function(fm,ordN){
     } else {
         
         if(ordN>1){
-            returnCol <- 5 ## return transmittance
+            returnCol <- 5:6 ## return transmittance
         } else {
             returnCol <- 2 ## return transmittance
         }
@@ -322,12 +364,12 @@ getModels <- function(){
               "prospectd",
               "foursail",
               "foursail2",
-              "foursail2b")
+              "foursail2b",
+              "flim")
     
     data.frame(model=mods,
-               level=c(1,1,2,3,3),
+               level=c(1,1,2,3,3,3),
                 row.names = mods)
-    
 }
 
 
@@ -345,7 +387,6 @@ checkForm <- function(fm=NULL){
     test <-unlist(strsplit(as.character(fm)[[3]]," \\+ "))
     if(length(test)>length(reqMods)) reqMods <- test
 
-    
     ordN <- length(reqMods)
 
     ## get model information

@@ -3,7 +3,6 @@
 \docType{package}
 \name{ccrtm}
 \alias{ccrtm}
-\alias{ccrtm-package}
 \title{ccrtm: Coupled Chain Radiative Transfer Models.}
 \description{
 A collection of radiative transfer models that can form
@@ -15,9 +14,9 @@ Currently implemented models:
 
 \itemize{
 
-\item [1] = PROSPECT 5, 5B and D
-\item [2] = FOURSAIL, and FOURSAIL2 
-\item [3] = FLIM
+\item \link{1} = PROSPECT 5, 5B and D
+\item \link{2} = FOURSAIL, and FOURSAIL2
+\item \link{3} = FLIM
 
 }
 
@@ -25,8 +24,8 @@ Currently being tested or to be implemented models
 
 \itemize{
 
-\item [1] = LIBERTY, PROCOSINE
-\item [2] = INFORM
+\item \link{1} = LIBERTY, PROCOSINE
+\item \link{2} = INFORM
 
 }
 }

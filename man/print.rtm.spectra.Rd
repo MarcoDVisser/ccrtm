@@ -12,7 +12,7 @@
 \item{\dots}{additional plot arguments}
 }
 \value{
-prints the standard information from a simulated 
+prints the standard information from a simulated
 ccrtm spectra plot
 }
 \description{

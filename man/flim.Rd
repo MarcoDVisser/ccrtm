@@ -15,20 +15,20 @@ flim(Rc, Rg, To = NULL, Ts = NULL, params, area = 10000)
 
 \item{Ts}{transmission in sun direction}
 
-\item{params}{a named vector of parameters: 
- \itemize{
-\item [1] = D, stand density (confounded with cd)
-\item [2] = cd, crown diameter (confounded with D)
-\item [3] = h, mean crown height
-\item [6] = Solar zenith angle (tts)
-\item [7] = Observer zenith angle (tto)
-\item [8] = Sun-sensor azimuth angle (psi)
+\item{params}{a named vector of parameters:
+\itemize{
+\item \link{1} = D, stand density (confounded with cd)
+\item \link{2} = cd, crown diameter (confounded with D)
+\item \link{3} = h, mean crown height
+\item \link{6} = Solar zenith angle (tts)
+\item \link{7} = Observer zenith angle (tto)
+\item \link{8} = Sun-sensor azimuth angle (psi)
 }}
 
 \item{area}{area of stand}
 }
 \value{
-a list with reflectance, and the fractions of shaded 
+a list with reflectance, and the fractions of shaded
 and sunexplosed crowns, shaded and sun exposed open space.
 }
 \description{
@@ -43,7 +43,7 @@ Confounded parameters pairs cannot be inversely
 estimated, one of the pairs should be set to 1.
 }
 \references{
-Rosema, A., Verhoef, W., Noorbergen, H., Borgesius, J.J. (1992). 
-A new forest light interaction model in support of forest monitoring. 
+Rosema, A., Verhoef, W., Noorbergen, H., Borgesius, J.J. (1992).
+A new forest light interaction model in support of forest monitoring.
 Remote Sens. Environ. 42, 23-41.
 }

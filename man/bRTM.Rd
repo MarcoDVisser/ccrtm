@@ -5,25 +5,30 @@
 \title{Generates an invertable model for backward implementation
 of Radiative Transfer Models}
 \usage{
-bRTM(fm = rho ~ prospect5, data = NULL, pars = NULL, fixed = NULL,
-  wl = 400:2500)
+bRTM(
+  fm = rho ~ prospect5,
+  data = NULL,
+  pars = NULL,
+  fixed = NULL,
+  wl = 400:2500
+)
 }
 \arguments{
-\item{fm}{A formula specifying which rtm to run}
+\item{fm}{A formula specifying which rtm to run (see details).}
 
 \item{data}{ignored as of yet}
 
-\item{pars}{a list of _named_ parameter vectors for all models.
+\item{pars}{a list of \emph{named} parameter vectors for all models.
 The parameter list for a model call as rho ~ prospect + foursail
 therefore contains two named vectors the first with parameters for
-prospect and the second with parameters for foursail 
+prospect and the second with parameters for foursail
 if left empty default parameters are generated}
 
 \item{fixed}{a list of parameters to fix}
 
 \item{wl}{wavelengths (in nm) add only if
 certain wavelengths are required as output.
-Input is expected to integers between 400 and 2500, or will 
+Input is expected to integers between 400 and 2500, or will
 be forced to be an integer. Integers outside the 400:2500 range
 will not be returned.}
 }

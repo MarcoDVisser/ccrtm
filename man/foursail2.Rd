@@ -4,8 +4,18 @@
 \alias{foursail2}
 \title{R implementation of the foursail2 model with 2 canopy layers.}
 \usage{
-foursail2(rhoA, tauA, rhoB = NULL, tauB = NULL, bgr, rsobgr = NULL,
-  rdobgr = NULL, rsdbgr = NULL, rddbgr = NULL, param)
+foursail2(
+  rhoA,
+  tauA,
+  rhoB = NULL,
+  tauB = NULL,
+  bgr,
+  rsobgr = NULL,
+  rdobgr = NULL,
+  rsdbgr = NULL,
+  rddbgr = NULL,
+  param
+)
 }
 \arguments{
 \item{rhoA}{primary particle reflectance from 400-2500nm (can be measured or modeled)}
@@ -29,42 +39,42 @@ soil reflectance spectra from 400-2500nm (can be measured or modeled)}
 
 \item{param}{A named vector of 4SAIL2 parameter values (note:
 program ignores case):
- \itemize{
-\item [1] = Leaf angle distribution function parameter a (LIDFa)
-\item [2] = Leaf angle distribution function parameter b (LIDFb)
-\item [3] = Leaf angle distribution function type (TypeLidf, see ?lidfFun)
-\item [4] = Total Leaf Area Index (LAI), including primary and secondary 
+\itemize{
+\item \link{1} = Leaf angle distribution function parameter a (LIDFa)
+\item \link{2} = Leaf angle distribution function parameter b (LIDFb)
+\item \link{3} = Leaf angle distribution function type (TypeLidf, see ?lidfFun)
+\item \link{4} = Total Leaf Area Index (LAI), including primary and secondary
 particles (brown and green leafs).
-\item [5] = fraction secondary particles ("brown leaf fraction", fb)
-\item [6] = Canopy dissociation factor for secondary particles ("diss")
-\item [7] = Hot spot effect parameter (hspot). Often defined as the
+\item \link{5} = fraction secondary particles ("brown leaf fraction", fb)
+\item \link{6} = Canopy dissociation factor for secondary particles ("diss")
+\item \link{7} = Hot spot effect parameter (hspot). Often defined as the
 ratio of mean leaf width and canopy height.
-\item [7] = vertical crown coverage fraction (Cv), models clumping in combination
-with parameter zeta. 
-\item [7] = tree shape factor (zeta), defined as the ratio of crown diameter and height.
-\item [6] = Solar zenith angle (tts)
-\item [7] = Observer zenith angle (tto)
-\item [8] = Sun-sensor azimuth angle (psi)
+\item \link{7} = vertical crown coverage fraction (Cv), models clumping in combination
+with parameter zeta.
+\item \link{7} = tree shape factor (zeta), defined as the ratio of crown diameter and height.
+\item \link{6} = Solar zenith angle (tts)
+\item \link{7} = Observer zenith angle (tto)
+\item \link{8} = Sun-sensor azimuth angle (psi)
 }}
 }
 \value{
-spectra matrixwith 4 reflectance factors and canopy transmission 
+spectra matrixwith 4 reflectance factors and canopy transmission
 for wavelengths 400 to 2500nm:
- \itemize{
-\item [1] = bi-hemispherical reflectance (rddt). White-sky albedo: the reflectance of the canopy
+\itemize{
+\item \link{1} = bi-hemispherical reflectance (rddt). White-sky albedo: the reflectance of the canopy
 under diffuse illumination. The BRDF integrated over all viewing and illumination directions.
- Diffuse reflectance for diffuse incidence.
-\item [2] = hemispherical directional reflectance (rsdt). Black-sky albedpo: reflectance of a surface
+Diffuse reflectance for diffuse incidence.
+\item \link{2} = hemispherical directional reflectance (rsdt). Black-sky albedpo: reflectance of a surface
 under direct light without a diffuse component. It is the integral of the BRDF over all viewing
 directions. Diffuse reflectance for direct solar incidence.
-\item [3] = directional hemispherical reflectance (rdot). Diffuse reflectance in the vieweing
-direction. 
-\item [4] = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
-to the incoming radiant flux in the solar direction. 
+\item \link{3} = directional hemispherical reflectance (rdot). Diffuse reflectance in the vieweing
+direction.
+\item \link{4} = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
+to the incoming radiant flux in the solar direction.
 }
 }
 \description{
-The foursail2 model is a two layer implementation of the 
+The foursail2 model is a two layer implementation of the
 foursail model described in Verhoef and Bach (2007).
 Layers are assumed identical in particle inclination and
 hotspot, but may differ in the relative density and types of
@@ -80,7 +90,7 @@ the dissociation paramerter.The model 4SAIL2 combines with
 prospect, libery or procosine for the reflectance
 and transmittance of the particles, and with the the foursail
 or Hapke elements for the background reflectance.
-If run alone, these require direct inputs which could be 
+If run alone, these require direct inputs which could be
 measured leaf reflectance.
 }
 \examples{
@@ -89,7 +99,7 @@ fRTM(rho~prospect5+foursail2)
 
 }
 \references{
-Verhoef, W., Bach, H. (2007). Coupled soil-leaf-canopy and atmosphere radiative transfer 
-  modeling to simulate hyperspectral multi-angular surface reflectance and TOA radiance data. 
-  Remote Sens. Environ. 109, 166-182.
+Verhoef, W., Bach, H. (2007). Coupled soil-leaf-canopy and atmosphere radiative transfer
+modeling to simulate hyperspectral multi-angular surface reflectance and TOA radiance data.
+Remote Sens. Environ. 109, 166-182.
 }

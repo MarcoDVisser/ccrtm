@@ -12,10 +12,10 @@ direct and diffuse light
 }
 \section{details}{
 
-***********************************************************************
- \itemize{
-\item [1] = direct light
-\item [2] = diffuse light
+
+\itemize{
+\item \link{1} = direct light
+\item \link{2} = diffuse light
 }
 }
 

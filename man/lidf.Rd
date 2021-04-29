@@ -8,18 +8,18 @@ s3 method for calling leaf models}
 lidf(pars)
 }
 \arguments{
-\item{pars}{a parameter vector with a class 
-lidf.[modelnumber]. Models include:
- \itemize{
-\item [1] = Dlagden distribution (1, lidf.1)
-\item [2] = Ellipsoid (Campebll) distribution (2, lidf.2)
-\item [3] = Beta distribution (3, lidf.3)
-\item [4] = One parameter beta distribution (4, lidf.4)
+\item{pars}{a parameter vector with a class
+lidf.\link{modelnumber}. Models include:
+\itemize{
+\item \link{1} = Dlagden distribution (1, lidf.1)
+\item \link{2} = Ellipsoid (Campebll) distribution (2, lidf.2)
+\item \link{3} = Beta distribution (3, lidf.3)
+\item \link{4} = One parameter beta distribution (4, lidf.4)
 }
- Models 1 and 2 are the standard models from the SAIL model}
+Models 1 and 2 are the standard models from the SAIL model}
 }
 \value{
-a vector of proportions for each leaf angle calculated 
+a vector of proportions for each leaf angle calculated
 from each leaf inclination model
 }
 \description{

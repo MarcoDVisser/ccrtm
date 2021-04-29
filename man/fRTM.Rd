@@ -4,31 +4,69 @@
 \alias{fRTM}
 \title{Forward implementation of coupled Radiative Transfer Models.}
 \usage{
-fRTM(fm = rho + tau ~ prospect5 + foursail, pars = NULL,
-  wl = 400:2500)
+fRTM(fm = rho + tau ~ prospect5 + foursail, pars = NULL, wl = 400:2500)
 }
 \arguments{
-\item{fm}{A formula specifying which rtm to run}
+\item{fm}{A formula specifying which rtm to run (see details).}
 
-\item{pars}{a list of _named_ parameter vectors for all models.
+\item{pars}{a list of \emph{named} parameter vectors for all models.
 The parameter list for a model call as rho ~ prospect + foursail
 therefore contains two named vectors the first with parameters for
-prospect and the second with parameters for foursail 
+prospect and the second with parameters for foursail
 if left empty default parameters are generated}
 
 \item{wl}{wavelengths (in nm) add only if
 certain wavelengths are required as output.
-Input is expected to integers between 400 and 2500, or will 
+Input is expected to integers between 400 and 2500, or will
 be forced to be an integer. Integers outside the 400:2500 range
 will not be returned.}
 }
 \value{
 spectra matrix with reflectance (and transmission,
-depending on the formula inputs). 
+depending on the formula inputs).
 See seperate model helpfiles for details.
 }
 \description{
 Forward implementation of coupled Radiative Transfer Models.
+}
+\details{
+In general the form of the formula specifies the
+both the expected output (left hand) and the different models
+you would like to couple to generate the output (right hand).
+
+At current the following ratiative transfer models are
+implemented\tabular{lc}{
+   Formula \tab Model \cr
+   rho ~ prospect5 \tab prospect5 \cr
+   rho ~ prospectd \tab prospectd \cr
+   rho ~ prospectd + foursail \tab 4SAIL \cr
+   rho ~ prospectd + foursail2 \tab 4SAIL2 \cr
+   rho ~ prospectd + foursail2b \tab 4SAIL2b \cr
+   rho ~ prospectd + foursail2 + flim \tab 4SAIL2 \cr
+   rho ~ prospectd + foursail2b + flim \tab 4SAIL2b \cr
+   rho ~ prospectd + foursail + flim \tab INFORM \cr
+}
+
+
+In the examples with additive components above, prospectd can
+be replaced with prospect5 if so desired. See the help files for
+details on each righ hand component, for instance ?foursail
+provides more elaboration on the 4SAIL model
+(and gives exampes for lower-level implementation of component
+models).
+
+Tranmission can also be returned if specified in
+the left-hand component of the formula:\tabular{lc}{
+   Formula \tab Model \cr
+   rho + tau ~ prospect5 \tab prospect5 \cr
+   rho + tau ~ prospectd + foursail \tab 4SAIL \cr
+}
+
+
+Both examples above will return predicted transmission,
+the first returns leaf reflectance and transmission while
+the second returns 4 components of canopy reflectance and
+canopy transmission in the solar and viewing direction
 }
 \examples{
 ## setup graphics for plots 
@@ -65,5 +103,5 @@ parlist$foursail2["LAI"]<-8.5
 ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)
 plot(ref,main="LAI=8.5")
 
-par(oldpar)   
+par(oldpar)
 }

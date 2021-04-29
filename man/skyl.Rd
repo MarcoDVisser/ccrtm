@@ -27,8 +27,8 @@ solar incident flux}
 \value{
 a list with hemispherical and directional reflectance.
 rt<-fRTM(rho~prospect5+foursail)
-skyl(rt[,"rddt"],rt[,"rsdt"],rt[,"rdot"],rt[,"rsot"],
-Es=solar[,1],Ed=solar[,2],tts=45,skyl=NULL)
+skyl(rt\link{,"rddt"},rt\link{,"rsdt"},rt\link{,"rdot"},rt\link{,"rsot"},
+Es=solar\link{,1},Ed=solar\link{,2},tts=45,skyl=NULL)
 }
 \description{
 Simple atmospherical model that builds on recommendations
@@ -38,8 +38,8 @@ from Francois et al. (2002).
 data(solar)
 }
 \references{
-Francois, C., Ottle, C., Olioso, A., Prevot, L., Bruguier, N., 
-  Ducros, Y.(2002). Conversion of 400-1100 nm vegetation albedo measurements 
-  into total shortwave broadband albedo using a canopy radiative transfer model. 
-  Agronomie 22, 611-618.
+Francois, C., Ottle, C., Olioso, A., Prevot, L., Bruguier, N.,
+Ducros, Y.(2002). Conversion of 400-1100 nm vegetation albedo measurements
+into total shortwave broadband albedo using a canopy radiative transfer model.
+Agronomie 22, 611-618.
 }

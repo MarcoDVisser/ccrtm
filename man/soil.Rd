@@ -12,10 +12,10 @@ soil reflectance
 }
 \section{details}{
 
-***********************************************************************
- \itemize{
-\item [1] = wet soil
-\item [2] = dry soil 
+
+\itemize{
+\item \link{1} = wet soil
+\item \link{2} = dry soil
 }
 }
 

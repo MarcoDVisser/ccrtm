@@ -15,40 +15,40 @@ foursail(rho, tau, bgr, param)
 soil reflectance spectra from 400-2500nm (can be measured or modeled)}
 
 \item{param}{A named vector of SAIL parameter values (note: program ignores case):
- \itemize{
-\item [1] = Leaf angle distribution function parameter a (LIDFa)
-\item [2] = Leaf angle distribution function parameter b (LIDFb)
-\item [3] = Leaf angle distribution function type (see ?lidfFun)
-\item [4] = Leaf area index (LAI)
-\item [5] = Hot spot effect parameter (hspot)
-\item [6] = Solar zenith angle (tts)
-\item [7] = Observer zenith angle (tto)
-\item [8] = Sun-sensor azimuth angle (psi)
+\itemize{
+\item \link{1} = Leaf angle distribution function parameter a (LIDFa)
+\item \link{2} = Leaf angle distribution function parameter b (LIDFb)
+\item \link{3} = Leaf angle distribution function type (see ?lidfFun)
+\item \link{4} = Leaf area index (LAI)
+\item \link{5} = Hot spot effect parameter (hspot)
+\item \link{6} = Solar zenith angle (tts)
+\item \link{7} = Observer zenith angle (tto)
+\item \link{8} = Sun-sensor azimuth angle (psi)
 }}
 }
 \value{
-spectra matrixwith 4 reflectance factors and canopy transmission 
+spectra matrixwith 4 reflectance factors and canopy transmission
 for wavelengths 400 to 2500nm:
- \itemize{
-\item [1] = bi-hemispherical reflectance (rddt). White-sky albedo: the reflectance of the canopy
-under diffuse illumination. The BRDF integrated over all viewing and illumination directions.  
-\item [2] = hemispherical directional reflectance (rsdt). Black-sky albedo: reflectance of a surface
+\itemize{
+\item \link{1} = bi-hemispherical reflectance (rddt). White-sky albedo: the reflectance of the canopy
+under diffuse illumination. The BRDF integrated over all viewing and illumination directions.
+\item \link{2} = hemispherical directional reflectance (rsdt). Black-sky albedo: reflectance of a surface
 under direct light without a diffuse component. It is the integral of the BRDF over all viewing
 directions.
-\item [3] = directional hemispherical reflectance (rdot). Diffuse reflectance in the vieweing
-direction. 
-\item [4] = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
-to the incoming radiant flux in the solar direction. 
-\item [5] = Canopy transmission of diffuse light through the canopy (taud).
-\item [6] = transmission of direct light through the canopy in the solar direction (taus).
-\item [7] = transmission of direct light through the canopy in the sensor/viewing direction (tauo).
+\item \link{3} = directional hemispherical reflectance (rdot). Diffuse reflectance in the vieweing
+direction.
+\item \link{4} = bi-directional reflectance (rsot). The ratio of reflected radiance in the viewing direction
+to the incoming radiant flux in the solar direction.
+\item \link{5} = Canopy transmission of diffuse light through the canopy (taud).
+\item \link{6} = transmission of direct light through the canopy in the solar direction (taus).
+\item \link{7} = transmission of direct light through the canopy in the sensor/viewing direction (tauo).
 }
 }
 \description{
-The foursail (or 4SAIL) radiative transfer model is commonly used to simulate bidirectional 
-reflectance distribution functions within vegetation canopies. Foursail (4SAIL) refers 
-to "Scattering by Arbitrary Inclined Leaves" in a 4-stream model. The four-streams represents 
-the scattering and absorption of upward, downward and two directional radiative fluxes with 
+The foursail (or 4SAIL) radiative transfer model is commonly used to simulate bidirectional
+reflectance distribution functions within vegetation canopies. Foursail (4SAIL) refers
+to "Scattering by Arbitrary Inclined Leaves" in a 4-stream model. The four-streams represents
+the scattering and absorption of upward, downward and two directional radiative fluxes with
 four linear differential equations in a 1-D canopy. The model was initially developed by
 Verhoef (1984), who extended work by Suits (1971) 4-steam model.
 }
@@ -78,9 +78,9 @@ foursail(rt[,"rho"],rt[,"tau"],bgRef,bestpars)
 
 }
 \references{
-Suits, G.H., 1971. The calculation of the directional reflectance of a 
- vegetative canopy. Remote Sens. Environ. 2, 117-125.
+Suits, G.H., 1971. The calculation of the directional reflectance of a
+vegetative canopy. Remote Sens. Environ. 2, 117-125.
 
-Verhoef, W. (1984). Light scattering by leaf layers with application to 
-  canopy reflectance modeling: The SAIL model. Remote Sens. Environ. 16, 125-141.
+Verhoef, W. (1984). Light scattering by leaf layers with application to
+canopy reflectance modeling: The SAIL model. Remote Sens. Environ. 16, 125-141.
 }

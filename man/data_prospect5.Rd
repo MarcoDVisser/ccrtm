@@ -14,25 +14,25 @@ on the data.
 }
 \section{details}{
 
-***********************************************************************
-data_prospect5 (february, 25th 2008)
- The dataset contains the following labels (columns):
-***********************************************************************
- \itemize{
 
-\item [1] = wavelength (nm)
-\item [2] = refractive index of leaf material (
- or the ratio of the velocity of light in a vacuum to its velocity in "leaf
+data_prospect5 (february, 25th 2008)
+The dataset contains the following labels (columns):
+
+\itemize{
+
+\item \link{1} = wavelength (nm)
+\item \link{2} = refractive index of leaf material (
+or the ratio of the velocity of light in a vacuum to its velocity in "leaf
 medium").
-\item [3] = specific absorption coefficient of chlorophyll (a+b) (cm2.microg-1)
-\item [4] = specific absorption coefficient of carotenoids (cm2.microg-1)
-\item [5] = specific absorption coefficient of brown pigments (arbitrary units)
-\item [6] = specific absorption coefficient of water (cm-1)
-\item [7] = specific absorption coefficient of dry matter (g.cm-1)
-\item [8] = direct light
-\item [9] = diffuse light
-\item [10] = dry soil
-\item [11] = wet soil
+\item \link{3} = specific absorption coefficient of chlorophyll (a+b) (cm2.microg-1)
+\item \link{4} = specific absorption coefficient of carotenoids (cm2.microg-1)
+\item \link{5} = specific absorption coefficient of brown pigments (arbitrary units)
+\item \link{6} = specific absorption coefficient of water (cm-1)
+\item \link{7} = specific absorption coefficient of dry matter (g.cm-1)
+\item \link{8} = direct light
+\item \link{9} = diffuse light
+\item \link{10} = dry soil
+\item \link{11} = wet soil
 
 }
 }
