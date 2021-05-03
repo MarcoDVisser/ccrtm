@@ -50,10 +50,10 @@ implemented\tabular{lc}{
 
 In the examples with additive components above, prospectd can
 be replaced with prospect5 if so desired. See the help files for
-details on each righ hand component, for instance ?foursail
-provides more elaboration on the 4SAIL model
-(and gives exampes for lower-level implementation of component
-models).
+details on each right hand component. For instance, ?foursail
+provides more elaboration on the 4SAIL model and gives
+an example for lower-level implementations of each component
+model.
 
 Tranmission can also be returned if specified in
 the left-hand component of the formula:\tabular{lc}{
@@ -63,10 +63,11 @@ the left-hand component of the formula:\tabular{lc}{
 }
 
 
-Both examples above will return predicted transmission,
-the first returns leaf reflectance and transmission while
+The examples above indicate that the users wishes to predict
+transmission next to reflectance. More specifically, The first
+returns leaf reflectance and transmission while
 the second returns 4 components of canopy reflectance and
-canopy transmission in the solar and viewing direction
+canopy transmission in the solar and viewing direction.
 }
 \examples{
 ## setup graphics for plots 

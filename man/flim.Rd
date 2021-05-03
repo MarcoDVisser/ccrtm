@@ -17,9 +17,11 @@ flim(Rc, Rg, To = NULL, Ts = NULL, params, area = 10000)
 
 \item{params}{a named vector of parameters:
 \itemize{
-\item \link{1} = D, stand density (confounded with cd)
-\item \link{2} = cd, crown diameter (confounded with D)
-\item \link{3} = h, mean crown height
+\item \link{1} = stand density (d) *  (see details).
+\item \link{2} = crown diameter (cd) * - confounded with d (see details).
+\item \link{3} = mean crown height (h)
+\item \link{4} = leaf area index (lai) **
+\item \link{5} = light extinction coefficient (alpha) **
 \item \link{6} = Solar zenith angle (tts)
 \item \link{7} = Observer zenith angle (tto)
 \item \link{8} = Sun-sensor azimuth angle (psi)
@@ -39,8 +41,11 @@ probabilty to observe either a gap (background)
 or a tree crown. Both gaps and crowns may be shaded.
 }
 \details{
-Confounded parameters pairs cannot be inversely
-estimated, one of the pairs should be set to 1.
+\itemize{
+\item Parameters are confounded (d & cd), confounded parameters pairs cannot be inversely
+estimated, one of the pairs should be set to 1 - or given explicitly.
+** required if T0, Ts are not given.
+}
 }
 \references{
 Rosema, A., Verhoef, W., Noorbergen, H., Borgesius, J.J. (1992).

@@ -13,9 +13,11 @@
 #' @param area area of stand
 #' @param params a named vector of parameters: 
 #'  \itemize{
-#' \item [1] = D, stand density (confounded with cd)
-#' \item [2] = cd, crown diameter (confounded with D)
-#' \item [3] = h, mean crown height
+#' \item [1] = stand density (d) *  (see details).
+#' \item [2] = crown diameter (cd) * - confounded with d (see details).
+#' \item [3] = mean crown height (h)
+#' \item [4] = leaf area index (lai) ** 
+#' \item [5] = light extinction coefficient (alpha) ** 
 #' \item [6] = Solar zenith angle (tts)
 #' \item [7] = Observer zenith angle (tto)
 #' \item [8] = Sun-sensor azimuth angle (psi)
@@ -23,13 +25,14 @@
 #'
 #' @details
 #'
-#' Confounded parameters pairs cannot be inversely
-#' estimated, one of the pairs should be set to 1.
+#' * Parameters are confounded (d & cd), confounded parameters pairs cannot be inversely
+#' estimated, one of the pairs should be set to 1 - or given explicitly. 
+#' ** required if T0, Ts are not given.
 #'
 #' @return a list with reflectance, and the fractions of shaded 
 #' and sunexplosed crowns, shaded and sun exposed open space. 
 #'
-#' @examlpes
+#' @examlpe
 #' parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,d=10,tto=10,tts=20,psi=30)
 #' flim(0.1,0.1,params=parvec)
 #'    
@@ -39,6 +42,7 @@
 #' @importFrom pracma sec
 #' @export
 flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
+
 
     ## degrees to radians
     rd <- pi/180
@@ -55,6 +59,7 @@ flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
         }
     } 
     
+    names(params)<-tolower(params)
     cd <- params["cd"] # mean crown diameter
     h <- params["h"] # mean crown height
     D <- params["d"] # stand density
