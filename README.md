@@ -112,8 +112,8 @@ Wavelength range  400-2500 (nm)
 
 ## Thanks
 Special thanks to Matteo Detto for all the suggestions while I was developing this package. 
-Comments from helped improve documentation and remove bugs - so thanks to (in no particular order);
-Zavud Baghirov and Martina Schmirl.
+Special thanks to (in no particular order) Zavud Baghirov and Martina Schmirl. 
+Their comments helped improve documentation and remove bugs.
 
 
 ## Version history
