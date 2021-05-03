@@ -59,13 +59,13 @@ flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
         }
     } 
     
-    names(params)<-tolower(params)
-    cd <- params["cd"] # mean crown diameter
-    h <- params["h"] # mean crown height
-    D <- params["d"] # stand density
-    tto <- params["tto"]*rd  # observer zenith
-    tts <- params["tts"]*rd # sun zenith
-    psi <- params["psi"]*rd # relative azimuth
+    names(params)<-tolower(names(params))
+    cd <- as.numeric(params["cd"]) # mean crown diameter
+    h <- as.numeric(params["h"]) # mean crown height
+    D <- as.numeric(params["d"]) # stand density
+    tto <- as.numeric(params["tto"]*rd)  # observer zenith
+    tts <- as.numeric(params["tts"]*rd) # sun zenith
+    psi <- as.numeric(params["psi"]*rd) # relative azimuth
     
 
     ## Some house keeping
