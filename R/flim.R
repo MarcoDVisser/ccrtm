@@ -10,14 +10,14 @@
 #' @param Rg soil/background reflectance
 #' @param To transmission in viewing direction
 #' @param Ts transmission in sun direction
-#' @param area area of stand
+#' @param area area of stand (m2)
 #' @param params a named vector of parameters: 
 #'  \itemize{
-#' \item [1] = stand density (d) *  (see details).
-#' \item [2] = crown diameter (cd) * - confounded with d (see details).
+#' \item [1] = stand density (d) (1) 
+#' \item [2] = crown diameter (cd) (1) 
 #' \item [3] = mean crown height (h)
-#' \item [4] = leaf area index (lai) ** 
-#' \item [5] = light extinction coefficient (alpha) ** 
+#' \item [4] = leaf area index (lai) (2) 
+#' \item [5] = light extinction coefficient (alpha) (2) 
 #' \item [6] = Solar zenith angle (tts)
 #' \item [7] = Observer zenith angle (tto)
 #' \item [8] = Sun-sensor azimuth angle (psi)
@@ -25,14 +25,14 @@
 #'
 #' @details
 #'
-#' * Parameters are confounded (d & cd), confounded parameters pairs cannot be inversely
+#' (1) Parameters are confounded (d & cd), confounded parameters pairs cannot be inversely
 #' estimated, one of the pairs should be set to 1 - or given explicitly. 
-#' ** required if T0, Ts are not given.
+#' (2) required if T0, Ts are not given.
 #'
 #' @return a list with reflectance, and the fractions of shaded 
 #' and sunexplosed crowns, shaded and sun exposed open space. 
 #'
-#' @examlpe
+#' @examples
 #' parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,d=10,tto=10,tts=20,psi=30)
 #' flim(0.1,0.1,params=parvec)
 #'    

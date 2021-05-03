@@ -17,17 +17,17 @@ flim(Rc, Rg, To = NULL, Ts = NULL, params, area = 10000)
 
 \item{params}{a named vector of parameters:
 \itemize{
-\item \link{1} = stand density (d) *  (see details).
-\item \link{2} = crown diameter (cd) * - confounded with d (see details).
+\item \link{1} = stand density (d) (1)
+\item \link{2} = crown diameter (cd) (1)
 \item \link{3} = mean crown height (h)
-\item \link{4} = leaf area index (lai) **
-\item \link{5} = light extinction coefficient (alpha) **
+\item \link{4} = leaf area index (lai) (2)
+\item \link{5} = light extinction coefficient (alpha) (2)
 \item \link{6} = Solar zenith angle (tts)
 \item \link{7} = Observer zenith angle (tto)
 \item \link{8} = Sun-sensor azimuth angle (psi)
 }}
 
-\item{area}{area of stand}
+\item{area}{area of stand (m2)}
 }
 \value{
 a list with reflectance, and the fractions of shaded
@@ -41,11 +41,14 @@ probabilty to observe either a gap (background)
 or a tree crown. Both gaps and crowns may be shaded.
 }
 \details{
-\itemize{
-\item Parameters are confounded (d & cd), confounded parameters pairs cannot be inversely
+(1) Parameters are confounded (d & cd), confounded parameters pairs cannot be inversely
 estimated, one of the pairs should be set to 1 - or given explicitly.
-** required if T0, Ts are not given.
+(2) required if T0, Ts are not given.
 }
+\examples{
+parvec<- c(alpha = 0.5,lai=5,cd=15,h=30,d=10,tto=10,tts=20,psi=30)
+flim(0.1,0.1,params=parvec)
+   
 }
 \references{
 Rosema, A., Verhoef, W., Noorbergen, H., Borgesius, J.J. (1992).
