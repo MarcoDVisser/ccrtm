@@ -111,7 +111,9 @@ Wavelength range  400-2500 (nm)
 - Add GEOSAIL model
 
 ## Thanks
-Special thanks to Matteo Detto for all the suggestions while I was developing this package.
+Special thanks to Matteo Detto for all the suggestions while I was developing this package. 
+Comments from (in no particular order) helped improve documentation and remove bugs;
+Zavud Baghirov and Martina Schmirl.
 
 
 ## Version history
