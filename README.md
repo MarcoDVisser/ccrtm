@@ -7,12 +7,12 @@ radiative transfer models can form a coupled chain, basically models that feed i
 The package will slowly be extended as more models are added, and tested, and optimized. Please send requests and bug reports.
 
 Currently the following models are implemented:
-- prospect5
-- prospect5b
-- prospectD
-- foursail
-- foursail2 (leaf angles fixed for each layer)
-- foursail2b (leaf angles differ for each layer)
+- PROSPECT5
+- PROSPECT5B
+- PROSPECTD
+- FOURSAIL
+- 4SAIL2 (leaf angles fixed for each layer; sensu Verhoef and Bach 2007)
+- 4SAIL2B (leaf angles differ for each layer; sensu Zhang et al 2005)
 - FLIM
 - PROSAIL (5/5b/D)
 - PROSAIL2 (5/5b/D)
