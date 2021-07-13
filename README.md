@@ -1,10 +1,25 @@
-## ccrtm: Coupled Chain Radiative Transfer Models 
+## ccrtm: Coupled Chain Radiative Transfer Models (0.2.0)
 
 A set of radiative transfer models to quantitatively describe the absorption, reflectance and transmission of solar energy in vegatation,
 and model remotely sensed spectral signatures of vegetation at distinct spatial scales. The main principle behind ccrtm is that many 
 radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). Included models are prospect family, and 2 stream and 4 stream models for canopies, with planned inclusion atmospheric models.
 
 The package will slowly be extended as more models are added, and tested, and optimized. Please send requests and bug reports.
+
+Currently the following models are implemented:
+- prospect5
+- prospect5b
+- prospectD
+- foursail
+- foursail2 (leaf angles fixed for each layer)
+- foursail2b (leaf angles differ for each layer)
+- FLIM
+- PROSAIL (5/5b/D)
+- PROSAIL2 (5/5b/D)
+- INFORM (5/5b/D) - only lower level implementation as of yet
+
+Implementation planned in the near future:
+- SMAC
 
 [![cran version](http://www.r-pkg.org/badges/version/ccrtm)](http://cran.rstudio.com/web/packages/ccrtm)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ccrtm?color=E664A4)](https://github.com/metacran/cranlogs.app)
@@ -119,5 +134,16 @@ Their comments helped improve documentation and remove bugs.
 ## Version history
 0.01 Initial package with everything in R 
 0.1 Basic tests complete, basic optimization, and refactoring in c++. 
+0.1.1 Documentation update, more code refactored in c++
+0.1.1 Documentation update, more code refactored in c++
+0.1.4 refactored code now running via Rcpp, tested against fortran
+0.1.5 Documentation updated, code reviewed and CRAN tests passed.
+0.1.6 CRAN new package review issues fixed.
+0.1.7 fixed bugs identified by Zavud, and improved documentation for leaf angle model
+0.2.0 Start of major overhual of fRTM using model aliases, and inclusion of lower-level implementation of INFORM
+
+
+
+
 
 
