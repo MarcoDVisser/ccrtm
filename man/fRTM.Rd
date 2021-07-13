@@ -34,31 +34,34 @@ In general the form of the formula specifies the
 both the expected output (left hand) and the different models
 you would like to couple to generate the output (right hand).
 
-At current the following ratiative transfer models are
+The following radiative transfer models are currently
 implemented\tabular{lc}{
    Formula \tab Model \cr
-   rho ~ prospect5 \tab prospect5 \cr
-   rho ~ prospectd \tab prospectd \cr
+   rho ~ prospect5 \tab PROSPECT5 \cr
+   rho ~ prospectd \tab PROSPECTD \cr
    rho ~ prospectd + foursail \tab 4SAIL \cr
    rho ~ prospectd + foursail2 \tab 4SAIL2 \cr
    rho ~ prospectd + foursail2b \tab 4SAIL2b \cr
+   rho ~ prospectd + foursail + flim \tab INFORM \cr
    rho ~ prospectd + foursail2 + flim \tab 4SAIL2 \cr
    rho ~ prospectd + foursail2b + flim \tab 4SAIL2b \cr
-   rho ~ prospectd + foursail + flim \tab INFORM \cr
+   rho ~ prospectd + prospect5 + foursail2b + flim \tab 4SAIL2b \cr
 }
 
 
 In the examples with additive components above, prospectd can
-be replaced with prospect5 if so desired. See the help files for
-details on each right hand component. For instance, ?foursail
-provides more elaboration on the 4SAIL model and gives
-an example for lower-level implementations of each component
-model.
+be replaced with prospect5 if so desired. In the final line
+4SAIL2b is implemented with a different leaf model for
+the secondary particles (leaves).
+See the help files for details on each right hand component.
+For instance, ?foursail provides more elaboration on
+the 4SAIL model and gives an example for lower-level
+implementations of each component model.
 
 Tranmission can also be returned if specified in
 the left-hand component of the formula:\tabular{lc}{
    Formula \tab Model \cr
-   rho + tau ~ prospect5 \tab prospect5 \cr
+   rho + tau ~ prospect5 \tab PROSPECT5 \cr
    rho + tau ~ prospectd + foursail \tab 4SAIL \cr
 }
 

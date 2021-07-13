@@ -22,13 +22,10 @@ solar incident flux}
 
 \item{tts}{solar angle}
 
-\item{skyl}{fraction diffuse}
+\item{skyl}{diffuse fraction}
 }
 \value{
 a list with hemispherical and directional reflectance.
-rt<-fRTM(rho~prospect5+foursail)
-skyl(rt\link{,"rddt"},rt\link{,"rsdt"},rt\link{,"rdot"},rt\link{,"rsot"},
-Es=solar\link{,1},Ed=solar\link{,2},tts=45,skyl=NULL)
 }
 \description{
 Simple atmospherical model that builds on recommendations
@@ -36,6 +33,10 @@ from Francois et al. (2002).
 }
 \examples{
 data(solar)
+rt<-fRTM(rho~prospect5+foursail)
+skyl(rt[,"rddt"],rt[,"rsdt"],rt[,"rdot"],rt[,"rsot"],
+Es=solar[,1],Ed=solar[,2],tts=45,skyl=NULL)
+
 }
 \references{
 Francois, C., Ottle, C., Olioso, A., Prevot, L., Bruguier, N.,

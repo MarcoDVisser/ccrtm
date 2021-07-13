@@ -46,11 +46,7 @@
 #' ## e.g. fRTM(rho~prospectd+foursail) 
 #'
 #' ## 1) get parameters
-#' params<-getDefaults(rho~prospectd+foursail) 
-#' ## getDefaults("foursail") will also work
-#' bestpars<-params$foursail$best
-#' ## ensure the vector is named
-#' names(bestpars) <- rownames(params$foursail)
+#' typicalpars<-getDefaults("foursail") 
 #' 
 #' ## 2) get leaf reflectance and transmission 
 #' rt<-fRTM(rho+tau~prospectd)
@@ -59,10 +55,10 @@
 #' data(soil)
 #' 
 #' ## a linear mixture soil model 
-#' bgRef<- bestpars["psoil"]*soil[,"drySoil"] + (1-bestpars["psoil"])*soil[,"wetSoil"]
+#' bgRef<- typicalpars["psoil"]*soil[,"drySoil"] + (1-typicalpars["psoil"])*soil[,"wetSoil"]
 #' 
 #' ## 4) run 4SAIL
-#' foursail(rt[,"rho"],rt[,"tau"],bgRef,bestpars)
+#' foursail(rt[,"rho"],rt[,"tau"],bgRef,typicalpars)
 #' 
 #' @references Suits, G.H., 1971. The calculation of the directional reflectance of a 
 #'  vegetative canopy. Remote Sens. Environ. 2, 117-125.
@@ -161,13 +157,14 @@ foursail <- function(rho, tau, bgr,param){
                            rdd,tdd,tsd,rsd,tdo,rdo,tss,too,rsod)
 
     
-  ## rddt    Bi-hemispherical reflectance
-  ## rsdt    Directional-hemispherical reflectance for solar incident flux
-  ## rdot    Hemispherical-directional reflectance in viewing direction
-  ## rsot    Bi-directional reflectance factor
+    ## rddt    Bi-hemispherical reflectance
+    ## rsdt    Directional-hemispherical reflectance for solar incident flux
+    ## rdot    Hemispherical-directional reflectance in viewing direction
+    ## rsot    Bi-directional reflectance factor
+    ## tss, tsdm, rdd used in INFORM downstream
 
     reflMat <- as.matrix(do.call(cbind,finalOut))
-    colnames(reflMat) <- c('rddt','rsdt','rdot','rsot','taus','tauo')
+    colnames(reflMat) <- c('rddt','rsdt','rdot','rsot','tss',"tsd","tdd","rdd")
    
     return(reflMat)
 
@@ -286,7 +283,7 @@ r_foursail <- function(rho, tau,bgr,param){
     ##  Canopy reflectance and transmittance
     ## Input LAI and leaf rho and tau
     ## Also give geometric factors
-    refTransRes <- cReflTrans(rho,tau,lai,att,m,sigb,ks,ko,sf,sb,vf,vb)
+    refTransRes <- ReflTrans(rho,tau,lai,att,m,sigb,ks,ko,sf,sb,vf,vb)
 
     rdd  <- refTransRes[[1]]
     tdd  <- refTransRes[[2]]
@@ -775,15 +772,14 @@ sail_BDRF <- function(w,lai,sumint,tsstoo,rsoil,
     rsot <- rsost+rsodt # total
 
     ## transmission of light through the canopy
-    ## taus = tranmission of diffuse light from solar direction
-    ## plus gap fraction in solar direction
-    ## direct (not diffuse) transmission of light in solar direction    
-    taus <- (tss) 
-
-    ## direct (not diffuse0 transmission of light in observer direction
-    tauo <- (tdo) 
-
-    return(list(rddt,rsdt,rdot,rsot,taus,tauo))
+    ## in the soloar direction
+    ## is calculated from tss,tdd,rdd,rsoil
+    ## In the viewing direction from
+    ## 
+    ## This assumes a lambertian soil!
+    
+    return(list(rddt,rsdt,rdot,rsot,
+                tss,tsd,tdd,rdd))
 
 } ## sail_BDRF
 

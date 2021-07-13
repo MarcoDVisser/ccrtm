@@ -32,33 +32,36 @@
 #' both the expected output (left hand) and the different models
 #' you would like to couple to generate the output (right hand).
 #'
-#' At current the following ratiative transfer models are
-#' implemented
+#' The following radiative transfer models are currently
+#' implemented 
 #'
-#' | Formula                             | Model     |      
-#' | :---------------------------------  | :-------: | 
-#' | rho ~ prospect5                     | prospect5 |
-#' | rho ~ prospectd                     | prospectd |
-#' | rho ~ prospectd + foursail          | 4SAIL     | 
-#' | rho ~ prospectd + foursail2         | 4SAIL2    |
-#' | rho ~ prospectd + foursail2b        | 4SAIL2b   |
-#' | rho ~ prospectd + foursail2 + flim  | 4SAIL2    |
-#' | rho ~ prospectd + foursail2b + flim | 4SAIL2b   |
-#' | rho ~ prospectd + foursail + flim   | INFORM    |
-#'
+#' | Formula                                          | Model     |      
+#' | :----------------------------------------------- | :-------: | 
+#' | rho ~ prospect5                                  | PROSPECT5 |
+#' | rho ~ prospectd                                  | PROSPECTD |
+#' | rho ~ prospectd + foursail                       | 4SAIL     | 
+#' | rho ~ prospectd + foursail2                      | 4SAIL2    |
+#' | rho ~ prospectd + foursail2b                     | 4SAIL2b   |
+#' | rho ~ prospectd + foursail + flim                | INFORM    |
+#' | rho ~ prospectd + foursail2 + flim               | 4SAIL2    |
+#' | rho ~ prospectd + foursail2b + flim              | 4SAIL2b   |
+#' | rho ~ prospectd + prospect5 + foursail2b + flim  | 4SAIL2b   |
+#' 
 #' In the examples with additive components above, prospectd can
-#' be replaced with prospect5 if so desired. See the help files for
-#' details on each right hand component. For instance, ?foursail
-#' provides more elaboration on the 4SAIL model and gives
-#' an example for lower-level implementations of each component
-#' model.
+#' be replaced with prospect5 if so desired. In the final line
+#' 4SAIL2b is implemented with a different leaf model for
+#' the secondary particles (leaves).
+#' See the help files for details on each right hand component.
+#' For instance, ?foursail provides more elaboration on
+#' the 4SAIL model and gives an example for lower-level
+#' implementations of each component model.
 #'
 #' Tranmission can also be returned if specified in
 #' the left-hand component of the formula:
 #'
 #' | Formula                             | Model     |      
 #' | :---------------------------------  | :-------: | 
-#' | rho + tau ~ prospect5               | prospect5 |
+#' | rho + tau ~ prospect5               | PROSPECT5 |
 #' | rho + tau ~ prospectd + foursail    | 4SAIL     |
 #'
 #' The examples above indicate that the users wishes to predict
@@ -121,6 +124,17 @@ fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
     if(!any(rowInc)) stop("check wavelengths: wl")
     
     tmp <- checkForm(fm)
+
+    if(any(tmp[[1]]%in%c("flim"))) {
+
+        flt <- tmp[[1]][tmp[[1]]%in%c("flim")]
+        
+        stop(paste0("Model ",flt,
+                    " is not fully supported yet",
+                    " please use lower-level implementation"))
+
+        }
+       
     reqMods <- tmp[[1]]
     ordN <- tmp[[2]]
 
@@ -146,7 +160,6 @@ fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
   
 }
 
- 
 
 
 #' Generates an invertable model for backward implementation
@@ -232,6 +245,7 @@ bRTM <- function(fm = rho ~ prospect5, data=NULL, pars=NULL, fixed=NULL,
 #ref ~ (prospect | N = 2) + (sail | LAI =3) + (geo | X= 2)
 #predict(prospect + sail + geo)
 }
+
 
 
 ## internal prediction building function
@@ -365,11 +379,13 @@ getModels <- function(){
               "foursail",
               "foursail2",
               "foursail2b",
-              "flim")
-    
+              "flim",
+              "skyl"
+              )
+
     data.frame(model=mods,
-               level=c(1,1,2,3,3,3),
-                row.names = mods)
+               level=c(1,1,2,3,3,3,4),
+               row.names = mods)
 }
 
 
@@ -427,10 +443,11 @@ checkPars <- function(pars,reqMods,ordN){
 
     ## generate expected parameters
     parlist <- lapply(reqMods, getDefaults)
-    expparnames <- lapply(parlist, rownames)
+    expparnames <- lapply(parlist, names)
 
     ## add duplicated parameters
     dub <- duplicated(reqMods)
+    
     if(any(dub)){
 
         for(i in 1:sum(dub)){
@@ -440,7 +457,7 @@ checkPars <- function(pars,reqMods,ordN){
 
     }
     
-    expparlist <- lapply(parlist, function(X) X$best)
+    expparlist <- lapply(parlist, function(X) X)
 
     for(i in 1:length(expparnames)){
         names(expparlist[[i]]) <- tolower(expparnames[[i]])
@@ -474,7 +491,7 @@ checkPars <- function(pars,reqMods,ordN){
         }
         
         if(length(pars)!=ordN){
-            stop("Looks like not each model was supplied parameter vector")
+            stop("Looks like not all models were supplied a parameter vector")
         }
         
         parnames <- lapply(pars,function(X) names(X))

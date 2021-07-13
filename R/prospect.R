@@ -24,8 +24,23 @@
 #' }
 #'
 #' @importFrom expint expint_E1
+#'
+#' @examples
+#' ## see ?fRTM for the typical mode of simulation
+#' ## e.g. fRTM(rho~prospect5) 
+#'
+#' ## 1) get parameters
+#' defaultpars<-getDefaults(rho~prospect5) 
+#' ## getDefaults("prospect5") will also work
 #' 
-#' @export
+#' ## 2) get leaf reflectance and transmission 
+#' rt<-fRTM(rho+tau~prospect5,defaultpars)
+#'
+#' ## lower-level implementation example
+#' ## Alternatively implement directly
+#' mypars<-c("N"=1,"Cab"=35,"Car"=20,"Cbrown"=3,"Cw"=0.01,"Cm"=0.01)
+#' prospect5(mypars)
+#' 
 #' @references Jacquemoud, S., and Ustin, S. (2019). Leaf optical properties. 
 #'   Cambridge University Press.
 #' @references Feret, J.B., Francois, C., Asner, G.P., Gitelson, A.A., 
@@ -38,7 +53,8 @@
 #' @references Stokes G.G. (1862), On the intensity of the light
 #'   reflected from or transmitted through a pile of plates,
 #'   Proceedings of the Royal Society of London, 11:545-556.
-#' @useDynLib ccrtm    
+#' @useDynLib ccrtm
+#' @export
 prospect5 <- function(param){
 
     ## force case to lower
@@ -125,6 +141,21 @@ prospect5 <- function(param){
 #'   reflected from or transmitted through a pile of plates,
 #'   Proceedings of the Royal Society of London, 11:545-556.
 #' @importFrom expint expint_E1
+#' @examples
+#' ## see ?fRTM for the typical mode of simulation
+#' ## e.g. fRTM(rho~prospectd) 
+#'
+#' ## 1) get parameters
+#' defaultpars<-getDefaults(rho~prospectd) 
+#' ## getDefaults("prospectd") will also work
+#' 
+#' ## 2) get leaf reflectance and transmission 
+#' rt<-fRTM(rho+tau~prospect5,defaultpars)
+#'
+#' ## lower-level implementation example
+#' ## Alternatively implement directly (case ignored for parameters)
+#' mypars<-c("N"=1,"Cab"=35,"Car"=20,"Canth"=15,"Cbrown"=3,"Cw"=0.01,"Cm"=0.01)
+#' prospectd(mypars)
 #' @export
 #' @useDynLib ccrtm    
 prospectd <- function(param){

@@ -4,7 +4,7 @@
 \alias{flim}
 \title{Forest Light Interaction Model (FLIM)}
 \usage{
-flim(Rc, Rg, To = NULL, Ts = NULL, params, area = 10000)
+flim(Rc, Rg, To = NULL, Ts = NULL, params)
 }
 \arguments{
 \item{Rc}{Canopy reflectance at infinite depth}

@@ -41,7 +41,7 @@
 #' Remote Sens. Environ. 42, 23-41. 
 #' @importFrom pracma sec
 #' @export
-flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
+flim <- function(Rc,Rg,To=NULL,Ts=NULL,params){
 
 
     ## degrees to radians
@@ -63,6 +63,7 @@ flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
     cd <- as.numeric(params["cd"]) # mean crown diameter
     h <- as.numeric(params["h"]) # mean crown height
     D <- as.numeric(params["d"]) # stand density
+    area <- as.numeric(params["area"]) # stand area
     tto <- as.numeric(params["tto"]*rd)  # observer zenith
     tts <- as.numeric(params["tts"]*rd) # sun zenith
     psi <- as.numeric(params["psi"]*rd) # relative azimuth
@@ -99,8 +100,8 @@ flim <- function(Rc,Rg,To=NULL,Ts=NULL,params,area=10000){
     C <- (1-Ts*To)*cs*co  # eqn 16
     R <- Rc*C + Rg*G # eqn 15
 
-    names(R)<-"rho"
-    return(list(R,crowndark=Fcd,crownsun=Fcs,opendark=Fod,opensun=Fos,open=open,sunlit=sunlit))
+    return(list(rho=as.numeric(R),crowndark=Fcd,crownsun=Fcs,opendark=Fod,opensun=Fos,open=open,sunlit=sunlit))
 }
 
     
+

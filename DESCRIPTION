@@ -1,11 +1,11 @@
 Package: ccrtm
 Type: Package
 Title: Coupled Chain Radiative Transfer Models
-Version: 0.1.6.2
-Date: 2021-04-29
+Version: 0.2
+Date: 2021-06-29
 Authors@R: c(person(given="Marco D.",family="Visser", role = c("aut", "cre"),
                       email = "marco.d.visser@gmail.com"))
-Description: A set of radiative transfer models to quantitatively describe the absorption, reflectance and transmission of solar energy in vegetation, and model remotely sensed spectral signatures of vegetation at distinct spatial scales (leaf,canopy and stand). The main principle behind ccrtm is that many radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). It allows the simulation of spectral datasets in the solar spectrum (400-2500nm) using leaf models as PROSPECT5, 5b, and D which can be coupled with canopy models as 'FLIM', 'SAIL' and 'SAIL2'. Currently, only a simple atmospheric model ('skyl') is implemented. Jacquemoud et al 2008 provide the most comprehensive overview of these models <doi:10.1016/j.rse.2008.01.026>. 
+Description: A set of radiative transfer models to quantitatively describe the absorption, reflectance and transmission of solar energy in vegetation, and model remotely sensed spectral signatures of vegetation at distinct spatial scales (leaf,canopy and stand). The main principle behind ccrtm is that many radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). It allows the simulation of spectral datasets in the solar spectrum (400-2500nm) using leaf models as PROSPECT5, 5b, and D which can be coupled with canopy models as 'FLIM', 'SAIL' and 'SAIL2' for top of canopy reflectance, and with two atmospheric models 'SKYL'and 'SMAC' for calculation of top of the atmosphere reflectance. Jacquemoud et al 2008 provides a comprehensive overview of these and other models <doi:10.1016/j.rse.2008.01.026>. 
 License: GPL (>= 2)
 URL: https://github.com/MarcoDVisser/ccrtm
 BugReports: https://github.com/MarcoDVisser/ccrtm/issues

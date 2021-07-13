@@ -61,7 +61,7 @@ defaults <- function(x, ...){
 ##      - Cbrown= brown pigments content in arbitrary units
 ##      - Cw    = equivalent water thickness
 ##      - Cm    = dry matter content 
-defaults.prospect5<-function(x){
+defaults.prospect5<-function(x,simple=TRUE){
    
     ## typical values are the rice values
     typical = c(2.698,70.8,20, 0.0117,0.009327,0.001)
@@ -72,12 +72,19 @@ defaults.prospect5<-function(x){
     names(typical)<-c("N", "Cab","Car", "Cw", "Cm", "Cbrown")
     names(omega)<-c("N", "Cab","Car", "Cw", "Cm", "Cbrown")
     names(alpha)<-c("N", "Cab","Car", "Cw", "Cm", "Cbrown")
+
+    if(simple){
+        
+        return(typical)
     
+    } else {
+        
     def = data.frame(best = typical)
     def$lower = alpha
     def$upper = omega
     
     return(def)
+    }
 }
 
 ## get some default values for the prospect model 
@@ -89,7 +96,7 @@ defaults.prospect5<-function(x){
 ##       - Cw    = equivalent water thickness
 ##       - Cm    = dry matter content 
 ##
-defaults.prospectd<-function(x){
+defaults.prospectd<-function(x,simple=TRUE){
     
     
     ## typical values are the rice values
@@ -101,12 +108,19 @@ defaults.prospectd<-function(x){
     names(typical)<-c("N", "Cab","Car", "Cw", "Cm","Canth", "Cbrown")
     names(omega)<-c("N", "Cab","Car", "Cw", "Cm", "Canth","Cbrown")
     names(alpha)<-c("N", "Cab","Car", "Cw", "Cm","Canth","Cbrown")
+
+    if(simple){
+        
+        return(typical)
     
-    def = data.frame(best = typical)
-    def$lower = alpha
-    def$upper = omega
-    
-     return(def)
+    } else {
+
+        def = data.frame(best = typical)
+        def$lower = alpha
+        def$upper = omega
+        
+        return(def)
+    }
 }
 
 
@@ -123,7 +137,7 @@ defaults.prospectd<-function(x){
 ##       - tts   = Solar zenith angle (degrees)
 ##       - tto   = Observer zenith angle (degrees)
 ##       - psi   = Relative azimuth angle (degrees)
-defaults.foursail<-function(x){
+defaults.foursail<-function(x,simple=TRUE){
 
     nms <- c("psoil","LAI","TypeLidf","lidfa","lidfb",
              "hspot","tts","tto","psi")
@@ -143,13 +157,19 @@ defaults.foursail<-function(x){
     names(typical)<-nms
     names(omega)<-nms
     names(alpha)<-nms
+
+    if(simple){
+        
+        return(typical)
+    
+    } else {
     
     def = data.frame(best = typical)
     def$lower = alpha
     def$upper = omega
     
     return(def)
-
+    }
 }   
 
 ## Generate default values for the foursail2 model 
@@ -168,7 +188,7 @@ defaults.foursail<-function(x){
 ##       - tts   = Solar zenith angle (degrees).
 ##       - tto   = Observer zenith angle (degrees).
 ##       - psi   = Relative azimuth angle (degrees).
-defaults.foursail2<-function(x){
+defaults.foursail2<-function(x,simple=TRUE){
 
     nms <- c("psoil","LAI","TypeLidf","lidfa","lidfb",
              "hspot",
@@ -196,12 +216,21 @@ defaults.foursail2<-function(x){
     names(typical)<-nms
     names(omega)<-nms
     names(alpha)<-nms
-    
-    def = data.frame(best = typical)
-    def$lower = alpha
-    def$upper = omega
 
-    return(def)
+    if(simple){
+        
+        return(typical)
+    
+    } else {
+    
+        def = data.frame(best = typical)
+        def$lower = alpha
+        def$upper = omega
+        
+        
+        
+        return(def)
+    }
     
 }
 
@@ -222,7 +251,7 @@ defaults.foursail2<-function(x){
 ##       - tts   = Solar zenith angle (degrees).
 ##       - tto   = Observer zenith angle (degrees).
 ##       - psi   = Relative azimuth angle (degrees).
-defaults.foursail2b<-function(x){
+defaults.foursail2b<-function(x,simple=TRUE){
 
     nms <- c("psoil","LAI","TypeLidf","lidfa","lidfb",
              "hspot",
@@ -250,35 +279,118 @@ defaults.foursail2b<-function(x){
     names(typical)<-nms
     names(omega)<-nms
     names(alpha)<-nms
-    
-    def = data.frame(best = typical)
-    def$lower = alpha
-    def$upper = omega
 
-    return(def)
-    
+    if(simple){
+        
+        return(typical)
+        
+    } else {
+        
+        def = data.frame(best = typical)
+        def$lower = alpha
+        def$upper = omega
+        
+        return(def)
+    }
 }
 
 ## get some default values for the prospect model 
-##       - N     = leaf structure parameter
-##       - Cab   = chlorophyll a+b content 
-##       - Car   = carotenoids content 
-##       - Cbrown= brown pigments content in arbitrary units
-##       - Cw    = equivalent water thickness
-##       - Cm    = dry matter content 
-##
-defaults.skyl<-function(x){
+##       - skyl     = diffuse pattern
+defaults.skyl<-function(x,simple=TRUE){
    
-    ## typical values are the rice values
     typical = c(0.1)
     omega <- c(1) 
     alpha <- c(0) 
     
     names(alpha)<-names(omega)<-names(typical)<-c("skyl")
+
+    if(simple){
+        
+        return(typical)
+        
+    } else {
+        
+        def = data.frame(best = typical)
+        def$lower = alpha
+        def$upper = omega
+        
+        return(def)
+    }
+}
+
+
+## Generate default values for the flim model
+#' d = stand density (d)  
+#' cd = crown diameter (cd) 
+#' h = mean crown height (h)
+#' lai = leaf area index (lai)  
+#' alpha = light extinction coefficient (alpha)  
+#' tts = Solar zenith angle (tts)
+#' tto = Observer zenith angle (tto)
+#' psi = Sun-sensor azimuth angle (psi)
+defaults.flim<-function(x,simple=TRUE){
+
+    nms <- c("cd", "h", "d", "area","tto","tts","psi")
     
-    def = data.frame(best = typical)
-    def$lower = alpha
-    def$upper = omega
+    typical = c(10,20,30,10000,0,15,45)
+    omega <- c(Inf,Inf,Inf,Inf,90,90,180) 
+    alpha <- c(0,0,0,0,0,0,0) 
     
+    names(alpha)<-names(omega)<-names(typical)<-nms
+
+    if(simple){
+        
+        return(typical)
+        
+    } else {
+    
+        def = data.frame(best = typical)
+        def$lower = alpha
+        def$upper = omega
+        
+        return(def)
+        
+    }
+}
+
+
+## Generate default values for the inform-5 model
+defaults.inform5<-function(x,simple=TRUE){
+
+    ## make parameter list
+    leafpars <- getDefaults("prospect5",simple)
+    canopypars <- getDefaults("foursail",simple)
+    flimpars <- getDefaults("flim",simple)
+    skylpars <- getDefaults("skyl",simple)
+
+    def <- list("prospect5"=list("canopy"=leafpars,
+                                 "understorey"=leafpars),
+                "foursail"=list("canopy" = canopypars,
+                                 "understorey" = canopypars),
+                "flim"=flimpars,
+                "skyl"=skylpars
+                )
+                
+    return(def)
+}
+
+
+## Generate default values for the inform-d model
+defaults.informd<-function(x,simple=TRUE){
+
+    ## make parameter list
+    leafpars <- getDefaults("prospectd",simple)
+    canopypars <- getDefaults("foursail",simple)
+    flimpars <- getDefaults("flim",simple)
+    skylpars <- getDefaults("skyl",simple)
+
+    def <- list("prospectd"=list("canopy"=leafpars,
+                                 "understorey"=leafpars),
+                "foursail"=list("canopy" = canopypars,
+                                 "understorey" = canopypars),
+                "flim"=flimpars,
+                "skyl"=skylpars
+                )
+                
     return(def)
 }

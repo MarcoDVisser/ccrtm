@@ -11,18 +11,18 @@
 ##' @param Es Solar flux
 ##' @param Ed Diffuse flux
 ##' @param tts solar angle
-##' @param skyl fraction diffuse
+##' @param skyl diffuse fraction
 ##' @references Francois, C., Ottle, C., Olioso, A., Prevot, L., Bruguier, N., 
 ##'   Ducros, Y.(2002). Conversion of 400-1100 nm vegetation albedo measurements 
 ##'   into total shortwave broadband albedo using a canopy radiative transfer model. 
 ##'   Agronomie 22, 611-618.
 ##' @examples
 ##' data(solar)
-##' @return a list with hemispherical and directional reflectance.
 ##' rt<-fRTM(rho~prospect5+foursail)
 ##' skyl(rt[,"rddt"],rt[,"rsdt"],rt[,"rdot"],rt[,"rsot"],
 ##' Es=solar[,1],Ed=solar[,2],tts=45,skyl=NULL)
 ##'
+##' @return a list with hemispherical and directional reflectance.
 ##' @export
 skyl <- function(rddt,rsdt,rdot,rsot,Es,Ed,tts,skyl=NULL){
 
@@ -37,11 +37,11 @@ skyl <- function(rddt,rsdt,rdot,rsot,Es,Ed,tts,skyl=NULL){
         }
     
     ## Direct / diffuse light		
-    PARdiro <- (1-skyl)*Es
-    PARdifo <- (skyl)*Ed  
+    Rdir <- (1-skyl)*Es
+    Rdif <- (skyl)*Ed  
     
-    resh <-  (rddt*PARdifo+rsdt*PARdiro)/(PARdiro+PARdifo) ## hemispherical
-    resv <-  (rdot*PARdifo+rsot*PARdiro)/(PARdiro+PARdifo) ## observer
+    resh <-  (rsdt*Rdir+rddt*Rdif)/(Rdir+Rdif) ## hemispherical
+    resv <-  (rsot*Rdir+rdot*Rdif)/(Rdir+Rdif) ## observer
     
     return(list(hemispherical=resh,directional=resv))
 }

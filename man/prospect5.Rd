@@ -32,6 +32,23 @@ Jacquemoud and Ustin (2019), and is further described in detail in Feret et al (
 PROSPECT models use the plate models developed in
 Allen (1969) and Stokes (1862). Set Cbrown to 0 for prospect version 5.
 }
+\examples{
+## see ?fRTM for the typical mode of simulation
+## e.g. fRTM(rho~prospect5) 
+
+## 1) get parameters
+defaultpars<-getDefaults(rho~prospect5) 
+## getDefaults("prospect5") will also work
+
+## 2) get leaf reflectance and transmission 
+rt<-fRTM(rho+tau~prospect5,defaultpars)
+
+## lower-level implementation example
+## Alternatively implement directly
+mypars<-c("N"=1,"Cab"=35,"Car"=20,"Cbrown"=3,"Cw"=0.01,"Cm"=0.01)
+prospect5(mypars)
+
+}
 \references{
 Jacquemoud, S., and Ustin, S. (2019). Leaf optical properties.
 Cambridge University Press.

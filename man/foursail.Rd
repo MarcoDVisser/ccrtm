@@ -58,11 +58,7 @@ Verhoef (1984), who extended work by Suits (1971) 4-steam model.
 ## e.g. fRTM(rho~prospectd+foursail) 
 
 ## 1) get parameters
-params<-getDefaults(rho~prospectd+foursail) 
-## getDefaults("foursail") will also work
-bestpars<-params$foursail$best
-## ensure the vector is named
-names(bestpars) <- rownames(params$foursail)
+typicalpars<-getDefaults("foursail") 
 
 ## 2) get leaf reflectance and transmission 
 rt<-fRTM(rho+tau~prospectd)
@@ -71,10 +67,10 @@ rt<-fRTM(rho+tau~prospectd)
 data(soil)
 
 ## a linear mixture soil model 
-bgRef<- bestpars["psoil"]*soil[,"drySoil"] + (1-bestpars["psoil"])*soil[,"wetSoil"]
+bgRef<- typicalpars["psoil"]*soil[,"drySoil"] + (1-typicalpars["psoil"])*soil[,"wetSoil"]
 
 ## 4) run 4SAIL
-foursail(rt[,"rho"],rt[,"tau"],bgRef,bestpars)
+foursail(rt[,"rho"],rt[,"tau"],bgRef,typicalpars)
 
 }
 \references{
