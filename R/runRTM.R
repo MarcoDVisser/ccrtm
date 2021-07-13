@@ -162,9 +162,9 @@ rtm.informd <- function(pars){
 
     skyl <- pars[["skyl"]]
 
-    leafpar <- pars[["prospect5"]]
-    lRTc <- prospect5(leafpar[["canopy"]]) ## canopy particles 
-    lRTu <- prospect5(leafpar[["understorey"]]) ## unstorey particles
+    leafpar <- pars[["prospectd"]]
+    lRTc <- prospectd(leafpar[["canopy"]]) ## canopy particles 
+    lRTu <- prospectd(leafpar[["understorey"]]) ## unstorey particles
 
     ## calculate background (soil) reflectance
     bgRef<- parsc["psoil"]*soil[,"drySoil"] +
