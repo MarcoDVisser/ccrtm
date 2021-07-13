@@ -10,16 +10,18 @@ Currently the following models are implemented:
 - PROSPECT5
 - PROSPECT5B
 - PROSPECTD
-- FOURSAIL
+- 4SAIL
 - 4SAIL2 (leaf angles fixed for each layer; sensu Verhoef and Bach 2007)
 - 4SAIL2B (leaf angles differ for each layer; sensu Zhang et al 2005)
 - FLIM
-- PROSAIL (5/5b/D)
-- PROSAIL2 (5/5b/D)
-- INFORM (5/5b/D) - only lower level implementation as of yet
+- PROSAIL (5/5B/D)
+- PROSAIL2(b) (5/5B/D)
+- INFORM (5/5B/D) - only lower level implementation as of yet
 
 Implementation planned in the near future:
 - SMAC
+- PROCOSINE
+- LIBERTY
 
 [![cran version](http://www.r-pkg.org/badges/version/ccrtm)](http://cran.rstudio.com/web/packages/ccrtm)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ccrtm?color=E664A4)](https://github.com/metacran/cranlogs.app)
