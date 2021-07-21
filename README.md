@@ -22,6 +22,7 @@ Implementation planned in the near future:
 - SMAC
 - PROCOSINE
 - LIBERTY
+- SOILSPECT
 
 [![cran version](http://www.r-pkg.org/badges/version/ccrtm)](http://cran.rstudio.com/web/packages/ccrtm)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ccrtm?color=E664A4)](https://github.com/metacran/cranlogs.app)
@@ -124,7 +125,7 @@ Wavelength range  400-2500 (nm)
 ## to do list
 - Add liberty, and procosine
 - Add 2 stream model
-- Add inform model
+- Add inform model to fRTM
 - Add GEOSAIL model
 
 ## Thanks
