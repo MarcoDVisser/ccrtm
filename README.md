@@ -127,7 +127,7 @@ Wavelength range  400-2500 (nm)
 ```
 
 ## INFORM
-The functions are not exported yet as this code remain untested formally - although it appears to behave well. The best "formal test" is to test againts original (often fortran) code. For INFORM this isn't possible mostly because no code is publically available to test against as far as I am aware of (i.e. made available by the authors of INFORM) . Therefore, inform remains lower-level for now (not exported by defualt).  You can however use INFORM if you wish simply by doing:   
+The INFORM functions are not exported yet as this code remain untested "formally" - although it appears to behave well. The best "formal test" is to test againts original published (often fortran) code. For INFORM this isn't possible because no code is publically available to test against (i.e. made available by the authors of INFORM) - at  least as far as I am aware of. Therefore, inform remains lower-level for now (not exported by defualt).  You can however use INFORM if you wish simply by doing:   
 
 ```r
 require(ccrtm)
@@ -137,8 +137,8 @@ informpars <-  ccrtm:::defaults.inform5()
 R <- ccrtm:::rtm.inform5(informpars)
 
 ## to use INFORM with prospectd
-informpars <-  ccrtm:::defaults.inform5()
-R <- ccrtm:::rtm.inform5(informpars)
+informpars <-  ccrtm:::defaults.informd()
+R <- ccrtm:::rtm.informd(informpars)
 
 
 ```

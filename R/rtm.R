@@ -33,20 +33,20 @@
 #' you would like to couple to generate the output (right hand).
 #'
 #' The following radiative transfer models are currently
-#' implemented 
+#' implemented
 #'
-#' | Formula                                          | Model     |      
-#' | :----------------------------------------------- | :-------: | 
+#' | Formula                                          | Model     |
+#' | :----------------------------------------------- | :-------: |
 #' | rho ~ prospect5                                  | PROSPECT5 |
 #' | rho ~ prospectd                                  | PROSPECTD |
-#' | rho ~ prospectd + foursail                       | 4SAIL     | 
+#' | rho ~ prospectd + foursail                       | 4SAIL     |
 #' | rho ~ prospectd + foursail2                      | 4SAIL2    |
 #' | rho ~ prospectd + foursail2b                     | 4SAIL2b   |
 #' | rho ~ prospectd + foursail + flim                | INFORM    |
 #' | rho ~ prospectd + foursail2 + flim               | 4SAIL2    |
 #' | rho ~ prospectd + foursail2b + flim              | 4SAIL2b   |
 #' | rho ~ prospectd + prospect5 + foursail2b + flim  | 4SAIL2b   |
-#' 
+#'
 #' In the examples with additive components above, prospectd can
 #' be replaced with prospect5 if so desired. In the final line
 #' 4SAIL2b is implemented with a different leaf model for
@@ -59,8 +59,8 @@
 #' Tranmission can also be returned if specified in
 #' the left-hand component of the formula:
 #'
-#' | Formula                             | Model     |      
-#' | :---------------------------------  | :-------: | 
+#' | Formula                             | Model     |
+#' | :---------------------------------  | :-------: |
 #' | rho + tau ~ prospect5               | PROSPECT5 |
 #' | rho + tau ~ prospectd + foursail    | 4SAIL     |
 #'
