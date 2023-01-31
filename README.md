@@ -61,7 +61,7 @@ install_github("MarcoDVisser/ccrtm")
 ```
 ### Dependencies
 
-ccrtm depends on the pracma and expint packages (for now). 
+ccrtm depends on the Rcpp, pracma and expint packages (for now).  
 
 ## Examples
 
@@ -127,13 +127,20 @@ Wavelength range  400-2500 (nm)
 ```
 
 ## INFORM
-The functions are not exported yet as this code is untested - and no code has been made publically available by the authors of INFORM
-to test this against (in contrast to all other RTMS here). Therefore, inform remains lower-level for now.  
+The functions are not exported yet as this code remain untested formally - although it appears to behave well. The best "formal test" is to test againts original (often fortran) code. For INFORM this isn't possible mostly because no code is publically available to test against as far as I am aware of (i.e. made available by the authors of INFORM) . Therefore, inform remains lower-level for now (not exported by defualt).  You can however use INFORM if you wish simply by doing:   
 
 ```r
 require(ccrtm)
+
+## to use INFORM with prospect5
 informpars <-  ccrtm:::defaults.inform5()
 R <- ccrtm:::rtm.inform5(informpars)
+
+## to use INFORM with prospectd
+informpars <-  ccrtm:::defaults.inform5()
+R <- ccrtm:::rtm.inform5(informpars)
+
+
 ```
 
 ## to do list
@@ -160,8 +167,4 @@ Their comments helped improve documentation and remove bugs.
 0.2.0 Start of major overhual of fRTM using model aliases, and inclusion of lower-level implementation of INFORM
 0.3.2 Ongoing of major overhual now including a 2x faster full vectorized prospect (takes matrix of parameters)
 0.3.3 expected: working aliases, inform and vectorized prospect 
-
-
-
-
 
