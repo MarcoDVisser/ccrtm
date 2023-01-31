@@ -1,4 +1,4 @@
-## ccrtm: Coupled Chain Radiative Transfer Models (0.2.0)
+## ccrtm: Coupled Chain Radiative Transfer Models (0.3.2)
 
 <!-- badges: start -->
 [![cran version](http://www.r-pkg.org/badges/version/ccrtm)](http://cran.rstudio.com/web/packages/ccrtm)
@@ -13,17 +13,17 @@ radiative transfer models can form a coupled chain, basically models that feed i
 
 The package will slowly be extended as more models are added, and tested, and optimized. Please send requests and bug reports.
 
-Currently the following models are implemented:
-- PROSPECT5
-- PROSPECT5B
-- PROSPECTD
-- 4SAIL
+Currently the following models are implemented from scratch (and refactored in c++):
+- PROSPECT5 
+- PROSPECT5B 
+- PROSPECTD 
+- 4SAIL 
 - 4SAIL2 (leaf angles fixed for each layer; sensu Verhoef and Bach 2007)
 - 4SAIL2B (leaf angles differ for each layer; sensu Zhang et al 2005)
 - FLIM
 - PROSAIL (5/5B/D)
 - PROSAIL2(b) (5/5B/D)
-- INFORM (5/5B/D) - only lower level implementation as of yet
+- INFORM (5/5B/D) - only lower level implementation as of yet (see below)
 
 Implementation planned in the near future:
 - SMAC
@@ -126,6 +126,16 @@ Generating model(s):  prospect5, prospectd, foursail2
 Wavelength range  400-2500 (nm) 
 ```
 
+## INFORM
+The functions are not exported yet as this code is untested - and no code has been made publically available by the authors of INFORM
+to test this against (in contrast to all other RTMS here). Therefore, inform remains lower-level for now.  
+
+```r
+require(ccrtm)
+informpars <-  ccrtm:::defaults.inform5()
+R <- ccrtm:::rtm.inform5(informpars)
+```
+
 ## to do list
 - Add liberty, and procosine
 - Add 2 stream model
@@ -148,7 +158,8 @@ Their comments helped improve documentation and remove bugs.
 0.1.6 CRAN new package review issues fixed.
 0.1.7 fixed bugs identified by Zavud, and improved documentation for leaf angle model
 0.2.0 Start of major overhual of fRTM using model aliases, and inclusion of lower-level implementation of INFORM
-
+0.3.2 Ongoing of major overhual now including a 2x faster full vectorized prospect (takes matrix of parameters)
+0.3.3 expected: working aliases, inform and vectorized prospect 
 
 
 

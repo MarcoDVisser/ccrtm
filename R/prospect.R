@@ -215,7 +215,7 @@ prospectd <- function(param){
 
 
 
-# Low level prospect D implementation
+# Low level prospect 5 implementation
 .prospect5 <- function(param,
                        expected=c("n","cab","car","cbrown","cw","cm")){
  
@@ -317,6 +317,117 @@ prospectd <- function(param){
 
     colnames(rhoTau) <- c("rho", "tau")
     return(rhoTau)
+}
+
+
+
+## Low level vectorized prospect 5 implementation
+## param is expected to be a matrix
+
+.prospect5v <- function(param){
+
+  ## expected parameters and order
+  expected <- c("n","cab","car","cbrown","cw","cm")
+
+  CoefMat <- ccrtm:::data_prospect5 ## get reflective and absorbtion coefficient data
+
+  ## force to all to lowercase
+  colnames(param) <- tolower(colnames(param))
+  colnames(CoefMat) <- tolower(colnames(CoefMat))
+
+
+  ## input paramters
+  l <- CoefMat[,"l"] ## wavelength
+  N <-    matrix(rep(as.numeric(param[,"n"]),length(l)),byrow=FALSE,ncol=length(l)) ## N matrix
+
+  ## prepare matrices
+  Input <- param[,which(colnames(param)!="n")] ## input matrix 
+  Input <- Input[,expected[-1]] ## enforce order
+  k_i_mat <- t(CoefMat[,expected[-1]]) ## absorbtion k_i 
+
+  ## n x k . k x l = n x l
+  kmat <- (Input %*% k_i_mat)/N
+  
+  ##    k[which(k==0)] <- .Machine$double.eps ## precision of zero in R
+  ## using expint::expint_E1 instead of pracma::expint due to performance
+  ## test
+  trans <- (1-kmat)*exp(-kmat)+kmat^2*expint::expint_E1(kmat) ## transmittance
+  
+  ## next run it through the plate model 
+  
+  ## the plate model 
+  ## reflectance and transmittance though interface, one layer and N layers
+  n <- CoefMat[,2] # refractive index
+
+  alpha <- 40
+  t12 <- ccrtm:::ctav(alpha,n) ## Transmission of isotropic light from 40degrees
+  tav90n <- ccrtm:::ctav(90,n)
+  t21 <- tav90n/n^2 ## 90degrees
+  r12 <- 1-t12
+  r21 <- 1-t21
+  x <- t12/tav90n
+  y <- x*(tav90n-1)+1-t12
+
+  pm <-  cplateModel_vectorized(r12,t12,r21,t21, x, y, trans, N[,1])
+
+  rho <- pm[[1]]
+  tau <- pm[[2]]
+
+  return(list(rho=rho,tau=tau))
+
+}
+
+
+## Low level vectorized prospect D implementation
+## param is expected to be a matrix
+.prospectdv <- function(param){
+
+CoefMat <- ccrtm:::data_prospectd ## get reflective and absorbtion coefficient data
+
+## force to all to lowercase
+colnames(param) <- tolower(colnames(param))
+colnames(CoefMat) <- tolower(colnames(CoefMat))
+
+
+## input paramters
+l <- CoefMat[,"l"] ## wavelength
+N <-    matrix(rep(as.numeric(param[,"n"]),length(l)),byrow=FALSE,ncol=length(l)) ## N matrix
+
+## prepare matrices
+Input <- param[,which(colnames(param)!="n")] ## input matrix
+Input <- Input[,c("cab","car","canth","cbrown","cw","cm")] ## enforce order
+k_i_mat <- t(CoefMat[,c("cab","car","canth","cbrown","cw","cm")]) ## absorbtion k_i
+
+## n x k . k x l = n x l
+kmat <- (Input %*% k_i_mat)/N
+
+##    k[which(k==0)] <- .Machine$double.eps ## precision of zero in R
+## using expint::expint_E1 instead of pracma::expint due to performance
+## test
+trans <- (1-kmat)*exp(-kmat)+kmat^2*expint::expint_E1(kmat) ## transmittance
+
+## next run it through the plate model
+
+## the plate model
+## reflectance and transmittance though interface, one layer and N layers
+n <- CoefMat[,2] # refractive index
+
+alpha <- 40
+t12 <- ccrtm:::ctav(alpha,n) ## Transmission of isotropic light from 40degrees
+tav90n <- ccrtm:::ctav(90,n)
+t21 <- tav90n/n^2 ## 90degrees
+r12 <- 1-t12
+r21 <- 1-t21
+x <- t12/tav90n
+y <- x*(tav90n-1)+1-t12
+
+
+pm <-  cplateModel_vectorized(r12,t12,r21,t21, x, y, trans, N[,1])
+
+rho <- pm[[1]]
+tau <- pm[[2]]
+
+  return(list(rho=rho,tau=tau))
 }
 
 
