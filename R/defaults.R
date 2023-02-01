@@ -1,28 +1,23 @@
 #' S3- methods for Generate defaults settings and parameters
-#' for all supported models. 
-#'
-#' @param model a ccrtm formula or character vector of modelnames
-#' @param \\dots not used.
+#' for all supported models. See ?ccrtm for details.
+#' 
+#' @param model a ccrtm formula (rho ~ prospectd) or character vector of modelnames
 #' (e.g. "prospect5")
+#' @param \\dots not used.
+#' 
 #' @return a data.frame with default model parameters
 #' @export
 getDefaults<-function(model=NULL, ...){
 
     rtmModels <- getModels()
 
-    if(class(model)=="formula"){
+  if(class(model)=="formula"){
 
-        ## get order of RTM
-        reqMods <- attr(terms(model),"term.labels")
-
-        ## assert that repeated terms are not lost!
-        test <-unlist(strsplit(as.character(model)[[3]]," \\+ "))
-        if(length(test)>length(reqMods)) reqMods <- test
-        
+    reqMods <- getAlias(model)
 
         ## check models
         if(any(!reqMods%in%rtmModels$model)){
-            
+
             stop(reqMods[!reqMods%in%rtmModels$model],
                  " not implemented")
         }
@@ -30,23 +25,23 @@ getDefaults<-function(model=NULL, ...){
 
         test <- any(sapply(model,function(X) !X%in%rtmModels$model))
         if(test) stop("model not recognized")
-        
+
         reqMods <- model
         }
-        
+
     def <- vector("list",length(reqMods))
-    
+
     for(i in seq_len(length(reqMods))){
-        
+
         mod <- reqMods[i]
         class(mod) <- reqMods[i]
         def[[i]] <- defaults(mod)
     }
-    
+
     names(def) <- reqMods
     if(length(def)==1) return(def[[1]])
-    
-    return(def)     
+
+    return(def)
 }
 
 ## defualts function
@@ -74,16 +69,16 @@ defaults.prospect5<-function(x,simple=TRUE){
     names(alpha)<-c("N", "Cab","Car", "Cw", "Cm", "Cbrown")
 
     if(simple){
-        
-        return(typical)
-    
+         
+      return(list("prospect5"=typical))
+   
     } else {
         
     def = data.frame(best = typical)
     def$lower = alpha
     def$upper = omega
     
-    return(def)
+    return(list("prospect5"=def))
     }
 }
 
@@ -111,15 +106,15 @@ defaults.prospectd<-function(x,simple=TRUE){
 
     if(simple){
         
-        return(typical)
+      return(list("prospectd"=typical))
     
     } else {
 
         def = data.frame(best = typical)
         def$lower = alpha
         def$upper = omega
-        
-        return(def)
+
+      return(list("prospectd"=def))
     }
 }
 
@@ -160,15 +155,16 @@ defaults.foursail<-function(x,simple=TRUE){
 
     if(simple){
         
-        return(typical)
+      return(list("foursail"=typical))
     
     } else {
     
     def = data.frame(best = typical)
     def$lower = alpha
     def$upper = omega
-    
-    return(def)
+
+  return(list("foursail"=def))
+      
     }
 }   
 
@@ -219,8 +215,8 @@ defaults.foursail2<-function(x,simple=TRUE){
 
     if(simple){
         
-        return(typical)
-    
+      return(list("foursail2"=typical))
+
     } else {
     
         def = data.frame(best = typical)
@@ -228,8 +224,7 @@ defaults.foursail2<-function(x,simple=TRUE){
         def$upper = omega
         
         
-        
-        return(def)
+      return(list("foursail2"=def))
     }
     
 }
@@ -282,7 +277,7 @@ defaults.foursail2b<-function(x,simple=TRUE){
 
     if(simple){
         
-        return(typical)
+      return(list("foursail2b"=typical))
         
     } else {
         
@@ -290,7 +285,7 @@ defaults.foursail2b<-function(x,simple=TRUE){
         def$lower = alpha
         def$upper = omega
         
-        return(def)
+        return("foursail2b"=def)
     }
 }
 
@@ -306,15 +301,16 @@ defaults.skyl<-function(x,simple=TRUE){
 
     if(simple){
         
-        return(typical)
-        
+      return(list("skyl"=typical))
+       
     } else {
         
         def = data.frame(best = typical)
         def$lower = alpha
         def$upper = omega
-        
-        return(def)
+
+    return(list("skyl"=def))
+
     }
 }
 
@@ -340,7 +336,7 @@ defaults.flim<-function(x,simple=TRUE){
 
     if(simple){
         
-        return(typical)
+      return(list("flim"=typical))
         
     } else {
     
@@ -348,7 +344,7 @@ defaults.flim<-function(x,simple=TRUE){
         def$lower = alpha
         def$upper = omega
         
-        return(def)
+      return(list("flim"=def))
         
     }
 }
@@ -358,10 +354,10 @@ defaults.flim<-function(x,simple=TRUE){
 defaults.inform5<-function(x,simple=TRUE){
 
     ## make parameter list
-    leafpars <- getDefaults("prospect5",simple)
-    canopypars <- getDefaults("foursail",simple)
-    flimpars <- getDefaults("flim",simple)
-    skylpars <- getDefaults("skyl",simple)
+    leafpars <- getDefaults("prospect5",simple)[[1]]
+    canopypars <- getDefaults("foursail",simple)[[1]]
+    flimpars <- getDefaults("flim",simple)[[1]]
+    skylpars <- getDefaults("skyl",simple)[[1]]
 
     def <- list("prospect5"=list("canopy"=leafpars,
                                  "understorey"=leafpars),
@@ -379,10 +375,10 @@ defaults.inform5<-function(x,simple=TRUE){
 defaults.informd<-function(x,simple=TRUE){
 
     ## make parameter list
-    leafpars <- getDefaults("prospectd",simple)
-    canopypars <- getDefaults("foursail",simple)
-    flimpars <- getDefaults("flim",simple)
-    skylpars <- getDefaults("skyl",simple)
+    leafpars <- getDefaults("prospectd",simple)[[1]]
+    canopypars <- getDefaults("foursail",simple)[[1]]
+    flimpars <- getDefaults("flim",simple)[[1]]
+    skylpars <- getDefaults("skyl",simple)[[1]]
 
     def <- list("prospectd"=list("canopy"=leafpars,
                                  "understorey"=leafpars),
@@ -391,6 +387,166 @@ defaults.informd<-function(x,simple=TRUE){
                 "flim"=flimpars,
                 "skyl"=skylpars
                 )
-                
     return(def)
 }
+
+
+## Generate default values for the prosail5 model
+defaults.prosail5<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafpars <- getDefaults("prospect5",simple)[[1]]
+  canopypars <- getDefaults("foursail",simple)[[1]]
+
+  def <- list("prospect5"=leafpars,
+              "foursail"=canopypars
+              )
+
+  return(def)
+}
+
+## Generate default values for the prosaild model
+defaults.prosaild<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafpars <- getDefaults("prospectd",simple)[[1]]
+  canopypars <- getDefaults("foursail",simple)[[1]]
+
+  def <- list("prospectd"=leafpars,
+              "foursail"=canopypars
+              )
+
+  return(def)
+}
+
+## Generate default values for the prosail5 model
+defaults.prosail2_55<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospect5",simple)[[1]]
+  leafparsb <- getDefaults("prospect5",simple)[[1]]
+  canopypars <- getDefaults("foursail2",simple)[[1]]
+
+  def <- list("prospect5.a"=leafparsa,
+              "prospect5.b"=leafparsb,
+              "foursail2"=canopypars
+              )
+
+  return(def)
+}
+
+## Generate default values for the prosail5 model
+defaults.prosail2_dd<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospectd",simple)[[1]]
+  leafparsb <- getDefaults("prospectd",simple)[[1]]
+  canopypars <- getDefaults("foursail2",simple)[[1]]
+
+  def <- list("prospectd.a"=leafparsa,
+              "prospectd.b"=leafparsb,
+              "foursail2"=canopypars
+              )
+
+  return(def)
+}
+
+
+## Generate default values for the prosail5 model
+defaults.prosail2_5d<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospect5",simple)[[1]]
+  leafparsb <- getDefaults("prospectd",simple)[[1]]
+  canopypars <- getDefaults("foursail2",simple)[[1]]
+
+  def <- list("prospect5"=leafparsa,
+              "prospectd"=leafparsb,
+              "foursail2"=canopypars
+              )
+
+  return(def)
+}
+
+## Generate default values for the prosail5 model
+defaults.prosail2_d5<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospectd",simple)[[1]]
+  leafparsb <- getDefaults("prospect5",simple)[[1]]
+  canopypars <- getDefaults("foursail2",simple)[[1]]
+
+  def <- list("prospectd"=leafparsa,
+              "prospect5"=leafparsb,
+              "foursail2"=canopypars
+              )
+
+  return(def)
+}
+
+## Generate default values for the prosail5 model
+defaults.prosail2b_55<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospect5",simple)[[1]]
+  leafparsb <- getDefaults("prospect5",simple)[[1]]
+  canopypars <- getDefaults("foursail2b",simple)[[1]]
+
+  def <- list("prospect5.a"=leafparsa,
+              "prospect5.b"=leafparsb,
+              "foursail2b"=canopypars
+              )
+
+  return(def)
+}
+
+## Generate default values for the prosail5 model
+defaults.prosail2b_dd<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospectd",simple)[[1]]
+  leafparsb <- getDefaults("prospectd",simple)[[1]]
+  canopypars <- getDefaults("foursail2b",simple)[[1]]
+
+  def <- list("prospectd.a"=leafparsa,
+              "prospectd.b"=leafparsb,
+              "foursail2b"=canopypars
+              )
+
+  return(def)
+}
+
+
+## Generate default values for the prosail5 model
+defaults.prosail2b_5d<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospect5",simple)[[1]]
+  leafparsb <- getDefaults("prospectd",simple)[[1]]
+  canopypars <- getDefaults("foursail2b",simple)[[1]]
+
+  def <- list("prospect5"=leafparsa,
+              "prospectd"=leafparsb,
+              "foursail2b"=canopypars
+              )
+
+  return(def)
+}
+
+## Generate default values for the prosail5 model
+defaults.prosail2b_d5<-function(x,simple=TRUE){
+
+  ## make parameter list
+  leafparsa <- getDefaults("prospectd",simple)[[1]]
+  leafparsb <- getDefaults("prospect5",simple)[[1]]
+  canopypars <- getDefaults("foursail2b",simple)[[1]]
+
+  def <- list("prospectd"=leafparsa,
+              "prospect5"=leafparsb,
+              "foursail2b"=canopypars
+              )
+
+  return(def)
+}
+
+

@@ -16,9 +16,9 @@
 #' prospect, libery or procosine for the reflectance
 #' and transmittance of the particles, and with the the foursail
 #' or Hapke elements for the background reflectance.
-#' If run alone, these require direct inputs which could be 
-#' measured leaf reflectance. 
-#' 
+#' If run alone, these require direct inputs which could be
+#' measured leaf reflectance.
+#'
 #' @param rhoA primary particle reflectance from 400-2500nm (can be measured or modeled)
 #' @param tauA primary particle transmittance from 400-2500nm (can be measured or modeled)
 #' @param rhoB secondary particle reflectance from 400-2500nm (can be measured or modeled)
@@ -35,7 +35,7 @@
 #'  \itemize{
 #' \item [1] = Leaf angle distribution function parameter a (LIDFa)
 #' \item [2] = Leaf angle distribution function parameter b (LIDFb)
-#' \item [3] = Leaf angle distribution function type (TypeLidf, see ?lidfFun)
+#' \item [3] = Leaf angle distribution function type (TypeLidf, see ?lidf)
 #' \item [4] = Total Leaf Area Index (LAI), including primary and secondary 
 #' particles (brown and green leafs).
 #' \item [5] = fraction secondary particles ("brown leaf fraction", fb)
@@ -374,10 +374,10 @@ HotSpot2 <- function(lai,lai1,fbu,q,tss,ks,ko,dso){
             x1     <- x2
             y1     <- y2
             f1     <- f2
-           
+
         }
 
-        
+
         tsstoo <- f1
     }
 

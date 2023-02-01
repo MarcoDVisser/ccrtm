@@ -1,6 +1,6 @@
-#' Leaf inclination distribution models
-#' s3 method for calling leaf models
-#' @param pars a parameter vector with a class 
+#' Leaf inclination distribution function models
+#' s3 method for calling leaf models.
+#' @param pars a parameter vector c(angles, LIDFa, LIDFb) with a class
 #' lidf.[modelnumber]. Models include:
 #'  \itemize{
 #' \item [1] = Dlagden distribution (1, lidf.1)
@@ -8,9 +8,36 @@
 #' \item [3] = Beta distribution (3, lidf.3)
 #' \item [4] = One parameter beta distribution (4, lidf.4)
 #' }
-#'  Models 1 and 2 are the standard models from the SAIL model
-#' @return a vector of proportions for each leaf angle calculated 
-#' from each leaf inclination model  
+#'  Models 1 and 2 are the standard models from the SAIL model.
+#' Two parameter models use parameters LIDFa and LIDFb, while
+#' single parameter models use only LIDFa (ignoring any supplied LIDFb).
+#'
+#' More information on the Dlagden and Ellipsoid parameter is
+#' given in Verhoef, W. (1998),theory of radiative transfer models applied
+#' in optical remote sensing of vegetation canopies (PhD thesis).
+#'
+#' The beta distribution is the typical beta distribution as often implemented
+#' (as in dbeta(x,LIDFa, LIDFb)). Where x is a value between 0 and 90,
+#' that gives the angular density over 0 and 90 degrees (rescaled to 0 and 1).
+#' 
+#' The one parameter beta distribution is given by LIDFa*x^(LIDFa-1).
+#' Where x is a value between 0 and 90, that given the angular density
+#' over 0 and 90 degrees (rescaled to 0 and 1).
+#'
+#' @example
+#' ## This function is meant for internal use with in cctrm functions
+#' ## the example is to provide understanding for the internal working
+#' ## only and is not meant to be functional.
+#' x<-c(13,1,2)
+#' names(x) <- c("na","a","b") ## number of angles,  lidfa, lidfb
+#' ccrtm:::lidf.lidf.1(x) ## Dlagden
+#' ccrtm:::lidf.lidf.2(x) ## Cambell
+#' ccrtm:::lidf.lidf.3(x) ## Beta
+#' ccrtm:::lidf.lidf.4(x) ## One par beter 
+#' 
+#'
+#' @return a vector of proportions for each leaf angle calculated
+#' from each leaf inclination model.
 #' @export
 lidf <- function(pars) {
     
@@ -20,13 +47,13 @@ lidf <- function(pars) {
 } # LIDF_fun
 
 ################################################################################
-##                          Campbell                            
-##     
-##    Computation of the leaf angle distribution function value (freq) 
-##    Ellipsoidal distribution function caracterised by the average leaf 
-##    inclination angle in degree (ala)                                     
-##    Campbell 1986                                                      
-##                                                                              
+##                          Campbell
+##
+##    Computation of the leaf angle distribution function value (freq)
+##    Ellipsoidal distribution function caracterised by the average leaf
+##    inclination angle in degree (ala)
+##    Campbell 1986
+##
 ################################################################################
 ##  old pure R version kept here for testing 
 r_lidf.lidf.2 <- function(param){
@@ -76,13 +103,13 @@ r_lidf.lidf.2 <- function(param){
 } #campbell
 
 ################################################################################
-##                          Campbell                            
-##     
-##    Computation of the leaf angle distribution function value (freq) 
-##    Ellipsoidal distribution function caracterised by the average leaf 
-##    inclination angle in degree (ala)                                     
-##    Campbell 1986                                                      
-##                                                                              
+##                          Campbell
+##
+##    Computation of the leaf angle distribution function value (freq)
+##    Ellipsoidal distribution function caracterised by the average leaf
+##    inclination angle in degree (ala)
+##    Campbell 1986
+##
 ################################################################################
 lidf.lidf.2 <- function(param){
 
@@ -180,8 +207,8 @@ dcum <- function(a,b,t){
 lidf.lidf.3 <- function(param){
 
     na <- param[1]
-    a <- param[2] * param[3]
-    b <- (1-param[2]) * param[3]
+    a <- param[2] 
+    b <- param[3]
     
     freq <- numeric(na)
 

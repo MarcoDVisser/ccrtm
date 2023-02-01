@@ -33,7 +33,7 @@
 #'  \itemize{
 #' \item [1] = Leaf angle distribution function parameter a (LIDFa)
 #' \item [2] = Leaf angle distribution function parameter b (LIDFb)
-#' \item [3] = Leaf angle distribution function type (TypeLidf, see ?lidfFun)
+#' \item [3] = Leaf angle distribution function type (TypeLidf, see ?lidf)
 #' \item [4] = Total Leaf Area Index (LAI), including primary and secondary 
 #' particles (brown and green leafs).
 #' \item [5] = fraction secondary particles ("brown leaf fraction", fb)

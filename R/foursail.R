@@ -1,11 +1,11 @@
 #' Optimized R implementation of foursail (4SAIL) 
 #'
-#' The foursail (or 4SAIL) radiative transfer model is commonly used to simulate bidirectional 
-#' reflectance distribution functions within vegetation canopies. Foursail (4SAIL) refers 
-#' to "Scattering by Arbitrary Inclined Leaves" in a 4-stream model. The four-streams represents 
-#' the scattering and absorption of upward, downward and two directional radiative fluxes with 
+#' The foursail (or 4SAIL) radiative transfer model is commonly used to simulate bidirectional
+#' reflectance distribution functions within vegetation canopies. Foursail (4SAIL) refers
+#' to "Scattering by Arbitrary Inclined Leaves" in a 4-stream model. The four-streams represents
+#' the scattering and absorption of upward, downward and two directional radiative fluxes with
 #' four linear differential equations in a 1-D canopy. The model was initially developed by
-#' Verhoef (1984), who extended work by Suits (1971) 4-steam model.  
+#' Verhoef (1984), who extended work by Suits (1971) 4-steam model. 
 #' 
 #' @param rho input leaf reflectance from 400-2500nm (can be measured or modeled)
 #' @param tau input leaf transmittance from 400-2500nm (can be measured or modeled)
@@ -15,7 +15,7 @@
 #'  \itemize{
 #' \item [1] = Leaf angle distribution function parameter a (LIDFa)
 #' \item [2] = Leaf angle distribution function parameter b (LIDFb)
-#' \item [3] = Leaf angle distribution function type (see ?lidfFun)
+#' \item [3] = Leaf angle distribution function type (see ?lidf)
 #' \item [4] = Leaf area index (LAI)
 #' \item [5] = Hot spot effect parameter (hspot)
 #' \item [6] = Solar zenith angle (tts)
@@ -46,7 +46,11 @@
 #' ## e.g. fRTM(rho~prospectd+foursail) 
 #'
 #' ## 1) get parameters
-#' typicalpars<-getDefaults("foursail") 
+#' params<-getDefaults(rho~prospectd+foursail) 
+#' ## getDefaults("foursail") will also work
+#' bestpars<-params$foursail$best
+#' ## ensure the vector is named
+#' names(bestpars) <- rownames(params$foursail)
 #' 
 #' ## 2) get leaf reflectance and transmission 
 #' rt<-fRTM(rho+tau~prospectd)
@@ -55,10 +59,10 @@
 #' data(soil)
 #' 
 #' ## a linear mixture soil model 
-#' bgRef<- typicalpars["psoil"]*soil[,"drySoil"] + (1-typicalpars["psoil"])*soil[,"wetSoil"]
+#' bgRef<- bestpars["psoil"]*soil[,"drySoil"] + (1-bestpars["psoil"])*soil[,"wetSoil"]
 #' 
 #' ## 4) run 4SAIL
-#' foursail(rt[,"rho"],rt[,"tau"],bgRef,typicalpars)
+#' foursail(rt[,"rho"],rt[,"tau"],bgRef,bestpars)
 #' 
 #' @references Suits, G.H., 1971. The calculation of the directional reflectance of a 
 #'  vegetative canopy. Remote Sens. Environ. 2, 117-125.

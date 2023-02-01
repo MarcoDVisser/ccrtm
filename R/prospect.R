@@ -360,8 +360,8 @@ prospectd <- function(param){
   n <- CoefMat[,2] # refractive index
 
   alpha <- 40
-  t12 <- ccrtm:::ctav(alpha,n) ## Transmission of isotropic light from 40degrees
-  tav90n <- ccrtm:::ctav(90,n)
+  t12 <- ctav(alpha,n) ## Transmission of isotropic light from 40degrees
+  tav90n <- ctav(90,n)
   t21 <- tav90n/n^2 ## 90degrees
   r12 <- 1-t12
   r21 <- 1-t21
@@ -413,8 +413,8 @@ trans <- (1-kmat)*exp(-kmat)+kmat^2*expint::expint_E1(kmat) ## transmittance
 n <- CoefMat[,2] # refractive index
 
 alpha <- 40
-t12 <- ccrtm:::ctav(alpha,n) ## Transmission of isotropic light from 40degrees
-tav90n <- ccrtm:::ctav(90,n)
+t12 <- ctav(alpha,n) ## Transmission of isotropic light from 40degrees
+tav90n <- ctav(90,n)
 t21 <- tav90n/n^2 ## 90degrees
 r12 <- 1-t12
 r21 <- 1-t21
