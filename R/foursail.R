@@ -46,24 +46,26 @@
 #' ## e.g. fRTM(rho~prospectd+foursail) 
 #'
 #' ## 1) get parameters
-#' params<-getDefaults("foursail") 
-#' ##  will also work
+#' params<-getDefaults("foursail")
+#'
+#' ##  getDefaults(rho~prospectd+foursail) will also work
 #' pars<-params$foursail
+#'
 #' ## ensure the vector is named
-#' pars <- names(params$foursail)
-#' 
+#' names(pars) <- names(params$foursail)
+#'
 #' ## 2) get leaf reflectance and transmission 
 #' rt<-fRTM(rho+tau~prospectd)
 #'
 #' ## 3) get soil reflectance to model background reflectance
 #' data(soil)
-#' 
+#'
 #' ## a linear mixture soil model 
 #' bgRef<- pars["psoil"]*soil[,"drySoil"] + (1-pars["psoil"])*soil[,"wetSoil"]
 #' 
 #' ## 4) run 4SAIL
 #' foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
-#' 
+#'
 #' @references Suits, G.H., 1971. The calculation of the directional reflectance of a 
 #'  vegetative canopy. Remote Sens. Environ. 2, 117-125.
 #' @references Verhoef, W. (1984). Light scattering by leaf layers with application to 

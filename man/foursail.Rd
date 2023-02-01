@@ -58,11 +58,13 @@ Verhoef (1984), who extended work by Suits (1971) 4-steam model.
 ## e.g. fRTM(rho~prospectd+foursail) 
 
 ## 1) get parameters
-params<-getDefaults(rho~prospectd+foursail) 
-## getDefaults("foursail") will also work
+params<-getDefaults("foursail")
+
+##  getDefaults(rho~prospectd+foursail) will also work
 pars<-params$foursail
+
 ## ensure the vector is named
-pars <- names(params$foursail)
+names(pars) <- names(params$foursail)
 
 ## 2) get leaf reflectance and transmission 
 rt<-fRTM(rho+tau~prospectd)
