@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // cdcum
 NumericVector cdcum(double a, double b, NumericVector theta);
 RcppExport SEXP _ccrtm_cdcum(SEXP aSEXP, SEXP bSEXP, SEXP thetaSEXP) {
@@ -46,6 +51,24 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type trans(transSEXP);
     Rcpp::traits::input_parameter< double >::type N(NSEXP);
     rcpp_result_gen = Rcpp::wrap(cplateModel(r12, t12, r21, t21, x, y, trans, N));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cplateModel_vectorized
+List cplateModel_vectorized(NumericVector r12, NumericVector t12, NumericVector r21, NumericVector t21, NumericVector x, NumericVector y, NumericMatrix trans, NumericVector N);
+RcppExport SEXP _ccrtm_cplateModel_vectorized(SEXP r12SEXP, SEXP t12SEXP, SEXP r21SEXP, SEXP t21SEXP, SEXP xSEXP, SEXP ySEXP, SEXP transSEXP, SEXP NSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type r12(r12SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t12(t12SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type r21(r21SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type t21(t21SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type trans(transSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type N(NSEXP);
+    rcpp_result_gen = Rcpp::wrap(cplateModel_vectorized(r12, t12, r21, t21, x, y, trans, N));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -149,6 +172,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ccrtm_cdcum", (DL_FUNC) &_ccrtm_cdcum, 3},
     {"_ccrtm_cambell", (DL_FUNC) &_ccrtm_cambell, 3},
     {"_ccrtm_cplateModel", (DL_FUNC) &_ccrtm_cplateModel, 8},
+    {"_ccrtm_cplateModel_vectorized", (DL_FUNC) &_ccrtm_cplateModel_vectorized, 8},
     {"_ccrtm_ctav", (DL_FUNC) &_ccrtm_ctav, 2},
     {"_ccrtm_cJfunc1", (DL_FUNC) &_ccrtm_cJfunc1, 3},
     {"_ccrtm_cJfunc2or3", (DL_FUNC) &_ccrtm_cJfunc2or3, 3},

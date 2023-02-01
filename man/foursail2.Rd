@@ -42,7 +42,7 @@ program ignores case):
 \itemize{
 \item \link{1} = Leaf angle distribution function parameter a (LIDFa)
 \item \link{2} = Leaf angle distribution function parameter b (LIDFb)
-\item \link{3} = Leaf angle distribution function type (TypeLidf, see ?lidfFun)
+\item \link{3} = Leaf angle distribution function type (TypeLidf, see ?lidf)
 \item \link{4} = Total Leaf Area Index (LAI), including primary and secondary
 particles (brown and green leafs).
 \item \link{5} = fraction secondary particles ("brown leaf fraction", fb)

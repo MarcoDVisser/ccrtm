@@ -41,7 +41,7 @@ defaultpars<-getDefaults(rho~prospectd)
 ## getDefaults("prospectd") will also work
 
 ## 2) get leaf reflectance and transmission 
-rt<-fRTM(rho+tau~prospect5,defaultpars)
+rt<-fRTM(rho+tau~prospectd,defaultpars)
 
 ## lower-level implementation example
 ## Alternatively implement directly (case ignored for parameters)

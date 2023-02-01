@@ -22,16 +22,21 @@ solar incident flux}
 
 \item{tts}{solar angle}
 
-\item{skyl}{diffuse fraction}
+\item{skyl}{diffuse fraction, if NULL skyl is estimated using the
+tts (solar angle).}
 }
 \value{
 a list with hemispherical and directional reflectance.
 }
 \description{
-Simple atmospherical model that builds on recommendations
-from Francois et al. (2002).
+Simple skyl atmospheric model.
+}
+\details{
+The version implemented here can also include a dependence of the sun zenith angle
+after Danner et al. (2019) who build on recommendations from Francois et al. (2002).
 }
 \examples{
+
 data(solar)
 rt<-fRTM(rho~prospect5+foursail)
 skyl(rt[,"rddt"],rt[,"rsdt"],rt[,"rdot"],rt[,"rsot"],
@@ -43,4 +48,9 @@ Francois, C., Ottle, C., Olioso, A., Prevot, L., Bruguier, N.,
 Ducros, Y.(2002). Conversion of 400-1100 nm vegetation albedo measurements
 into total shortwave broadband albedo using a canopy radiative transfer model.
 Agronomie 22, 611-618.
+
+Danner M, Berger K, Wocher M, Mauser W, Hank T.
+Fitted PROSAIL Parameterization of Leaf Inclinations, Water Content
+and Brown Pigment Content for Winter Wheat and Maize Canopies.
+Remote Sensing. 2019; 11(10):1150.
 }

@@ -32,6 +32,10 @@ cplateModel <- function(r12, t12, r21, t21, x, y, trans, N) {
     .Call('_ccrtm_cplateModel', PACKAGE = 'ccrtm', r12, t12, r21, t21, x, y, trans, N)
 }
 
+cplateModel_vectorized <- function(r12, t12, r21, t21, x, y, trans, N) {
+    .Call('_ccrtm_cplateModel_vectorized', PACKAGE = 'ccrtm', r12, t12, r21, t21, x, y, trans, N)
+}
+
 ctav <- function(theta, n) {
     .Call('_ccrtm_ctav', PACKAGE = 'ccrtm', theta, n)
 }

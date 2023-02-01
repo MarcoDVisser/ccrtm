@@ -3,20 +3,20 @@
 \name{getDefaults}
 \alias{getDefaults}
 \title{S3- methods for Generate defaults settings and parameters
-for all supported models.}
+for all supported models. See ?ccrtm for details.}
 \usage{
 getDefaults(model = NULL, ...)
 }
 \arguments{
-\item{model}{a ccrtm formula or character vector of modelnames}
-
-\item{\\dots}{not used.
+\item{model}{a ccrtm formula (rho ~ prospectd) or character vector of modelnames
 (e.g. "prospect5")}
+
+\item{\\dots}{not used.}
 }
 \value{
 a data.frame with default model parameters
 }
 \description{
 S3- methods for Generate defaults settings and parameters
-for all supported models.
+for all supported models. See ?ccrtm for details.
 }

@@ -46,8 +46,8 @@
 #' ## e.g. fRTM(rho~prospectd+foursail) 
 #'
 #' ## 1) get parameters
-#' params<-getDefaults(rho~prospectd+foursail) 
-#' ## getDefaults("foursail") will also work
+#' params<-getDefaults("foursail") 
+#' ##  will also work
 #' pars<-params$foursail
 #' ## ensure the vector is named
 #' pars <- names(params$foursail)

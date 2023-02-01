@@ -18,7 +18,7 @@ soil reflectance spectra from 400-2500nm (can be measured or modeled)}
 \itemize{
 \item \link{1} = Leaf angle distribution function parameter a (LIDFa)
 \item \link{2} = Leaf angle distribution function parameter b (LIDFb)
-\item \link{3} = Leaf angle distribution function type (see ?lidfFun)
+\item \link{3} = Leaf angle distribution function type (see ?lidf)
 \item \link{4} = Leaf area index (LAI)
 \item \link{5} = Hot spot effect parameter (hspot)
 \item \link{6} = Solar zenith angle (tts)
@@ -58,7 +58,11 @@ Verhoef (1984), who extended work by Suits (1971) 4-steam model.
 ## e.g. fRTM(rho~prospectd+foursail) 
 
 ## 1) get parameters
-typicalpars<-getDefaults("foursail") 
+params<-getDefaults(rho~prospectd+foursail) 
+## getDefaults("foursail") will also work
+pars<-params$foursail
+## ensure the vector is named
+pars <- names(params$foursail)
 
 ## 2) get leaf reflectance and transmission 
 rt<-fRTM(rho+tau~prospectd)
@@ -67,10 +71,10 @@ rt<-fRTM(rho+tau~prospectd)
 data(soil)
 
 ## a linear mixture soil model 
-bgRef<- typicalpars["psoil"]*soil[,"drySoil"] + (1-typicalpars["psoil"])*soil[,"wetSoil"]
+bgRef<- pars["psoil"]*soil[,"drySoil"] + (1-pars["psoil"])*soil[,"wetSoil"]
 
 ## 4) run 4SAIL
-foursail(rt[,"rho"],rt[,"tau"],bgRef,typicalpars)
+foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
 
 }
 \references{

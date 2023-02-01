@@ -12,8 +12,9 @@ fRTM(fm = rho + tau ~ prospect5 + foursail, pars = NULL, wl = 400:2500)
 \item{pars}{a list of \emph{named} parameter vectors for all models.
 The parameter list for a model call as rho ~ prospect + foursail
 therefore contains two named vectors the first with parameters for
-prospect and the second with parameters for foursail
-if left empty default parameters are generated}
+prospect and the second with parameters for foursail.
+See ?getDefaults.
+If left empty default parameters are generated (see).}
 
 \item{wl}{wavelengths (in nm) add only if
 certain wavelengths are required as output.
@@ -34,34 +35,39 @@ In general the form of the formula specifies the
 both the expected output (left hand) and the different models
 you would like to couple to generate the output (right hand).
 
-The following radiative transfer models are currently
+At current the following ratiative transfer models are
 implemented\tabular{lc}{
-   Formula \tab Model \cr
-   rho ~ prospect5 \tab PROSPECT5 \cr
-   rho ~ prospectd \tab PROSPECTD \cr
-   rho ~ prospectd + foursail \tab 4SAIL \cr
-   rho ~ prospectd + foursail2 \tab 4SAIL2 \cr
-   rho ~ prospectd + foursail2b \tab 4SAIL2b \cr
-   rho ~ prospectd + foursail + flim \tab INFORM \cr
-   rho ~ prospectd + foursail2 + flim \tab 4SAIL2 \cr
-   rho ~ prospectd + foursail2b + flim \tab 4SAIL2b \cr
-   rho ~ prospectd + prospect5 + foursail2b + flim \tab 4SAIL2b \cr
+   Example of a formula \tab Model \cr
+   rho ~ prospect5 \tab prospect5 \cr
+   rho ~ prospectd \tab prospectd \cr
+   rho ~ prospect5 + foursail \tab PROSAIL \cr
+   rho ~ prospect5 + foursail \tab PROSAIL \cr
+   rho ~ prospectd + foursail2 \tab PROSAIL \cr
+   rho ~ prospectd + prospect5 + foursail2 \tab PROSAIL2 \cr
+   rho ~ prospectd + foursail2b \tab PROSAIL2b \cr
+   rho ~ prospectd + foursail + flim + sky \tab INFORM* \cr
+   rho ~ prospectd + foursail + flim \tab INFORM* \cr
 }
 
 
-In the examples with additive components above, prospectd can
-be replaced with prospect5 if so desired. In the final line
-4SAIL2b is implemented with a different leaf model for
-the secondary particles (leaves).
+*INFORM is currently restricted to a lower-level function
+only. See the cctrm github readme page on how to use it.
+
+Note that the formula "rho ~ prospectd + foursail2" is the
+same as "rho ~ prospectd + prospectd + foursail2" and
+both expect a names list of 3 parameter vectors.
+
+In the above examples with additive components, prospectd can
+be replaced with prospect5 - or vice versa - if so desired.
 See the help files for details on each right hand component.
-For instance, ?foursail provides more elaboration on
-the 4SAIL model and gives an example for lower-level
-implementations of each component model.
+For instance, ?foursail provides more elaboration on the 4SAIL model
+and gives an example for lower-level implementations of each component
+model.
 
 Tranmission can also be returned if specified in
 the left-hand component of the formula:\tabular{lc}{
    Formula \tab Model \cr
-   rho + tau ~ prospect5 \tab PROSPECT5 \cr
+   rho + tau ~ prospect5 \tab prospect5 \cr
    rho + tau ~ prospectd + foursail \tab 4SAIL \cr
 }
 
@@ -71,30 +77,33 @@ transmission next to reflectance. More specifically, The first
 returns leaf reflectance and transmission while
 the second returns 4 components of canopy reflectance and
 canopy transmission in the solar and viewing direction.
+
+More details are given in ?cctrm.
 }
 \examples{
-## setup graphics for plots 
+## setup graphics for plots
 oldpar<-par()
 par(mfrow=c(3,2))
 
-## get reflectance for a leaf 
+## get reflectance for a leaf
 ref <- fRTM(rho~prospect5)
 plot(ref,main="Prospect 5")
-     
-## get reflectance and transmission for a leaf 
+
+## get reflectance and transmission for a leaf
 reftrans <- fRTM(rho+tau~prospect5)
 plot(reftrans,main="Prospect 5")
-     
-## get reflectance for a single layered canopy 
+
+## get reflectance for a single layered canopy
 ref <- fRTM(rho~prospect5+foursail)
 plot(ref,main="Prospect 5 + 4SAIL")
 
-## get reflectance for a 2 layered canopy with two leaf types 
+## get reflectance for a 2 layered canopy with two leaf types
 ref <- fRTM(rho~prospectd+prospect5+foursail2)
 plot(ref,main="Prospect D + Prospect 5  + 4SAIL2")
 
-## edit the parameters: sparse vegatation LAI 
-parlist<- list(prospect5=NULL,prospectd=NULL,foursail2=c(LAI=0.05))
+## edit the parameters: sparse vegetation LAI
+parlist <- getDefaults(rho~prospectd+prospect5+foursail2)
+parlist$foursail2["LAI"] <- 0.05
 
 ## update reflectance
 ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)

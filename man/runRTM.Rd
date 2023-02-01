@@ -4,16 +4,18 @@
 \alias{runRTM}
 \title{run a requested RTM (internal function)}
 \usage{
-runRTM(modReq)
+runRTM(pars)
 }
 \arguments{
-\item{modReq}{model request object built in fRTM}
+\item{pars}{the required parameters (vector or list)}
 
-\item{\dots}{additional plot arguments}
+\item{modReq}{model request object built in fRTM}
 }
 \value{
 prediction from the requested model
 }
 \description{
-run a requested RTM (internal function)
+List of aliases: prospect5, prospectd, prosail5,
+prosaild, prosail2_55,prosail2_dd, prosail2_5d,
+prosail2_d5, rtm.inform5, rtm.informd
 }

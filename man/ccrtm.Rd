@@ -10,7 +10,7 @@ a coupled chain to model radiative transfer across multiple
 spatial scales from leaf to canopy to stand.
 }
 \details{
-Currently implemented models:
+Currently implemented models that can be coupled:
 
 \itemize{
 
@@ -20,13 +20,92 @@ Currently implemented models:
 
 }
 
-Currently being tested or to be implemented models
+Currently being tested / or to be implemented models
 
 \itemize{
 
 \item \link{1} = LIBERTY, PROCOSINE
 \item \link{2} = INFORM
 
+}
+\subsection{Generating predictions}{
+
+To generate model prediction the typical approach is to use
+the fRTM function and apply a formula that specifies the
+both the expected output (left hand) and the different models
+you would like to couple to generate the output (right hand).
+
+At current the following radiative transfer models,
+and corresponding formula, are given in the next table\tabular{lc}{
+   Example of a formula \tab Model \cr
+   rho ~ prospect5 \tab prospect5 \cr
+   rho ~ prospectd \tab prospectd \cr
+   rho ~ prospect5 + foursail \tab PROSAIL \cr
+   rho ~ prospect5 + foursail \tab PROSAIL \cr
+   rho ~ prospectd + foursail2 \tab PROSAIL \cr
+   rho ~ prospectd + prospect5 + foursail2 \tab PROSAIL2 \cr
+   rho ~ prospectd + foursail2b \tab PROSAIL2b \cr
+   rho ~ prospectd + foursail + flim + sky \tab INFORM* \cr
+   rho ~ prospectd + foursail + flim \tab INFORM* \cr
+}
+
+
+*INFORM is currently restricted to a lower-level function
+only. See the cctrm github readme page on how to use it.
+
+In the above examples, prospectd can be replaced with prospect5
+\itemize{
+\item or vice versa - if so desired.
+}
+
+Also, note that the formula "rho ~ prospectd + foursail2" is the
+same as "rho ~ prospectd + prospectd + foursail2" and
+both expect a names list of 3 parameter vectors.
+
+See the help files for details on each right hand
+component. For instance, ?foursail provides more elaboration
+on the 4SAIL model and gives an example for lower-level
+implementations of each component model. See also ?flim,
+?foursail2, ?foursail2b, ?prospect5, and ?prospectd.
+
+Tranmission can also be returned if specified in
+the left-hand component of the formula:\tabular{lc}{
+   Formula \tab Model \cr
+   rho + tau ~ prospect5 \tab prospect5 \cr
+   rho + tau ~ prospectd + foursail \tab 4SAIL \cr
+}
+
+
+The examples above indicate that the users wishes to predict
+transmission next to reflectance. More specifically, The first
+returns leaf reflectance and transmission while
+the second returns 4 components of canopy reflectance and
+canopy transmission in the solar and viewing direction.
+}
+
+\subsection{PROSAIL and diffuse and direct light}{
+
+In contrast to some FORTRAN and MATLAB implementation,
+the sky light model is not implemented by default in
+ccrtm. This is because it is not a standard component of 4SAIL.
+In addition, this would affect limit the application of other
+more realistic atmospheric models. You can apply it by using ?skyl
+on model output obtained from fRTM (see example in ?skyl).
+The sky light model \emph{is} implemented for the INFORM model as per March 2022.
+}
+
+\subsection{Parameters}{
+
+Parameters are given as input to fRTM as a named list. See ?getDefaults for
+examples on how to structure parameters. Individual models can
+consulted on each parameter (e.g. see ?foursail2b or ?prospect5).
+}
+
+\subsection{Leaf inclination models.}{
+
+Canopy models such as foursail use leaf inclination models.
+In cctrm four inclination models are implemented.
+see ?lidf for more details.
 }
 }
 \author{
