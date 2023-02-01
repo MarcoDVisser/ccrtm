@@ -102,8 +102,9 @@
 #' ref <- fRTM(rho~prospectd+prospect5+foursail2)
 #' plot(ref,main="Prospect D + Prospect 5  + 4SAIL2")
 #'
-#' ## edit the parameters: sparse vegatation LAI 
-#' parlist<- list(prospect5=NULL,prospectd=NULL,foursail2=c(LAI=0.05))
+#' ## edit the parameters: sparse vegetation LAI
+#' parlist <- getDefaults(rho~prospectd+prospect5+foursail2)
+#' parlist$foursail2["LAI"] <- 0.05
 #'
 #' ## update reflectance
 #' ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)

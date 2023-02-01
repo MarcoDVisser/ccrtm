@@ -47,7 +47,6 @@ Implementation planned in the near future:
 A "10 minute" quickstart guide is will be implemented in due time. 
 
 ## Installation
-
 The pacakge is on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/). 
 Newer developmental versions will first be available from github and can be downloaded as [zip](https://github.com/MarcoDVisser/ccrtm/zipball/master) 
 or [tar ball](https://github.com/MarcoDVisser/ccrtm/tarball/master).
@@ -63,13 +62,12 @@ install_github("MarcoDVisser/ccrtm")
 
 ccrtm depends on the Rcpp, pracma and expint packages (for now).  
 
-## Examples
+## Examples (versions > 0.2)
 
 The basic functionality of ccrtm, and the coupled chain nature of the forward modelling components is shown below.
 Backward modelling will be included in later stages.
 
 ```r
-
 require(ccrtm)
 
 ## setup graphics for plots 
@@ -92,7 +90,8 @@ ref <- fRTM(rho~prospectd+prospect5+foursail2)
 plot(ref,main="Prospect D + Prospect 5  + 4SAIL2")
 
 ## edit the parameters: sparse vegatation LAI 
-parlist<- list(prospect5=NULL,prospectd=NULL,foursail2=c(LAI=0.05))
+parlist <- getDefaults(rho~prospectd+prospect5+foursail2)
+parlist$foursail2["LAI"] <- 0.05
 
 ## update reflectance
 ref <- fRTM(rho~prospect5+prospectd+foursail2,parlist)

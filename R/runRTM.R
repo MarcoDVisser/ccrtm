@@ -1,4 +1,4 @@
- #' run a requested RTM (internal function)
+#' run a requested RTM (internal function)
 #' 
 #' List of aliases: prospect5, prospectd, prosail5,
 #' prosaild, prosail2_55,prosail2_dd, prosail2_5d,
