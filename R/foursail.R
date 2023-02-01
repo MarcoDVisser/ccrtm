@@ -59,7 +59,7 @@
 #' data(soil)
 #' 
 #' ## a linear mixture soil model 
-#' bgRef<- bestpars["psoil"]*soil[,"drySoil"] + (1-bestpars["psoil"])*soil[,"wetSoil"]
+#' bgRef<- pars["psoil"]*soil[,"drySoil"] + (1-pars["psoil"])*soil[,"wetSoil"]
 #' 
 #' ## 4) run 4SAIL
 #' foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
