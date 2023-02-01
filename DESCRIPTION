@@ -14,7 +14,7 @@ Imports:
     grDevices,
     stats,
     testthat,
-    Rcpp (>= 1.0.3),
+    Rcpp,
     expint,
     pracma
 LinkingTo: Rcpp

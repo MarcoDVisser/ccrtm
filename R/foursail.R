@@ -43,7 +43,7 @@
 #' @examples
 #' ## lower-level implementation example
 #' ## see ?fRTM for the typical mode of simulation
-#' ## e.g. fRTM(rho~prospectd+foursail) 
+#' ## e.g. fRTM(rho~prospectd+foursail)
 #'
 #' ## 1) get parameters
 #' params<-getDefaults("foursail")
@@ -60,11 +60,12 @@
 #' ## 3) get soil reflectance to model background reflectance
 #' data(soil)
 #'
-#' ## a linear mixture soil model 
+#' ## a linear mixture soil model
 #' bgRef<- pars["psoil"]*soil[,"drySoil"] + (1-pars["psoil"])*soil[,"wetSoil"]
-#' 
+#'
 #' ## 4) run 4SAIL
-#' foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
+#' result<-foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
+#' head(result)
 #'
 #' @references Suits, G.H., 1971. The calculation of the directional reflectance of a 
 #'  vegetative canopy. Remote Sens. Environ. 2, 117-125.
