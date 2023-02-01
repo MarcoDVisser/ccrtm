@@ -48,9 +48,9 @@
 #' ## 1) get parameters
 #' params<-getDefaults(rho~prospectd+foursail) 
 #' ## getDefaults("foursail") will also work
-#' bestpars<-params$foursail$best
+#' pars<-params$foursail
 #' ## ensure the vector is named
-#' names(bestpars) <- rownames(params$foursail)
+#' pars <- names(params$foursail)
 #' 
 #' ## 2) get leaf reflectance and transmission 
 #' rt<-fRTM(rho+tau~prospectd)
@@ -62,7 +62,7 @@
 #' bgRef<- bestpars["psoil"]*soil[,"drySoil"] + (1-bestpars["psoil"])*soil[,"wetSoil"]
 #' 
 #' ## 4) run 4SAIL
-#' foursail(rt[,"rho"],rt[,"tau"],bgRef,bestpars)
+#' foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
 #' 
 #' @references Suits, G.H., 1971. The calculation of the directional reflectance of a 
 #'  vegetative canopy. Remote Sens. Environ. 2, 117-125.
