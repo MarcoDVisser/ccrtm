@@ -63,6 +63,7 @@
 #' ## a linear mixture soil model
 #' bgRef<- pars["psoil"]*soil[,"drySoil"] + (1-pars["psoil"])*soil[,"wetSoil"]
 #'
+#' 
 #' ## 4) run 4SAIL
 #' result<-foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
 #' head(result)

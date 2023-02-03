@@ -2,11 +2,11 @@
 #'
 #' The PROSPECT5(b) leaf reflectance model. The model was implemented based on
 #' Jacquemoud and Ustin (2019), and is further described in detail in Feret et al (2008).
-#' PROSPECT models use the plate models developed in 
+#' PROSPECT models use the plate models developed in
 #' Allen (1969) and Stokes (1862). Set Cbrown to 0 for prospect version 5.
-#' 
+#'
 #' @param param A named vector of PROSPECT parameters (note: program ignores case):
-#' 
+#'
 #'  \itemize{
 #' \item [1] = leaf structure parameter (N)
 #' \item [2] = chlorophyll a+b content in ug/cm2 (Cab)
@@ -15,8 +15,8 @@
 #' \item [5] = equivalent water thickness in g/cm2  (Cw)
 #' \item [6] = leaf dry matter content in g/cm2 - lma - (Cm)
 #' }
-#' 
-#' @return spectra matrix with leaf reflectance and transmission 
+#'
+#' @return spectra matrix with leaf reflectance and transmission
 #' for wavelengths 400 to 2500nm:
 #'  \itemize{
 #' \item [1] = leaf reflectance (rho)
@@ -27,26 +27,26 @@
 #'
 #' @examples
 #' ## see ?fRTM for the typical mode of simulation
-#' ## e.g. fRTM(rho~prospect5) 
+#' ## e.g. fRTM(rho~prospect5)
 #'
 #' ## 1) get parameters
-#' defaultpars<-getDefaults(rho~prospect5) 
+#' defaultpars<-getDefaults(rho~prospect5)
 #' ## getDefaults("prospect5") will also work
-#' 
-#' ## 2) get leaf reflectance and transmission 
+#'
+#' ## 2) get leaf reflectance and transmission
 #' rt<-fRTM(rho+tau~prospect5,defaultpars)
 #'
 #' ## lower-level implementation example
 #' ## Alternatively implement directly
 #' mypars<-c("N"=1,"Cab"=35,"Car"=20,"Cbrown"=3,"Cw"=0.01,"Cm"=0.01)
 #' prospect5(mypars)
-#' 
-#' @references Jacquemoud, S., and Ustin, S. (2019). Leaf optical properties. 
+#'
+#' @references Jacquemoud, S., and Ustin, S. (2019). Leaf optical properties.
 #'   Cambridge University Press.
-#' @references Feret, J.B., Francois, C., Asner, G.P., Gitelson, A.A., 
+#' @references Feret, J.B., Francois, C., Asner, G.P., Gitelson, A.A.,
 #'   Martin, R.E., Bidel, L.P.R., Ustin, S.L., le Maire, G., Jacquemoud, S. (2008),
-#'   PROSPECT-4 and 5: Advances in the leaf optical properties model separating photosynthetic 
-#'   pigments. Remote Sens. Environ. 112, 3030-3043. 
+#'   PROSPECT-4 and 5: Advances in the leaf optical properties model separating photosynthetic
+#'   pigments. Remote Sens. Environ. 112, 3030-3043.
 #' @references Allen W.A., Gausman H.W., Richardson A.J., Thomas J.R.
 #'   (1969), Interaction of isotropic ligth with a compact plant leaf,
 #'   Journal of the Optical Society of American, 59:1376-1379.

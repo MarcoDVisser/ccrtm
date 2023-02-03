@@ -6,20 +6,15 @@
 ## Species actions
 ## rho + tau ~ sp(foursail, rho=ref,tau=trans,bgr=rsoil) + geo
 
-## All models should have a named/ numbered list as input
-## so all models can just accept a parameter vector
-## and the output of the previous model directly
-## RTM2(..., param=pars[[2]],chain=predictions1)
-
 #' Forward implementation of coupled Radiative Transfer Models.
 #'
 #' @param fm A formula specifying which rtm to run (see details).
-#' @param pars a list of _named_ parameter vectors for all models.
+#' @param pars a _named_ list of _named_ parameter vectors for all models.
 #' The parameter list for a model call as rho ~ prospect + foursail
-#' therefore contains two named vectors the first with parameters for
+#' therefore contains two vectors the first with parameters for
 #' prospect and the second with parameters for foursail.
-#' See ?getDefaults.
-#' If left empty default parameters are generated (see).
+#' See ?getDefaults for an example of a parameter list.
+#' If left empty default parameters are generated.
 #' @param wl wavelengths (in nm) add only if
 #' certain wavelengths are required as output.
 #' Input is expected to integers between 400 and 2500, or will 

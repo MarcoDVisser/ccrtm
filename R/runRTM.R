@@ -62,8 +62,8 @@ rtm.prosail2_dd <- function(pars){
   SS <- pars[["foursail2"]]["psoil"]*soil[,"drySoil"] +
     (1-pars[["foursail2"]]["psoil"])*soil[,"wetSoil"] ## soil spectra
 
-  LSa <- prospect5(pars[["prospectd.a"]]) ## leaf spectra
-  LSb <- prospect5(pars[["prospectd.b"]]) ## leaf spectra
+  LSa <- prospectd(pars[["prospectd.a"]]) ## leaf spectra
+  LSb <- prospectd(pars[["prospectd.b"]]) ## leaf spectra
 
   foursail2(LSa[,"rho"],LSa[,"tau"],LSb[,"rho"],LSb[,"tau"],SS,param=pars[["foursail2"]])
 
@@ -74,7 +74,7 @@ rtm.prosail2_d5 <- function(pars){
   SS <- pars[["foursail2"]]["psoil"]*soil[,"drySoil"] +
     (1-pars[["foursail2"]]["psoil"])*soil[,"wetSoil"] ## soil spectra
 
-  LSa <- prospect5(pars[["prospectd"]]) ## leaf spectra
+  LSa <- prospectd(pars[["prospectd"]]) ## leaf spectra
   LSb <- prospect5(pars[["prospect5"]]) ## leaf spectra
 
   foursail2(LSa[,"rho"],LSa[,"tau"],LSb[,"rho"],LSb[,"tau"],SS,param=pars[["foursail2"]])
@@ -86,7 +86,7 @@ rtm.prosail2_5d <- function(pars){
     (1-pars[["foursail2"]]["psoil"])*soil[,"wetSoil"] ## soil spectra
 
   LSa <- prospect5(pars[["prospect5"]]) ## leaf spectra
-  LSb <- prospect5(pars[["prospectd"]]) ## leaf spectra
+  LSb <- prospectd(pars[["prospectd"]]) ## leaf spectra
 
   foursail2(LSa[,"rho"],LSa[,"tau"],LSb[,"rho"],LSb[,"tau"],SS,param=pars[["foursail2"]])
 }
@@ -109,8 +109,8 @@ rtm.prosail2b_dd <- function(pars){
   SS <- pars[["foursail2b"]]["psoil"]*soil[,"drySoil"] +
     (1-pars[["foursail2b"]]["psoil"])*soil[,"wetSoil"] ## soil spectra
 
-  LSa <- prospect5(pars[["prospectd.a"]]) ## leaf spectra
-  LSb <- prospect5(pars[["prospectd.b"]]) ## leaf spectra
+  LSa <- prospectd(pars[["prospectd.a"]]) ## leaf spectra
+  LSb <- prospectd(pars[["prospectd.b"]]) ## leaf spectra
 
   foursail2b(LSa[,"rho"],LSa[,"tau"],LSb[,"rho"],LSb[,"tau"],SS,param=pars[["foursail2b"]])
 
@@ -121,7 +121,7 @@ rtm.prosail2b_d5 <- function(pars){
   SS <- pars[["foursail2b"]]["psoil"]*soil[,"drySoil"] +
     (1-pars[["foursail2b"]]["psoil"])*soil[,"wetSoil"] ## soil spectra
 
-  LSa <- prospect5(pars[["prospectd"]]) ## leaf spectra
+  LSa <- prospectd(pars[["prospectd"]]) ## leaf spectra
   LSb <- prospect5(pars[["prospect5"]]) ## leaf spectra
 
   foursail2b(LSa[,"rho"],LSa[,"tau"],LSb[,"rho"],LSb[,"tau"],SS,param=pars[["foursail2b"]])
@@ -133,7 +133,7 @@ rtm.prosail2b_5d <- function(pars){
     (1-pars[["foursail2b"]]["psoil"])*soil[,"wetSoil"] ## soil spectra
 
   LSa <- prospect5(pars[["prospect5"]]) ## leaf spectra
-  LSb <- prospect5(pars[["prospectd"]]) ## leaf spectra
+  LSb <- prospectd(pars[["prospectd"]]) ## leaf spectra
 
   foursail2b(LSa[,"rho"],LSa[,"tau"],LSb[,"rho"],LSb[,"tau"],SS,param=pars[["foursail2b"]])
 }
