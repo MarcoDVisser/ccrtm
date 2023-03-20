@@ -34,13 +34,13 @@ Allen (1969) and Stokes (1862). Set Cbrown to 0 for prospect version 5.
 }
 \examples{
 ## see ?fRTM for the typical mode of simulation
-## e.g. fRTM(rho~prospect5) 
+## e.g. fRTM(rho~prospect5)
 
 ## 1) get parameters
-defaultpars<-getDefaults(rho~prospect5) 
+defaultpars<-getDefaults(rho~prospect5)
 ## getDefaults("prospect5") will also work
 
-## 2) get leaf reflectance and transmission 
+## 2) get leaf reflectance and transmission
 rt<-fRTM(rho+tau~prospect5,defaultpars)
 
 ## lower-level implementation example

@@ -55,7 +55,7 @@ Verhoef (1984), who extended work by Suits (1971) 4-steam model.
 \examples{
 ## lower-level implementation example
 ## see ?fRTM for the typical mode of simulation
-## e.g. fRTM(rho~prospectd+foursail) 
+## e.g. fRTM(rho~prospectd+foursail)
 
 ## 1) get parameters
 params<-getDefaults("foursail")
@@ -72,11 +72,13 @@ rt<-fRTM(rho+tau~prospectd)
 ## 3) get soil reflectance to model background reflectance
 data(soil)
 
-## a linear mixture soil model 
+## a linear mixture soil model
 bgRef<- pars["psoil"]*soil[,"drySoil"] + (1-pars["psoil"])*soil[,"wetSoil"]
 
+
 ## 4) run 4SAIL
-foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
+result<-foursail(rt[,"rho"],rt[,"tau"],bgRef,pars)
+head(result)
 
 }
 \references{
