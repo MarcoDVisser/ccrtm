@@ -1,4 +1,4 @@
-## ccrtm: Coupled Chain Radiative Transfer Models (0.3.3)
+## ccrtm: Coupled Chain Radiative Transfer Models (0.4.0)
 
 <!-- badges: start -->
 [![cran version](http://www.r-pkg.org/badges/version/ccrtm)](http://cran.rstudio.com/web/packages/ccrtm)
@@ -11,12 +11,14 @@ A set of radiative transfer models to quantitatively describe the absorption, re
 and model remotely sensed spectral signatures of vegetation at distinct spatial scales. The main principle behind ccrtm is that many 
 radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). Included models are prospect family, and 2 stream and 4 stream models for canopies, with planned inclusion atmospheric models.
 
+Starting from version 0.4.0 inversion routines are included (backward prediction: spectra to traits). Currently, prospectd can be run in backward model (inversion results shown below). 
+
 The package will slowly be extended as more models are added, and tested, and optimized. Please send requests and bug reports.
 
 Currently the following models are implemented from scratch (and refactored in c++):
 - PROSPECT5 
 - PROSPECT5B 
-- PROSPECTD 
+- PROSPECTD (forward and backward mode)
 - 4SAIL 
 - 4SAIL2 (leaf angles fixed for each layer; sensu Verhoef and Bach 2007)
 - 4SAIL2B (leaf angles differ for each layer; sensu Zhang et al 2005)
@@ -35,16 +37,18 @@ Implementation planned in the near future:
 ### Quicklinks
 
 -   [Quick start and tutorials](#quick-start-and-tutorials)
--   [Installation](#the-online-code-files-from-s1-text)
+-   [Installation](#installation)
 	-   [Dependencies](#dependencies)
 -   [Examples](#examples)
     -   [Examples of output](#examples-of-output)
+    -	[Model inversion/Backward mode](#inversion)
+-   [Inform](#inform) 
 -   [Thanks](#thanks)
   
 
 ## Quick start and tutorials
 
-A "10 minute" quickstart guide is will be implemented in due time. 
+A "10 minute" quickstart guide is will be implemented in due time - for now see the examples below.
 
 ## Installation
 The pacakge is on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/). 
@@ -124,6 +128,29 @@ RTM predicted spectra:  reflectance
 Generating model(s):  prospect5, prospectd, foursail2 
 Wavelength range  400-2500 (nm) 
 ```
+
+### Inversion
+
+Currently being implemented (online within the next few days - from March 30 2023).
+
+```r
+require(ccrtm)
+
+## get reflectance for a leaf with forward mode
+## our use your own measured leaf reflectance
+ref <- fRTM(rho~prospectd)
+plot(ref,main="Prospect D")
+
+## invert the model 
+traits <- bRTM(rho~prospectd,data=ref)
+
+```
+
+## Inversion performance
+Inversion procedure uses a multivariate neural network, a partial least squares regression and a Bayesian weighting model to invert from spectra to traits within a few seconds. The Bayesian weighting model ensures that inversion uncertainty can be included. Simulation results show that the inversion routine works well. 
+
+![](https://i.imgur.com/xsQzaew.png)
+
 
 ## INFORM
 The INFORM functions are not exported yet as this code remain untested "formally" - although it appears to behave well. The best "formal test" is to test againts original published (often fortran) code. For INFORM this isn't possible because no code is publically available to test against (i.e. made available by the authors of INFORM) - at  least as far as I am aware of. Therefore, inform remains lower-level for now (not exported by defualt).  You can however use INFORM if you wish simply by doing:   

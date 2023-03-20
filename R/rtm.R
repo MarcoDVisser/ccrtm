@@ -10,8 +10,8 @@
 #'
 #' @param fm A formula specifying which rtm to run (see details).
 #' @param pars a _named_ list of _named_ parameter vectors for all models.
-#' The parameter list for a model call as rho ~ prospect + foursail
-#' therefore contains two vectors the first with parameters for
+#' The parameter list for a model call as rho ~ prospect + foursail,
+#' therefore, contains two vectors: the first with parameters for
 #' prospect and the second with parameters for foursail.
 #' See ?getDefaults for an example of a parameter list.
 #' If left empty default parameters are generated.
@@ -27,7 +27,7 @@
 #' both the expected output (left hand) and the different models
 #' you would like to couple to generate the output (right hand).
 #'
-#' At current the following ratiative transfer models are
+#' At current the following radiative transfer models are
 #' implemented
 #'
 #' | Example of a formula                     | Model     |
@@ -37,17 +37,18 @@
 #' | rho ~ prospect5 + foursail               | PROSAIL   |
 #' | rho ~ prospect5 + foursail               | PROSAIL   |
 #' | rho ~ prospectd + foursail2              | PROSAIL   |
-#' | rho ~ prospectd + prospect5 + foursail2  | PROSAIL2  |
-#' | rho ~ prospectd + foursail2b             | PROSAIL2b |
-#' | rho ~ prospectd + foursail + flim + sky  | INFORM*   |
-#' | rho ~ prospectd + foursail + flim        | INFORM*   |
+#' | rho ~ prospectd + prospect5 + foursail2  | PROSAIL2* |
+#' | rho ~ prospectd + foursail2b             | PROSAIL2b*|
+#' | rho ~ prospectd + foursail + flim + sky  | INFORM**  |
+#' | rho ~ prospectd + foursail + flim        | INFORM**  |
 #'
-#' *INFORM is currently restricted to a lower-level function
-#' only. See the cctrm github readme page on how to use it.
-#'
-#' Note that the formula "rho ~ prospectd + foursail2" is the
+#' * Note that the formula "rho ~ prospectd + foursail2" is the
 #' same as "rho ~ prospectd + prospectd + foursail2" and
-#' both expect a names list of 3 parameter vectors.
+#' both expect a names list of 3 parameter vectors 
+#' (leaf type 1, leaf type 2, and the canopy parameters).
+#'
+#' ** INFORM is currently restricted to a lower-level function
+#' only. See the cctrm github readme page on how to use it.
 #'
 #' In the above examples with additive components, prospectd can
 #' be replaced with prospect5 - or vice versa - if so desired.
