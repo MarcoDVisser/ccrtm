@@ -131,23 +131,99 @@ Wavelength range  400-2500 (nm)
 
 ### Inversion
 
-Currently being implemented (online within the next few days - from March 30 2023).
+Backward mode (inversion) now works for prospect5 and prospectd given leaf reflectance spectra from 400 to 2400 nm (1 nm step).
+
+#### Inversion of a single leaf spectra
 
 ```r
 require(ccrtm)
 
-## get reflectance for a leaf with forward mode
-## our use your own measured leaf reflectance
-ref <- fRTM(rho~prospectd)
+## Normally you would use your own measured leaf reflectance
+## In this example we get reflectance for a leaf with forward mode
+## step 1: make a parameter list
+parameters<-list(prospectd=c(N=3,Cab=40,Car=15,Cw=0.01,Cm=0.025,Canth=26,Cbrown=4))
+
+## get reflectance for a single leaf on simulated spectra
+## at the inversion requirements with wavelengths betwen 400 and 2400
+ref <- fRTM(rho~prospectd,pars=parameters,wl=400:2400)   
 plot(ref,main="Prospect D")
 
 ## invert the model 
 traits <- bRTM(rho~prospectd,data=ref)
 
+## reorder with replicates measurements over rows, and make into matrix
+## this is the typical format for packages such as hsdar
+refdata<-t(as.matrix(ref))
+
+fit<-bRTM(rho~prospectd,data=refdata)
+summary(fit)
+     
+## compare fit with simulation on log-scale so all parameter are visible
+plot(parameters$prospectd,fit$mu,xlab="expected",ylab="inverted",pch=16,log="xy")
+  
+## add uncertainty
+segments(parameters$prospectd,fit$lower.ci,
+parameters$prospectd,fit$upper.ci,lwd=2)
+  
+## 1 to 1 line
+abline(0,1)
 ```
 
-## Inversion performance
-Inversion procedure uses a multivariate neural network, a partial least squares regression and a Bayesian weighting model to invert from spectra to traits within a few seconds. The Bayesian weighting model ensures that inversion uncertainty can be included. Simulation results show that the inversion routine works well. 
+```
+RTM predicted spectra:  reflectance 
+Generating model(s):  prospect5, prospectd, foursail2 
+Wavelength range  400-2500 (nm) 
+```
+
+![](https://i.imgur.com/xsQzaew.png)
+
+#### Inversion of many leaf spectra
+
+Users will more likely be interested in the inversion of multiple replicate spectra. Hundreds of spectra can be inverted 
+within a few seconds: 
+
+```r   
+## Inversion for multiple leaf spectra
+     
+## As above we simulate spectra, here using a lower-level vectorized prospect function
+## that rapidly simulates spectra over a matrix of input parameters
+set.seed(1234)
+
+## we simulate all spectra at once
+nsim<-300 ## number of leaves
+     
+## Generate random leaf parameters
+parmat<-cbind(
+     N=runif(nsim,1,6),
+     Cab=runif(nsim,5,80),
+     Car=runif(nsim,1,40),
+     Cw=runif(nsim,0.001,.02),
+     Cm=runif(nsim,0.002,0.03)+0.01,
+     Canth=runif(nsim,0,6),
+     Cbrown=runif(nsim,0,4)
+)
+     
+## simulate with the lower level prospect for rapid simulation
+## of many leaves
+ref<-ccrtm:::.prospectdv(parmat)[[1]][,1:2001] ## subset to 400:2400 wl
+     
+## invert the simulations
+fit<-bRTM(rho~prospectd,data=ref)
+summary(fit)
+     
+## check inversion performace for LMA
+plot(parmat[,"Cm"],fit$mu[,"Cm"],xlab="expected",ylab="inverted",pch=16)
+     
+## add uncertainty
+segments(parmat[,"Cm"],fit$lower.ci[,"Cm"],
+          parmat[,"Cm"],fit$upper.ci[,"Cm"],lwd=2)
+abline(0,1)
+
+```
+![](https://i.imgur.com/xsQzaew.png)
+
+## Inversion methods and performance
+Inversion procedure uses a multivariate neural network (MANN), a partial least squares regression (PLSR) and a Bayesian weighting model to invert from spectra to traits. The MANN and PLSR are both used because their performace differs, with the one outperforming the other depending on the parameter.   The Bayesian weighting model combines the predictions from the MANN and PLSR, and ensures that inversion uncertainty can be included (see examples above). Simulation results (below over 10000 simulations) show that the inversion routine works well. 
 
 ![](https://i.imgur.com/xsQzaew.png)
 
