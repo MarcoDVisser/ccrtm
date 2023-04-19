@@ -16,8 +16,8 @@ Starting from version 0.4.0 inversion routines are included (backward prediction
 The package will slowly be extended as more models are added, and tested, and optimized. Please send requests and bug reports.
 
 Currently the following models are implemented from scratch (and refactored in c++):
-- PROSPECT5 
-- PROSPECT5B 
+- PROSPECT5 (forward and backward mode)
+- PROSPECT5B (forward and backward mode) 
 - PROSPECTD (forward and backward mode)
 - 4SAIL 
 - 4SAIL2 (leaf angles fixed for each layer; sensu Verhoef and Bach 2007)
@@ -66,10 +66,9 @@ install_github("MarcoDVisser/ccrtm")
 
 ccrtm depends on the Rcpp, pracma and expint packages (for now).  
 
-## Examples (versions > 0.2)
+## Examples (versions > 0.4)
 
-The basic functionality of ccrtm, and the coupled chain nature of the forward modelling components is shown below.
-Backward modelling will be included in later stages.
+The basic functionality of ccrtm, and the coupled chain nature of the forward modelling components is shown below. Backward modelling has now been tested and included (since April 2023) for leaf models.
 
 ```r
 require(ccrtm)
