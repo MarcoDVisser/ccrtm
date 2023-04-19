@@ -11,7 +11,7 @@ A set of radiative transfer models to quantitatively describe the absorption, re
 and model remotely sensed spectral signatures of vegetation at distinct spatial scales. The main principle behind ccrtm is that many 
 radiative transfer models can form a coupled chain, basically models that feed into each other in a linked chain (from leaf, to canopy, to stand, to atmosphere). Included models are prospect family, and 2 stream and 4 stream models for canopies, with planned inclusion atmospheric models.
 
-Starting from version 0.4.0 inversion routines are included (backward prediction: spectra to traits). Currently, prospectd can be run in backward model (inversion results shown below). 
+Starting from version 0.4.0 inversion routines are included (backward prediction: spectra to traits). Currently, prospect5 and prospectd can be run in backward model (inversion results shown below). 
 
 The package will slowly be extended as more models are added, and tested, and optimized. Please send requests and bug reports.
 
