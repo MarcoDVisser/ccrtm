@@ -40,7 +40,13 @@ predict.pls <- function (object, newdata, ncomp = 1:object$ncomp,
     }
 
     nobs <- dim(newX)[1]
-    B <- rowSums(coef(object)[,,ncomp], dims = 2)
+
+    ## prep coefficients
+    beta <- object$coefficients[, , comps, drop = FALSE]
+    g1 <- which(comps > 1)
+    beta[, , g1] <- beta[, , g1, drop = FALSE] - object$coefficients[, 
+            , comps[g1] - 1, drop = FALSE]
+    B <- rowSums(beta, dims = 2)
     B0 <- object$Ymeans - object$Xmeans %*% B
     pred <- newX %*% B + rep(B0, each = nobs)
     return(pred)
