@@ -25,9 +25,11 @@ Currently being tested / or to be implemented models
 \itemize{
 
 \item \link{1} = LIBERTY, PROCOSINE
-\item \link{2} = INFORM
+\item \link{2} = INFORM*
 
 }
+
+*available as lower-level library (see ccrtm github page).
 \subsection{Generating predictions}{
 
 To generate model prediction the typical approach is to use

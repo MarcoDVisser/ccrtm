@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods.R
 \name{print.rtm.spectra}
 \alias{print.rtm.spectra}
-\title{Plot RTM return spectra vs. wavelength}
+\title{RTM generic print function}
 \usage{
 \method{print}{rtm.spectra}(x, ...)
 }
@@ -16,5 +16,5 @@ prints the standard information from a simulated
 ccrtm spectra plot
 }
 \description{
-Plot RTM return spectra vs. wavelength
+RTM generic print function
 }

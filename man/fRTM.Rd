@@ -31,11 +31,11 @@ See seperate model helpfiles for details.
 Forward implementation of coupled Radiative Transfer Models.
 }
 \details{
-In general the form of the formula specifies the
+Formula: In general the form of the formula specifies the
 both the expected output (left hand) and the different models
 you would like to couple to generate the output (right hand).
 
-At current the following radiative transfer models are
+Models: At current the following radiative transfer models are
 implemented\tabular{lc}{
    Example of a formula \tab Model \cr
    rho ~ prospect5 \tab prospect5 \cr
@@ -81,6 +81,8 @@ the second returns 4 components of canopy reflectance and
 canopy transmission in the solar and viewing direction.
 
 More details are given in ?cctrm.
+
+Questions and requests can be made on the ccrtm github page.
 }
 \examples{
 ## setup graphics for plots
