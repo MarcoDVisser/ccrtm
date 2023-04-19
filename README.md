@@ -167,9 +167,25 @@ abline(0,1)
 ```
 
 ```
-RTM predicted spectra:  reflectance 
-Generating model(s):  prospect5, prospectd, foursail2 
-Wavelength range  400-2500 (nm) 
+------------------------------------------------------
+Inverted  model(s):  prospectd 
+------------------------------------------------------
+Inverted (mean) parameters and inversion uncertainty: 
+ Estimate N : 3.03 (CI: 2.7-3.4)
+ Estimate Cab : 39.8 (CI: 35-45)
+ Estimate Car : 12.6 (CI: 2.2-23)
+ Estimate Cw : 0.00973 (CI: 0.0091-0.01)
+ Estimate Cm : 0.0242 (CI: 0.022-0.026)
+ Estimate Canth : 22.3 (CI: 15-29)
+ Estimate Cbrown : 3.61 (CI: 2.6-4.6)
+ 
+
+Head of inverted values matrix: 
+             N     Cab      Car          Cw         Cm    Canth  Cbrown
+[1,] 3.032301 39.7715 12.57556 0.009731867 0.02422989 22.31715 3.61153
+
+ A total of 1 RTM inversions performed. 
+
 ```
 
 ![](https://i.imgur.com/R3msl0K.png)
@@ -215,6 +231,33 @@ plot(parmat[,"Cm"],fit$mu[,"Cm"],xlab="expected",ylab="inverted",pch=16)
 segments(parmat[,"Cm"],fit$lower.ci[,"Cm"],
           parmat[,"Cm"],fit$upper.ci[,"Cm"],lwd=2)
 abline(0,1)
+
+```
+
+```
+------------------------------------------------------
+Inverted  model(s):  prospectd 
+------------------------------------------------------
+Inverted (mean) parameters and inversion uncertainty: 
+ Estimate N : 3.5 (CI: 3.2-3.8)
+ Estimate Cab : 44.8 (CI: 40-50)
+ Estimate Car : 20.6 (CI: 12-30)
+ Estimate Cw : 0.0103 (CI: 0.0096-0.011)
+ Estimate Cm : 0.026 (CI: 0.024-0.028)
+ Estimate Canth : 6.33 (CI: 2.1-13)
+ Estimate Cbrown : 2.63 (CI: 1.7-3.6)
+ 
+
+Head of inverted values matrix: 
+             N      Cab        Car          Cw         Cm     Canth    Cbrown
+[1,] 1.454031 36.75596 22.3264856 0.013613748 0.02991352  9.807317 3.6700023
+[2,] 4.379834 83.06349  6.2814088 0.008684775 0.02227380  7.177197 3.1339196
+[3,] 4.067006 43.62785  0.9717786 0.018761527 0.03370315  3.727199 1.6434374
+[4,] 4.350049 35.88337 28.9690067 0.009501127 0.01806905  0.000000 0.8650389
+[5,] 5.437518 69.62519 18.8491896 0.018808470 0.01538833 22.009023 0.0000000
+[6,] 4.355071 33.46050 17.5216464 0.001314402 0.03929835  2.919029 1.1305926
+
+ A total of 300 RTM inversions performed. 
 
 ```
 ![](https://i.imgur.com/iqx4gWi.png)
