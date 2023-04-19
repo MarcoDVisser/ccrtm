@@ -32,7 +32,7 @@ irtm.prospectd <- function(pars){
 predict.pls <- function (object, newdata, ncomp = 1:object$ncomp,
                          comps=object$ncomp) {
     if (missing(newdata) || is.null(newdata)){
-        stop("data not supplied: ccrtm errorcode 'inverse PLSR a1'")
+        stop("data not supplied")
     }  else if (is.matrix(newdata)) {
         if (ncol(newdata) != length(object$Xmeans)) 
             stop("'newdata' does not have the correct number of columns")
@@ -40,8 +40,7 @@ predict.pls <- function (object, newdata, ncomp = 1:object$ncomp,
     }
 
     nobs <- dim(newX)[1]
-
-    B <- rowSums(coef(object, comps = ncomp), dims = 2)
+    B <- rowSums(coef(object)[,,ncomp], dims = 2)
     B0 <- object$Ymeans - object$Xmeans %*% B
     pred <- newX %*% B + rep(B0, each = nobs)
     return(pred)
@@ -55,6 +54,7 @@ predict.pls <- function (object, newdata, ncomp = 1:object$ncomp,
 predict.nn <- function(object, newdata, eigenR,rescaler, ncomp = 40){
 
   if(nrow(newdata)==1){
+
     scaledR <- (newdata-rescaler[["scaled:center"]])/
       rescaler[["scaled:scale"]]
     pcaR <- scaledR%*%(eigenR$vectors)
@@ -63,6 +63,7 @@ predict.nn <- function(object, newdata, eigenR,rescaler, ncomp = 40){
     pred <- feedforward(c(biases,pcaR),object$w1,object$w2)$output
 
   } else {
+
     scaledR <- t(apply(newdata,1,
                        function(X) (X-rescaler[["scaled:center"]])/
                                    rescaler[["scaled:scale"]]))
@@ -101,6 +102,7 @@ predict.bayes <- function(object,nnfit,eigenR,rescaler,plsfit,newdata){
   low.ci <- pred-2*uncert
   upp.ci <- pred+2*uncert
   low.ci[low.ci<0] <- 0
+  upp.ci[upp.ci<0] <- 0
   mu[mu<0] <- 0
   list(mu=mu,lower.ci=low.ci,upper.ci=upp.ci)
 }
