@@ -24,6 +24,20 @@ irtm.prospectd <- function(pars){
 ################################################################################
 ## start: Supporting Tools
 ################################################################################
+## plsr coefficient function
+## @param object fitted pls object
+## @param ncomp number of components to use in prediction
+## @param comps number of components used in prediction
+coefpls <- function (object, ncomp = object$ncomp, comps, intercept = FALSE, 
+                     ...) {
+  B <- object$coefficients[, , comps, drop = FALSE]
+  g1 <- which(comps > 1)
+  B[, , g1] <- B[, , g1, drop = FALSE] - object$coefficients[, 
+                  , comps[g1] - 1, drop = FALSE]
+  dimnames(B)[[3]] <- paste("Comp", comps)
+  return(B)
+}
+
 ## plsr prediction function
 ## @param object fitted pls object
 ## @param newdata a dataframe to predict from
@@ -39,16 +53,12 @@ predict.pls <- function (object, newdata, ncomp = 1:object$ncomp,
         newX <- newdata
     }
 
-    nobs <- dim(newX)[1]
+    nObs <- dim(newX)[1]
 
     ## prep coefficients
-    beta <- object$coefficients[, , comps, drop = FALSE]
-    g1 <- which(comps > 1)
-    beta[, , g1] <- beta[, , g1, drop = FALSE] - object$coefficients[, 
-            , comps[g1] - 1, drop = FALSE]
-    B <- rowSums(beta, dims = 2)
+    B <- rowSums(coefpls(object, comps = ncomp), dims = 2)
     B0 <- object$Ymeans - object$Xmeans %*% B
-    pred <- newX %*% B + rep(B0, each = nobs)
+    pred <- newX %*% B + rep(B0, each = nObs)
     return(pred)
 }
 
