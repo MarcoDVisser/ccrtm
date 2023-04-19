@@ -23,11 +23,11 @@
 #' 
 #' @details
 #'
-#' In general the form of the formula specifies the
+#' Formula: In general the form of the formula specifies the
 #' both the expected output (left hand) and the different models
 #' you would like to couple to generate the output (right hand).
 #'
-#' At current the following radiative transfer models are
+#' Models: At current the following radiative transfer models are
 #' implemented
 #'
 #' | Example of a formula                     | Model     |
@@ -73,6 +73,8 @@
 #'
 #' More details are given in ?cctrm.
 #'
+#' Questions and requests can be made on the ccrtm github page.
+#' 
 #' @return spectra matrix with reflectance (and transmission,
 #' depending on the formula inputs).
 #' See seperate model helpfiles for details.
@@ -154,9 +156,151 @@ fRTM <- function(fm= rho + tau ~ prospect5 + foursail , pars=NULL,
   class(final) <- c(class(final),"rtm.spectra")
   return(final)
 
+ }
+
+
+#' Backward implementation (inversion) of coupled Radiative Transfer Models.
+#'
+#' @param fm A formula specifying which rtm to run (see details).
+#' @param data (measured) reflectance spectra. Expected are
+#' reflectance values between 0 and 1 for wavelength between 400 and 2400
+#' at 1 nm steps. The range 400 to 2400 is based on the largest common range
+#' in most leaf spectral datasets - and hence is a range that can be generated
+#' by most spectrometers.
+#'
+#' @details
+#'
+#' Formula: In general the form of the formula specifies the
+#' both the model and the data supplied (transmittance or reflectance),
+#' however, currently only reflectance data is expected
+#' (transmission not included yet).
+#'
+#' Models: At current the following radiative transfer models are
+#' implemented for backward / inversion mode
+#'
+#' | Example of a formula                     | Model     |
+#' | :--------------------------------------  | :-------: |
+#' | rho ~ prospect5                          | prospect5 |
+#' | rho ~ prospectd                          | prospectd |
+#'
+#'
+#' Inversion is rapid, and based on emulation of prospect
+#' models by a multivariate neural net (MANN) and
+#' a partial least squares regression (PLSR)
+#' model. The two methods are selected as the performance of NN or
+#' PLSR differ for each inverted parameter - with one method outperforming the other
+#' depending on the parameter. The predictions are then
+#' combined using a linear Bayesian mixing model that weights the
+#' NN and PLSR prediction for each parameter - and includes an
+#' estimate of model inversion uncertainty.
+#'
+#' Model inversion uncertainty estimates the 95% credible intervals
+#' under which the parameter will fall compared to a perfect
+#' inversion. Model inversion uncertainty arises due to
+#' parameter identifiability issues, and does not reflect
+#' the uncertainty in the data. Uncertainty in the data
+#' should be estimated with replicate measurements and
+#' standard statistical methods (not implemented).
+#'
+#' Questions and requests can be made on the ccrtm github page.
+#'
+#' @return a list of inverted parameters and their 95% CI
+#'
+#' @examples
+#'
+#' ## get reflectance for a single leaf on simulated spectra
+#'
+#' ## make a parameter list
+#' parameters<-list(prospectd=c(N=3,Cab=40,Car=15,Cw=0.01,Cm=0.025,Canth=26,Cbrown=4))
+#'
+#' ## simulate spectra at the inversion requirements 
+#' ref <- fRTM(rho~prospectd,pars=parameters,wl=400:2400)
+#'
+#' ## reorder with replicates measurements over rows, and make into matrix
+#' refdata<-t(as.matrix(ref))
+#'
+#' fit<-bRTM(rho~prospectd,data=refdata)
+#' summary(fit)
+#'
+#' ## compare fit with simulation on log-scale so all parameter are visible
+#' plot(parameters$prospectd,fit$mu,xlab="expected",ylab="inverted",pch=16,log="xy")
+#'
+#' ## add uncertainty
+#' segments(parameters$prospectd,fit$lower.ci,
+#' parameters$prospectd,fit$upper.ci,lwd=2)
+#'
+#' ## 1 to 1 line
+#' abline(0,1)
+#'
+#' ## Inversion for multiple leaf spectra
+#'
+#' ## using lower-level vectorized prospect function
+#' set.seed(1234)
+#' ## we simulate all spectra at once
+#' nsim<-300 ## number of leaves
+#'
+#' ## random leaf parameters
+#' parmat<-cbind(N=runif(nsim,1,6),
+#' Cab=runif(nsim,5,80),
+#' Car=runif(nsim,1,40),
+#' Cw=runif(nsim,0.001,.02),
+#' Cm=runif(nsim,0.002,0.03)+0.01,
+#' Canth=runif(nsim,0,6),
+#' Cbrown=runif(nsim,0,4)
+#' )
+#'
+#' ## simulate with the lower level prospect for rapid simulation
+#' ## of many leaves
+#' ref<-ccrtm:::.prospectdv(parmat)[[1]][,1:2001] ## subset to 400:2400 wl
+#'
+#' ## invert the simulations
+#' fit<-bRTM(rho~prospectd,data=ref)
+#' summary(fit)
+#'
+#' ## check inversion performace for LMA
+#' plot(parmat[,"Cm"],fit$mu[,"Cm"],xlab="expected",ylab="inverted",pch=16)
+#'
+#' ## add uncertainty
+#' segments(parmat[,"Cm"],fit$lower.ci[,"Cm"],
+#'          parmat[,"Cm"],fit$upper.ci[,"Cm"],lwd=2)
+#' abline(0,1)
+#'
+#' ## replace the simulated ref with measured reflectance over wavelengths 400:2400
+#' ## to invert for spectrometer data
+#'
+#' @export
+#' @md
+bRTM <- function(fm= rho ~ prospect5, data=NULL){
+
+  if(is.null(data)) stop("reflectance data not supplied.")
+  if(!is.matrix(data)) stop("reflectance data should be a matrix.")
+  if(ncol(data)!=2001) stop("reflectance data requires 2001 columns (wavelengths 400 to 2400)")
+
+  rtmModels <- getModels()
+
+  tmp <- checkForm(fm)
+  reqMods <- tmp[[1]]
+
+  ##invertable? 
+  rtmModels <- rtmModels[rtmModels$backwards==1,]
+
+  ## check models
+  if(any(!reqMods%in%rtmModels$model)){
+    stop(reqMods[!reqMods%in%rtmModels$model], " not invertable")
   }
 
+  alias<-getAlias(fm) ## get model alias
 
+  class(data) <- alias ## set alias
+
+  final <- invertRTM(data)
+
+  ## finalize output
+  attr(final,"models") <- unique(reqMods)
+  class(final) <- c(class(final),"rtm.inversion")
+  return(final)
+
+ }
 
 ## get prediction columns
 getPredictions<-function(fm,ordN){
@@ -210,16 +354,19 @@ getModels <- function(){
             "skyl"
              )
 
-   data.frame(model=mods,
-              level=c(1,1,
-                      2,2,2,
-                      3,3,3,3,3,
-                      3,3,3,3,3,
-                      3,
-                      3,
-                      3,
-                      4),
-             row.names = mods)
+   modelframe <- data.frame(model=mods,
+                            level=c(1,1,
+                                    2,2,2,
+                                    3,3,3,3,3,
+                                    3,3,3,3,3,
+                                    3,
+                                    3,
+                                    3,
+                                    4),
+                            row.names = mods)
+  modelframe$backwards <- modelframe$level==1
+  return(modelframe)
+
 }
 
 
@@ -427,7 +574,7 @@ vec2list <- function(fm=NULL, pars=NULL){
     tmp <- 1
 
     while(anyDuplicated(nms)>1){
-      
+
       nms[duplicated(nms)] <- paste0(nms[duplicated(nms)],".",tmp)
       tmp <- tmp+1
 
@@ -436,7 +583,7 @@ vec2list <- function(fm=NULL, pars=NULL){
     names(parvec) <- nms
 
     return(parvec)
-    
+
 
   } else{
 
@@ -453,7 +600,7 @@ vec2list <- function(fm=NULL, pars=NULL){
     }
 
     names(pars) <- tolower(names(pars))
-    
+
     expnms <- lapply(1:length(parlist),
                      function(X)
                        data.frame(n=tolower(rownames(parlist[[X]]))
@@ -479,6 +626,8 @@ vec2list <- function(fm=NULL, pars=NULL){
     names(newparlist) <- reqMods
     return(newparlist)
   }
-  
+
 
 }
+
+

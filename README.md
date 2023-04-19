@@ -1,4 +1,4 @@
-## ccrtm: Coupled Chain Radiative Transfer Models (0.4.0)
+## ccrtm: Coupled Chain Radiative Transfer Models (0.4.1)
 
 <!-- badges: start -->
 [![cran version](http://www.r-pkg.org/badges/version/ccrtm)](http://cran.rstudio.com/web/packages/ccrtm)
@@ -193,5 +193,8 @@ Their comments helped improve documentation and remove bugs.
 - 0.2.0 Start of major overhual of fRTM using model aliases, and inclusion of lower-level implementation of INFORM
 - 0.3.2 Ongoing of major overhual now including a 2x faster full vectorized prospect (takes matrix of parameters)
 - 0.3.3 Working aliases, inform implemented at lower-level and fully vectorized prospect 
-- 0.3.4 Expected: unctions accept matrix of parameters for vectorized prospect 
+- 0.3.4 Expected: functions accept matrix of parameters for vectorized prospect 
+- 0.4.0 Leaf models prospect5 and prospectd can now be inverted, and inversion uncertainty is returned.
+- 0.4.1 Documentation updated for backward modelling
+ 
 

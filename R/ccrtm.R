@@ -1,5 +1,5 @@
 #' ccrtm: Coupled Chain Radiative Transfer Models.
-#' 
+#'
 #' A collection of radiative transfer models that can form
 #' a coupled chain to model radiative transfer across multiple
 #' spatial scales from leaf to canopy to stand.
@@ -19,9 +19,11 @@
 #'  \itemize{
 #'
 #' \item [1] = LIBERTY, PROCOSINE
-#' \item [2] = INFORM
+#' \item [2] = INFORM*
 #'
 #' }
+#'
+#' *available as lower-level library (see ccrtm github page).
 #'
 #' @details
 #' ## Generating predictions
