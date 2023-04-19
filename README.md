@@ -138,7 +138,7 @@ Backward mode (inversion) now works for prospect5 and prospectd given leaf refle
 ```r
 require(ccrtm)
 
-## Normally you would use your own measured leaf reflectance
+## Normally you would use your own measured leaf reflectance.
 ## In this example we get reflectance for a leaf with forward mode
 ## step 1: make a parameter list
 parameters<-list(prospectd=c(N=3,Cab=40,Car=15,Cw=0.01,Cm=0.025,Canth=26,Cbrown=4))
@@ -147,9 +147,6 @@ parameters<-list(prospectd=c(N=3,Cab=40,Car=15,Cw=0.01,Cm=0.025,Canth=26,Cbrown=
 ## at the inversion requirements with wavelengths betwen 400 and 2400
 ref <- fRTM(rho~prospectd,pars=parameters,wl=400:2400)   
 plot(ref,main="Prospect D")
-
-## invert the model 
-traits <- bRTM(rho~prospectd,data=ref)
 
 ## reorder with replicates measurements over rows, and make into matrix
 ## this is the typical format for packages such as hsdar
