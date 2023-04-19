@@ -48,7 +48,7 @@ Implementation planned in the near future:
 
 ## Quick start and tutorials
 
-A "10 minute" quickstart guide is will be implemented in due time - for now see the examples below.
+A "10 minute" quickstart guide is will be implemented in due time (somewhere close to the version 1.0 release) - for now see the examples below which give an overview.
 
 ## Installation
 The pacakge is on [CRAN](https://cran.rstudio.com/web/packages/ccrtm/). 
