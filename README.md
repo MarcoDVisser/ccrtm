@@ -28,7 +28,7 @@ Currently the following models are implemented from scratch (and refactored in c
 - INFORM (5/5B/D) - only lower level implementation as of yet (see below)
 
 Implementation planned in the near future:
-- SMAC
+- SMAC 
 - PROCOSINE
 - LIBERTY
 - SOILSPECT
@@ -130,7 +130,7 @@ Wavelength range  400-2500 (nm)
 
 ### Inversion
 
-Backward mode (inversion) now works for prospect5 and prospectd given leaf reflectance spectra from 400 to 2400 nm (1 nm step).
+Backward mode (inversion) now works for prospect5 and prospectd given leaf reflectance spectra from 400 to 2400 nm (1 nm step). Normally users would use spectroradiometer data at the same range and resolution, we simulate this data below. The 400 to 2400 range is used, as for most spectrometers, and published datasets, the range of 400:2400 at 1 nm is available by default - or can be contructed via interpolation from 10 nm resolution datasets using R packages as hsdar.    
 
 #### Inversion of a single leaf spectra
 
@@ -143,7 +143,7 @@ require(ccrtm)
 parameters<-list(prospectd=c(N=3,Cab=40,Car=15,Cw=0.01,Cm=0.025,Canth=26,Cbrown=4))
 
 ## get reflectance for a single leaf on simulated spectra
-## at the inversion requirements with wavelengths betwen 400 and 2400
+## at the inversion requirements with wavelengths between 400 and 2400
 ref <- fRTM(rho~prospectd,pars=parameters,wl=400:2400)   
 plot(ref,main="Prospect D")
 
