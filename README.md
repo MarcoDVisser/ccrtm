@@ -175,7 +175,7 @@ Generating model(s):  prospect5, prospectd, foursail2
 Wavelength range  400-2500 (nm) 
 ```
 
-![](https://i.imgur.com/xsQzaew.png)
+![](https://i.imgur.com/R3msl0K.png)
 
 #### Inversion of many leaf spectra
 
@@ -220,7 +220,7 @@ segments(parmat[,"Cm"],fit$lower.ci[,"Cm"],
 abline(0,1)
 
 ```
-![](https://i.imgur.com/xsQzaew.png)
+![](https://i.imgur.com/iqx4gWi.png)
 
 ## Inversion methods and performance
 Inversion procedure uses a multivariate neural network (MANN), a partial least squares regression (PLSR) and a Bayesian weighting model to invert from spectra to traits. The MANN and PLSR are both used because their performace differs, with the one outperforming the other depending on the parameter.   The Bayesian weighting model combines the predictions from the MANN and PLSR, and ensures that inversion uncertainty can be included (see examples above). Simulation results (below over 10000 simulations) show that the inversion routine works well. 
