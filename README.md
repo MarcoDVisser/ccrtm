@@ -5,7 +5,6 @@
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ccrtm?color=E664A4)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/ccrtm?color=333FFF)](https://github.com/metacran/cranlogs.app)
 [![R-CMD-check](https://github.com/ropensci/allodb/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/ccrtm/actions)
-[![Downloads github all releases](https://img.shields.io/github/downloads/MarcoDVisser/ccrtm/total.svg)](https://GitHub.com/MarcoDVisser/ccrtm/releases/)
 <!-- badges: end -->
 
 A set of radiative transfer models to quantitatively describe the absorption, reflectance and transmission of solar energy in vegatation,
@@ -131,7 +130,7 @@ Wavelength range  400-2500 (nm)
 
 ### Inversion
 
-Backward mode (inversion) now works for prospect5 and prospectd given leaf reflectance spectra from 400 to 2400 nm (1 nm step). Normally users would use spectroradiometer data at the same range and resolution, we simulate this data below. The 400 to 2400 range is used, as for most spectrometers, and published datasets, the range of 400:2400 at 1 nm is available by default - or can be contructed via interpolation from 10 nm resolution datasets using R packages as hsdar.    
+Backward mode (inversion) now works for prospect5 and prospectd given leaf reflectance spectra from 400 to 2400 nm (1 nm step). Normally users would use spectroradiometer data at the same range and resolution, we simulate this data below. The 400 to 2400 range is used, as for most spectrometers, and published datasets, the range of 400:2400 at 1 nm is available by default - or can be contructed via interpolation from 10 nm resolution datasets using R packages as hsdar.  User should note that this has only been tested on simulations (see below), while testing on spectroradiometer data is actively underway, there are no guarentees and no benchmarks on data performance (yet).  
 
 #### Inversion of a single leaf spectra
 
