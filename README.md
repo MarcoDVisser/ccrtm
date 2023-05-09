@@ -5,7 +5,7 @@
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/ccrtm?color=E664A4)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/ccrtm?color=333FFF)](https://github.com/metacran/cranlogs.app)
 [![R-CMD-check](https://github.com/ropensci/allodb/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/ccrtm/actions)
-[![Downloads github all releases](https://img.shields.io/github/downloads/Naereen/StrapDown.js/total.svg)](https://GitHub.com/MarcoDViSser/ccrtm/releases/)
+[![Downloads github all releases](https://img.shields.io/github/downloads/MarcoDVisser/ccrtm/total.svg)](https://GitHub.com/MarcoDVisser/ccrtm/releases/)
 <!-- badges: end -->
 
 A set of radiative transfer models to quantitatively describe the absorption, reflectance and transmission of solar energy in vegatation,
