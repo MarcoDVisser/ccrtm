@@ -6,13 +6,14 @@
 #' but may differ in the relative density, inclination and types of
 #' particles. In comparison to foursail, the background (soil),
 #' can now be non-Lambertain, having it own 4-stream
-#' BDRF. There are two types of particles, generalized
+#' BDRF (not implemented here but may be input by the user).
+#' There are two types of particles, generalized
 #' to primary and secondary (originally termed "green"
 #' and "brown" particles). The  realtive abundance of
 #' the secondary particle in the top canopy is regulated by
-#' the dissociation paramerter.The model 4SAIL2 combines with
-#' prospect, libery or procosine for the reflectance
-#' and transmittance of the particles, and with the the foursail
+#' the dissociation paramerter. 
+#' The model 4SAIL2 combines with prospect, libery or procosine for 
+#' the reflectance and transmittance of the particles, and with the the foursail
 #' or Hapke elements for the background reflectance.
 #' If run alone, these require direct inputs which could be 
 #' measured leaf reflectance. 
@@ -31,9 +32,9 @@
 #' @param param A named vector of 4SAIL2 parameter values (note:
 #' program ignores case):
 #'  \itemize{
-#' \item [1] = Leaf angle distribution function parameter a (LIDFa)
-#' \item [2] = Leaf angle distribution function parameter b (LIDFb)
-#' \item [3] = Leaf angle distribution function type (TypeLidf, see ?lidf)
+#' \item [1] = Mean leaf angle for first (top) layer (LIDFa)
+#' \item [2] = Mean leaf angle for second (bottom) layer (LIDFb)
+#' \item [3] = Leaf angle distribution function type (ignored, only value 2 allow)
 #' \item [4] = Total Leaf Area Index (LAI), including primary and secondary 
 #' particles (brown and green leafs).
 #' \item [5] = fraction secondary particles ("brown leaf fraction", fb)
@@ -47,7 +48,11 @@
 #' \item [7] = Observer zenith angle (tto)
 #' \item [8] = Sun-sensor azimuth angle (psi)
 #' }
-#'
+#' @details
+#' Leaf inclination angles: leaf angles in 4SAIL2b are set for each layer
+#' and only the Cambell leaf angle distribution model is allowed. This means
+#' that each layer has a single parameter that defines leaf angles.
+#'  
 #' @return spectra matrixwith 4 reflectance factors and canopy transmission 
 #' for wavelengths 400 to 2500nm:
 #'  \itemize{
